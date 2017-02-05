@@ -1,8 +1,8 @@
 start:
-	supervisorctl kestrel-dotnetlive-account start 
+	systemctl start kestrel-dotnetlive-account.service
 
 stop:
-	systemctl kestrel-dotnetlive-account stop
+	systemctl stop kestrel-dotnetlive-account.service
 
 delete_current_build:
 	rm -rf /var/dotnetlive/pubsite/dotnetlive.account/
