@@ -1,11 +1,8 @@
-install:
-	
-
 start:
-	supervisorctl start kestral.dotnetlive.account
+	supervisorctl kestrel-dotnetlive-account start 
 
 stop:
-	systemctl stop kestral.dotnetlive.account
+	systemctl kestrel-dotnetlive-account stop
 
 delete_current_build:
 	rm -rf /var/dotnetlive/pubsite/dotnetlive.account/
@@ -13,7 +10,7 @@ delete_current_build:
 publish:
 	git clean -df
 	git pull
-	dotnet restore src/Feinian.sln 
+	dotnet restore src/DotNetLive.AccountWeb.sln 
 	cd src/DotNetLive.AccountWeb && npm install && bower install --allow-root && gulp default
 	dotnet publish src/DotNetLive.AccountWeb/DotNetLive.AccountWeb.csproj -c "Release" -o /var/dotnetlive/pubsite/dotnetlive.account/ 
 
