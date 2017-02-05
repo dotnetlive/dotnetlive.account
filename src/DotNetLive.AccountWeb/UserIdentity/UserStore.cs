@@ -1,7 +1,7 @@
 using AutoMapper;
 using DotNetLive.AccountWeb.Entities;
 using DotNetLive.AccountWeb.Models;
-using DotNetLive.AccountWeb.UserIdentity.Models;
+using DotNetLive.Framework.UserIdentity.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Logging;
 using System;
@@ -11,7 +11,7 @@ using System.Security.Claims;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace DotNetLive.AccountWeb.UserIdentity
+namespace DotNetLive.Framework.UserIdentity
 {
     public class UserStore<TUser> :
         IUserStore<TUser>,

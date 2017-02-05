@@ -1,10 +1,10 @@
 ﻿using AutoMapper;
 using DotNetLive.AccountWeb.Entities;
 using DotNetLive.AccountWeb.Models;
-using DotNetLive.AccountWeb.UserIdentity.Models;
+using DotNetLive.Framework.UserIdentity.Models;
 using System;
 
-namespace DotNetLive.AccountWeb.UserIdentity
+namespace DotNetLive.Framework.UserIdentity
 {
     public class UserIdentityModelsMaping : Profile
     {

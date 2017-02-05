@@ -1,8 +1,8 @@
 ﻿using AutoMapper;
-using DotNetLive.AccountWeb.Data.Repositories;
+using DotNetLive.Framework.Data.Repositories;
 using DotNetLive.AccountWeb.Entities;
 
-namespace DotNetLive.AccountWeb.UserIdentity
+namespace DotNetLive.Framework.UserIdentity
 {
     public interface IAuthenticationCommandAppService
     {
