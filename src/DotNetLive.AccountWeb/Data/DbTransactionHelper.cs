@@ -1,5 +1,4 @@
-﻿using DotNetLive.Blog.Data;
-using Microsoft.Extensions.DependencyInjection;
+﻿using Microsoft.Extensions.DependencyInjection;
 using System;
 
 namespace DotNetLive.AccountWeb.Data

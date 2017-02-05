@@ -1,9 +1,8 @@
 ﻿using DotNetLive.AccountWeb.Configurations;
+using DotNetLive.AccountWeb.Data;
 using DotNetLive.AccountWeb.Data.Repositories;
 using DotNetLive.AccountWeb.Services;
 using DotNetLive.AccountWeb.UserIdentity;
-using DotNetLive.Blog.Data;
-using DotNetLive.Blog.Databases;
 using DotNetLive.Framework.DependencyManagement;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;

@@ -1,5 +1,4 @@
-﻿using DotNetLive.Blog.Databases;
-using Microsoft.Extensions.Options;
+﻿using Microsoft.Extensions.Options;
 using Npgsql;
 using System;
 using System.Data;

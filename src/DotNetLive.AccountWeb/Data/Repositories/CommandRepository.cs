@@ -1,9 +1,8 @@
-﻿using DotNetLive.Blog.Data;
-using DotNetLive.Dapper.Contrib.Extensions;
+﻿using Dapper;
+using DotNetLive.Framework.Dapper.Extensions;
 using DotNetLive.Framework.Entities;
 using System;
 using System.Data;
-using Dapper;
 
 namespace DotNetLive.AccountWeb.Data.Repositories
 {

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
 using System.Linq;
+using System.Reflection;
 
 namespace DotNetLive.Framework
 {
@@ -23,6 +23,16 @@ namespace DotNetLive.Framework
         public static bool IsNotEmpty<T>(this IEnumerable<T> obj)
         {
             return obj != null && obj.Any();
+        }
+
+        public static bool IsGenericType(this Type obj)
+        {
+            return obj.GetTypeInfo().IsGenericType;
+        }
+
+        public static bool IsInterface(this Type obj)
+        {
+            return obj.GetTypeInfo().IsInterface;
         }
     }
 }

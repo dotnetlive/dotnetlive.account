@@ -1,7 +1,5 @@
 ﻿using Dapper;
-using DotNetLive.Blog.Data;
-using DotNetLive.Blog.Databases;
-using DotNetLive.Dapper.Contrib.Extensions;
+using DotNetLive.Framework.Dapper.Extensions;
 using DotNetLive.Framework.Models;
 using Microsoft.Extensions.Logging;
 using System;
