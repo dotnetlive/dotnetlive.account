@@ -1,6 +1,7 @@
 ﻿using DotNetLive.AccountWeb.Models;
 using DotNetLive.AccountWeb.Models.AccountViewModels;
 using DotNetLive.AccountWeb.Services;
+using DotNetLive.Framework.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;

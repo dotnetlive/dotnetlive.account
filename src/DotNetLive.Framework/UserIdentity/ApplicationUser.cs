@@ -4,7 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Security.Claims;
 
-namespace DotNetLive.AccountWeb.Models
+namespace DotNetLive.Framework.Models
 {
     // Add profile data for application users by adding properties to the ApplicationUser class
     public class ApplicationUser

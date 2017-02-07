@@ -10,6 +10,7 @@ using Microsoft.Extensions.Options;
 using DotNetLive.AccountWeb.Models;
 using DotNetLive.AccountWeb.Models.ManageViewModels;
 using DotNetLive.AccountWeb.Services;
+using DotNetLive.Framework.Models;
 
 namespace DotNetLive.AccountWeb.Controllers
 {

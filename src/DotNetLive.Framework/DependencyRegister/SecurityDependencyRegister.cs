@@ -1,6 +1,6 @@
-﻿using DotNetLive.AccountWeb.Models;
+﻿using DotNetLive.Framework.DependencyManagement;
+using DotNetLive.Framework.Models;
 using DotNetLive.Framework.UserIdentity;
-using DotNetLive.Framework.DependencyManagement;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.DataProtection;
@@ -17,8 +17,6 @@ namespace DotNetLive.Framework.DependencyRegister
     {
         public void Register(IServiceCollection services, IHostingEnvironment hostingEnvironment)
         {
-            services.AddScoped<IUserStore<ApplicationUser>, UserStore<ApplicationUser>>();
-
             services.Configure<IdentityOptions>(options =>
             {
                 var dataProtectionPath = Path.Combine(@"d:\dotnetlive", "identity-artifacts");

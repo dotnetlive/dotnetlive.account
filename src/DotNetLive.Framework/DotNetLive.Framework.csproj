@@ -3,14 +3,21 @@
     <TargetFramework>netcoreapp1.0</TargetFramework>
   </PropertyGroup>
   <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="5.2.0" />
+    <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="1.2.0" />
     <PackageReference Include="Dapper" Version="1.50.2" />
+    <PackageReference Include="Microsoft.AspNetCore.DataProtection" Version="1.1.0" />
+    <PackageReference Include="Microsoft.AspNetCore.DataProtection.Extensions" Version="1.1.0" />
     <PackageReference Include="Microsoft.AspNetCore.Hosting" Version="1.1.0" />
     <PackageReference Include="Microsoft.AspNetCore.Identity" Version="1.1.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc" Version="1.1.1" />
     <PackageReference Include="Microsoft.Extensions.DependencyModel" Version="1.1.0" />
     <PackageReference Include="Microsoft.Extensions.FileProviders.Abstractions" Version="1.1.0" />
     <PackageReference Include="Microsoft.Extensions.FileProviders.Embedded" Version="1.1.0" />
     <PackageReference Include="Microsoft.Extensions.FileProviders.Physical" Version="1.1.0" />
+    <PackageReference Include="Microsoft.Extensions.Options.ConfigurationExtensions" Version="1.1.0" />
     <PackageReference Include="Microsoft.Extensions.PlatformAbstractions" Version="1.1.0" />
+    <PackageReference Include="Npgsql" Version="3.2.0" />
     <PackageReference Include="System.ComponentModel.TypeConverter" Version="4.3.0" />
     <PackageReference Include="System.Data.Common" Version="4.3.0" />
     <PackageReference Include="System.Reflection.Emit" Version="4.3.0" />

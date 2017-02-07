@@ -1,9 +1,9 @@
 ﻿using AutoMapper;
 using DotNetLive.Framework.Data.Repositories;
-using DotNetLive.AccountWeb.Entities;
+using DotNetLive.Framework.Entities;
 using System;
 
-namespace DotNetLive.AccountWeb.UserIdentity
+namespace DotNetLive.Framework.UserIdentity
 {
     public interface IAuthenticationQueryAppService
     {

@@ -9,6 +9,13 @@
     <UserSecretsId>aspnet-DotNetLive.AccountWeb-11bc3a52-6af7-4673-afa7-7b6da39ce342</UserSecretsId>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Remove="Entities\Account.cs" />
+    <Compile Remove="UserIdentity\IAuthenticationCommandAppService.cs" />
+    <Compile Remove="UserIdentity\IAuthenticationQueryAppService.cs" />
+    <Compile Remove="UserIdentity\UserIdentityModelsMaping.cs" />
+    <Compile Remove="UserIdentity\UserStore.cs" />
+  </ItemGroup>
+  <ItemGroup>
     <PackageReference Include="AutoMapper" Version="5.2.0" />
     <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="1.2.0" />
     <PackageReference Include="Dapper" Version="1.50.2" />
@@ -24,6 +31,7 @@
     <PackageReference Include="Microsoft.AspNetCore.StaticFiles" Version="1.1.0" />
     <PackageReference Include="Microsoft.Extensions.Configuration.UserSecrets" Version="1.1.0" />
     <PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="1.1.0" />
+    <PackageReference Include="Microsoft.Extensions.Options.ConfigurationExtensions" Version="1.1.0" />
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="1.1.0-msbuild3-final" PrivateAssets="All" />
     <PackageReference Include="Microsoft.VisualStudio.Web.BrowserLink" Version="1.1.0" />
     <PackageReference Include="Npgsql" Version="3.2.0" />
@@ -35,5 +43,9 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\DotNetLive.Framework\DotNetLive.Framework.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Entities\" />
+    <Folder Include="UserIdentity\" />
   </ItemGroup>
 </Project>
