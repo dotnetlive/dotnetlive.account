@@ -26,11 +26,13 @@ namespace DotNetLive.Framework.DependencyManagement
             services.AddDependencyRegister(configuration,
                 dependencyContext.RuntimeLibraries
                     // Only load assemblies that reference AutoMapper
-                    .Where(lib =>
-                         //lib.Type.Equals("msbuildproject", StringComparison.OrdinalIgnoreCase)
-                         lib.Dependencies.Any(d => d.Name.StartsWith("DotNetLive", StringComparison.OrdinalIgnoreCase))
-                        )
-                    .SelectMany(lib => lib.GetDefaultAssemblyNames(dependencyContext).Select(Assembly.Load)).ToArray());
+                    //.Where(lib =>
+                    //     //lib.Type.Equals("msbuildproject", StringComparison.OrdinalIgnoreCase)
+                    //     lib.Dependencies.Any(d => d.Name.StartsWith("DotNetLive", StringComparison.OrdinalIgnoreCase))
+                    //    )
+                    .SelectMany(lib => lib.GetDefaultAssemblyNames(dependencyContext).Select(Assembly.Load))
+                    .Where(x => x.FullName.StartsWith("DotNetLive"))
+                    .ToArray());
         }
 
         private static void AddDependencyRegisterClass(IServiceCollection services, IEnumerable<Assembly> assembliesToScan)
