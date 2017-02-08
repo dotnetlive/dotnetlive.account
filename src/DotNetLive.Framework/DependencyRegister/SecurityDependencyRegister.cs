@@ -22,7 +22,7 @@ namespace DotNetLive.Framework.DependencyRegister
                 var dataProtectionPath = Path.Combine(@"d:\dotnetlive", "identity-artifacts");
                 options.Cookies.ApplicationCookie.AuthenticationScheme = "ApplicationCookie";
                 options.Cookies.ApplicationCookie.DataProtectionProvider = DataProtectionProvider.Create(dataProtectionPath);
-                options.Cookies.ApplicationCookie.CookieDomain = "";
+                options.Cookies.ApplicationCookie.CookieDomain = ".dotnet.live";
                 options.Cookies.ApplicationCookie.CookieName = "dnl-auth";
                 options.Cookies.ApplicationCookie.CookieHttpOnly = false;
                 options.Lockout.AllowedForNewUsers = true;
