@@ -28,11 +28,11 @@ namespace DotNetLive.Framework.DependencyRegister
 
             services.Configure<IdentityOptions>(options =>
             {
-                var dataProtectionPath = Path.Combine(_securitySettings.DataProtectionPath, "identity-artifacts");
+                var dataProtectionPath = Path.Combine(_securitySettings.DataProtectionPath);
 
                 var applicationCookie = options.Cookies.ApplicationCookie;
                 applicationCookie.AuthenticationScheme = "ApplicationCookie";
-                applicationCookie.DataProtectionProvider = DataProtectionProvider.Create(dataProtectionPath);
+                applicationCookie.DataProtectionProvider = DataProtectionProvider.Create(new DirectoryInfo(dataProtectionPath));
                 applicationCookie.CookieDomain = _securitySettings.DomainName;
                 applicationCookie.CookieName = "dnl-auth";
                 applicationCookie.CookieHttpOnly = false;

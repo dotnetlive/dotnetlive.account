@@ -65,6 +65,8 @@ namespace DotNetLive.AccountWeb
             app.UseStaticFiles();
 
             app.UseIdentity();
+            
+            //app.UseCookieAuthentication()
 
             // Add external authentication middleware below. To configure them please see http://go.microsoft.com/fwlink/?LinkID=532715
 
