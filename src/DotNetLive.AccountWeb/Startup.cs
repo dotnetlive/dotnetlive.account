@@ -51,9 +51,10 @@ namespace DotNetLive.AccountWeb
             loggerFactory.AddConsole(Configuration.GetSection("Logging"));
             loggerFactory.AddDebug();
 
+            app.UseDeveloperExceptionPage();
             if (env.IsDevelopment())
             {
-                app.UseDeveloperExceptionPage();
+                //app.UseDeveloperExceptionPage();
                 //app.UseDatabaseErrorPage();
                 app.UseBrowserLink();
             }
