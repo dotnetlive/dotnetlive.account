@@ -29,7 +29,7 @@ namespace DotNetLive.AccountWeb.Controllers
             }
             else
             {
-                return LocalRedirect(_assSettings.MainSite);
+                return Redirect(_assSettings.MainSite);
             }
         }
 
