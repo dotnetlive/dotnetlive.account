@@ -5,16 +5,20 @@ using Microsoft.AspNetCore.Hosting;
 using System.Text;
 using System.Reflection;
 using DotNetLive.Framework;
+using DotNetLive.AccountWeb.Configurations;
+using Microsoft.Extensions.Options;
 
 namespace DotNetLive.AccountWeb.Controllers
 {
     public class HomeController : Controller
     {
         private IHostingEnvironment _hostingEnvironment;
+        private AppSettings _assSettings;
 
-        public HomeController(IHostingEnvironment hostingEnvironment)
+        public HomeController(IHostingEnvironment hostingEnvironment, IOptions<AppSettings> appSettings)
         {
             this._hostingEnvironment = hostingEnvironment;
+            this._assSettings = appSettings.Value;
         }
 
         public IActionResult Index()
@@ -25,7 +29,7 @@ namespace DotNetLive.AccountWeb.Controllers
             }
             else
             {
-                return LocalRedirect("");
+                return LocalRedirect(_assSettings.MainSite);
             }
         }
 

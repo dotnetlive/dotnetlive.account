@@ -10,5 +10,6 @@ namespace DotNetLive.AccountWeb.Configurations
     /// </summary>
     public class AppSettings
     {
+        public string MainSite { get; set; }
     }
 }
