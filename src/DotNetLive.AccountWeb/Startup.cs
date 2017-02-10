@@ -50,6 +50,7 @@ namespace DotNetLive.AccountWeb
         {
             loggerFactory.AddConsole(Configuration.GetSection("Logging"));
             loggerFactory.AddDebug();
+            loggerFactory.AddFile("Logs/myapp-{Date}.txt");
 
             app.UseDeveloperExceptionPage();
             if (env.IsDevelopment())
