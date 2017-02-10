@@ -3,6 +3,7 @@ using DotNetLive.AccountWeb.Models.AccountViewModels;
 using DotNetLive.AccountWeb.Services;
 using DotNetLive.Framework.Models;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -21,19 +22,22 @@ namespace DotNetLive.AccountWeb.Controllers
         private readonly IEmailSender _emailSender;
         private readonly ISmsSender _smsSender;
         private readonly ILogger _logger;
+        private IHostingEnvironment _hostingEnvironment;
 
         public AccountController(
             UserManager<ApplicationUser> userManager,
             SignInManager<ApplicationUser> signInManager,
             IEmailSender emailSender,
             ISmsSender smsSender,
-            ILoggerFactory loggerFactory)
+            ILoggerFactory loggerFactory,
+            IHostingEnvironment hostingEnvironment)
         {
             _userManager = userManager;
             _signInManager = signInManager;
             _emailSender = emailSender;
             _smsSender = smsSender;
             _logger = loggerFactory.CreateLogger<AccountController>();
+            _hostingEnvironment = hostingEnvironment;
         }
 
         //
@@ -127,13 +131,28 @@ namespace DotNetLive.AccountWeb.Controllers
 
         //
         // POST: /Account/LogOff
-        [HttpPost]
+        [HttpPost, ActionName("LogOff")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> LogOff()
         {
             await _signInManager.SignOutAsync();
             _logger.LogInformation(4, "User logged out.");
             return RedirectToAction(nameof(HomeController.Index), "Home");
+        }
+
+        [HttpGet, ActionName("LogOff")]
+        public async Task<IActionResult> LogOff(string returnUrl = "")
+        {
+            await _signInManager.SignOutAsync();
+            _logger.LogInformation(4, "User logged out.");
+            if (_hostingEnvironment.IsDevelopment())
+            {
+                return RedirectToAction(nameof(HomeController.Index), "Home");
+            }
+            else
+            {
+                return Redirect(returnUrl);
+            }
         }
 
         //
