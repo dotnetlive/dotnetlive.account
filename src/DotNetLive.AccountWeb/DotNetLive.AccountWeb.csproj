@@ -16,6 +16,11 @@
     <Compile Remove="UserIdentity\UserStore.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="wwwroot\swagger.css">
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
     <PackageReference Include="AutoMapper" Version="5.2.0" />
     <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="1.2.0" />
     <PackageReference Include="Dapper" Version="1.50.2" />
@@ -35,6 +40,9 @@
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="1.1.0-msbuild3-final" PrivateAssets="All" />
     <PackageReference Include="Microsoft.VisualStudio.Web.BrowserLink" Version="1.1.0" />
     <PackageReference Include="Npgsql" Version="3.2.0" />
+    <PackageReference Include="Swashbuckle.AspNetCore.Swagger" Version="1.0.0-rc1" />
+    <PackageReference Include="Swashbuckle.AspNetCore.SwaggerGen" Version="1.0.0-rc1" />
+    <PackageReference Include="Swashbuckle.AspNetCore.SwaggerUi" Version="1.0.0-rc1" />
   </ItemGroup>
   <ItemGroup>
     <DotNetCliToolReference Include="Microsoft.EntityFrameworkCore.Tools.DotNet" Version="1.0.0-msbuild3-final" />
