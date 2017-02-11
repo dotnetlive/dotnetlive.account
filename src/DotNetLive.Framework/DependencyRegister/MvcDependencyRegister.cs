@@ -41,7 +41,7 @@ namespace DotNetLive.Framework.DependencyRegister
             });
 
             //https://weblog.west-wind.com/posts/2016/Sep/26/ASPNET-Core-and-CORS-Gotchas
-            https://docs.microsoft.com/en-us/aspnet/core/security/cors
+            //https://docs.microsoft.com/en-us/aspnet/core/security/cors
             // Add service and create Policy with options
             services.AddCors(options =>
             {

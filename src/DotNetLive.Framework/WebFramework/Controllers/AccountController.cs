@@ -10,7 +10,6 @@ namespace DotNetLive.Framework.WebFramework.Controllers
     public class BaseAccountController : Controller
     {
         private SecuritySettings _securitySettings;
-        private IOptions<SecuritySettings> securitySetting;
 
         public BaseAccountController(IOptions<SecuritySettings> securitySetting)
         {

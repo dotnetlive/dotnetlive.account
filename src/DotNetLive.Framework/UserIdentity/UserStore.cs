@@ -60,7 +60,7 @@ namespace DotNetLive.Framework.UserIdentity
 
             _accountCommandAppService.Create(account);
 
-            return IdentityResult.Success;
+            return await Task.FromResult(IdentityResult.Success);
         }
 
         public async Task<IdentityResult> DeleteAsync(TUser user, CancellationToken cancellationToken)
@@ -76,7 +76,7 @@ namespace DotNetLive.Framework.UserIdentity
 
             _accountCommandAppService.Update(_mapper.Map<ApplicationUser, Account>(user));
 
-            return IdentityResult.Success;
+            return await Task.FromResult(IdentityResult.Success);
         }
 
         public Task<TUser> FindByIdAsync(string userId, CancellationToken cancellationToken)
@@ -170,7 +170,7 @@ namespace DotNetLive.Framework.UserIdentity
 
             _accountCommandAppService.Update(account);
 
-            return IdentityResult.Success;
+            return await Task.FromResult(IdentityResult.Success);
         }
 
         public Task AddLoginAsync(TUser user, UserLoginInfo login, CancellationToken cancellationToken)
@@ -569,7 +569,7 @@ namespace DotNetLive.Framework.UserIdentity
             {
                 throw new ArgumentNullException(nameof(user));
             }
-            return 1;
+            return await Task.FromResult(1);
         }
 
         public Task ResetAccessFailedCountAsync(TUser user, CancellationToken cancellationToken)
