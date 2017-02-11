@@ -1,17 +1,18 @@
 start_web:
-	systemctl start kestrel-dotnetlive-account-web.service
+	systemctl start kestrel-dotnetlive-accountweb.service
 
 stop_web:
-	systemctl stop kestrel-dotnetlive-account-web.service
+	systemctl stop kestrel-dotnetlive-accountweb.service
 
 start_api:
-	systemctl start kestrel-dotnetlive-account-web.service
+	systemctl start kestrel-dotnetlive-accountapi.service
 
 stop_api:
-	systemctl stop kestrel-dotnetlive-account-web.service
+	systemctl stop kestrel-dotnetlive-accountapi.service
 
 delete_current_build:
 	rm -rf /var/dotnetlive/pubsite/dotnetlive.accountweb/
+	rm -rf /var/dotnetlive/pubsite/dotnetlive.accountapi/
 
 publish_web:
 	git clean -df
@@ -29,4 +30,4 @@ publish_api:
 deploy_web: stop_web publish_web start_web
 deploy_api: stop_api publish_api start_api
 
-deploy: deploy_api deploy_web
+deploy: delete_current_build deploy_api deploy_web
