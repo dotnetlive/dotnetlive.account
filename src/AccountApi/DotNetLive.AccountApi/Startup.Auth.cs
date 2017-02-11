@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Builder;
+﻿using DotNetLive.AccountApi.AuthorizationPolicy;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.IdentityModel.Tokens;
 using System;
 using System.Collections.Generic;
@@ -15,6 +17,40 @@ namespace DotNetLive.AccountApi
         // The secret key every token will be signed with.
         // Keep this safe on the server!
         private static readonly string secretKey = "mysupersecret_secretkey!123";
+
+        private void ConfigureAuth(IServiceCollection services)
+        {
+            services.AddAuthorization(options =>
+            {
+                //知识点:Custom Policy-Based Authorization
+                //https://docs.microsoft.com/en-us/aspnet/core/security/authorization/policies
+                options.AddPolicy("Admin", authBuilder =>
+                {
+                    authBuilder.RequireRole("Administrators");
+                });
+
+                options.AddPolicy("readAccess", authBuilder =>
+                {
+                    authBuilder.RequireRole("Administrators");
+                });
+
+                options.AddPolicy("writeAccess", authBuilder =>
+                {
+                    authBuilder.RequireRole("Administrators");
+                });
+
+                options.AddPolicy("Over21", policy => policy.Requirements.Add(new MinimumAgeRequirement(21)));
+                options.AddPolicy("BadgeEntry", policy => policy.RequireAssertion(context =>
+                    context.User.HasClaim(c =>
+                    (c.Type == DotNetLiveClaimTypes.BadgeId || c.Type == DotNetLiveClaimTypes.TemporaryBadgeId)
+                    && c.Issuer == "https://microsoftsecurity")
+                ));
+            });
+
+            services.AddSingleton<IAuthorizationHandler, MinimumAgeHandler>();
+            services.AddSingleton<IAuthorizationHandler, HasTemporaryStickerHandler>();
+            services.AddSingleton<IAuthorizationHandler, BadgeEntryHandler>();
+        }
 
         private void ConfigureAuth(IApplicationBuilder app)
         {

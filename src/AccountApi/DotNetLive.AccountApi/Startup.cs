@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Builder;
+﻿using DotNetLive.AccountApi.AuthorizationPolicy;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -7,6 +9,7 @@ using Microsoft.IdentityModel.Tokens;
 using Swashbuckle.AspNetCore.Swagger;
 using System;
 using System.Collections.Generic;
+using System.Security.Claims;
 
 namespace DotNetLive.AccountApi
 {
@@ -30,29 +33,8 @@ namespace DotNetLive.AccountApi
             // Add framework services.
             services.AddMvc();
 
-            // Register the Swagger generator, defining one or more Swagger documents
-            services.AddSwaggerGen(c =>
-            {
-                c.SwaggerDoc("v1", new Info { Title = "DNL API V1", Version = "v1" });
-                c.SwaggerDoc("v2", new Info { Title = "DNL API V2", Version = "v2" });
-                c.OperationFilter<AuthResponsesOperationFilter>();
-                c.DocumentFilter<TagDescriptionsDocumentFilter>();
-
-                // Define the OAuth2.0 scheme that's in use (i.e. Implicit Flow)
-                c.AddSecurityDefinition("oauth2", new OAuth2Scheme
-                {
-                    Type = "oauth2",
-                    Flow = "implicit",
-                    AuthorizationUrl = "http://petstore.swagger.io/oauth/dialog",
-                    Scopes = new Dictionary<string, string>
-                    {
-                        { "readAccess", "Access read operations" },
-                        { "writeAccess", "Access write operations" }
-                    }
-                });
-                // Assign scope requirements to operations based on AuthorizeAttribute
-                c.OperationFilter<SecurityRequirementsOperationFilter>();
-            });
+            ConfigSwagger(services);
+            ConfigureAuth(services);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -61,28 +43,11 @@ namespace DotNetLive.AccountApi
             loggerFactory.AddConsole(Configuration.GetSection("Logging"));
             loggerFactory.AddDebug();
 
-            //app.UseDeveloperExceptionPage();
-            // Enable middleware to serve generated Swagger as a JSON endpoint.
-            app.UseSwagger();
+            app.UseDeveloperExceptionPage();
 
             app.UseStaticFiles();
 
-            // Enable middleware to serve swagger-ui (HTML, JS, CSS etc.), specifying the Swagger JSON endpoint.
-            app.UseSwaggerUi(c =>
-            {
-                c.SwaggerEndpoint("/swagger/v1/swagger.json", "DNL Accont API V1");
-                c.SwaggerEndpoint("/swagger/v2/swagger.json", "DNL Accont API V2");
-
-                c.InjectStylesheet("/swagger.css");
-                c.EnabledValidator();
-                c.BooleanValues(new object[] { 0, 1 });
-                c.DocExpansion("full");
-                //c.InjectOnCompleteJavaScript("/swagger-ui/on-complete.js");
-                //c.InjectOnFailureJavaScript("/swagger-ui/on-failure.js");
-                c.SupportedSubmitMethods(new[] { "get", "post", "put", "patch" });
-                c.ShowRequestHeaders();
-                c.ShowJsonEditor();
-            });
+            ConfigSwagger(app);
 
             ConfigureAuth(app);
 
