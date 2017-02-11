@@ -26,4 +26,7 @@ publish_api:
 	dotnet restore src/AccountApi/DotNetLive.AccountApi.sln 
 	dotnet publish src/AccountApi/DotNetLive.AccountApi/DotNetLive.AccountApi.csproj -c "Release" -o /var/dotnetlive/pubsite/dotnetlive.accountapi/ 
 
-deploy: stop publish_web publish_api start
+deploy_web: stop_web publish_web start_web
+deploy_api: stop_api publish_api start_api
+
+deploy: deploy_api deploy_web
