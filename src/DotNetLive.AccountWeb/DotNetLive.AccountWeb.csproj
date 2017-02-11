@@ -16,11 +16,6 @@
     <Compile Remove="UserIdentity\UserStore.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="wwwroot\swagger.css">
-      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-    </Content>
-  </ItemGroup>
-  <ItemGroup>
     <PackageReference Include="AutoMapper" Version="5.2.0" />
     <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="1.2.0" />
     <PackageReference Include="Dapper" Version="1.50.2" />
