@@ -20,7 +20,12 @@ namespace DotNetLive.AccountApi.Controllers
         [HttpGet, Route("login"), AllowAnonymous]
         public LoginResult Login([FromQuery]string username, [FromQuery]string passwordHash, [FromHeader]string token)
         {
-            return new LoginResult();
+            return new LoginResult()
+            {
+                UserName = username,
+                PasswordHash = passwordHash,
+                Token = Guid.NewGuid().ToString()
+            };
         }
     }
 }

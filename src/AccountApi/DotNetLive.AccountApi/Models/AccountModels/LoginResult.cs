@@ -8,5 +8,7 @@ namespace DotNetLive.AccountApi.Models.AccountModels
     public class LoginResult
     {
         public string Token { get; set; }
+        public string UserName { get; set; }
+        public string PasswordHash { get; set; }
     }
 }
