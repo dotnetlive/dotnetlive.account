@@ -50,7 +50,7 @@ namespace DotNetLive.AccountApi
                 c.InjectStylesheet("/swagger.css");
                 c.EnabledValidator();
                 c.BooleanValues(new object[] { 0, 1 });
-                c.DocExpansion("full");
+                //c.DocExpansion("full");
                 //c.InjectOnCompleteJavaScript("/swagger-ui/on-complete.js");
                 //c.InjectOnFailureJavaScript("/swagger-ui/on-failure.js");
                 c.SupportedSubmitMethods(new[] { "get", "post", "put", "patch" });
