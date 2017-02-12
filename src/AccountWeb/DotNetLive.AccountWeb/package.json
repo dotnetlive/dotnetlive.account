@@ -6,7 +6,8 @@
   "dependencies": {
     "npm": "^4.1.2"
   },
-    "devDependencies": {
+  "devDependencies": {
+    "event-stream": "^3.3.4",
     "gulp": "^3.9.1",
     "gulp-concat": "^2.6.1",
     "gulp-cssmin": "^0.1.7",
