@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package>
+  <metadata>
+    <id>$id$</id>
+    <version>$version$</version>
+    <title>$title$</title>
+    <authors>DotNetLive Team</authors>
+    <owners>DotNetLive Team</owners>
+    <description>提供.NET下各平台访问Web API的基础组建库</description>
+    <projectUrl>http://dotnet.live/Components/WebApiClient</projectUrl>
+    <iconUrl></iconUrl>
+    <tags>webclient</tags>
+  </metadata>
+</package>
