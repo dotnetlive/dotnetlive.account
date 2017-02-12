@@ -9,6 +9,12 @@
     <UserSecretsId>aspnet-DotNetLive.AccountWeb-11bc3a52-6af7-4673-afa7-7b6da39ce342</UserSecretsId>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Remove="ApiControllers\**" />
+    <Content Remove="ApiControllers\**" />
+    <EmbeddedResource Remove="ApiControllers\**" />
+    <None Remove="ApiControllers\**" />
+  </ItemGroup>
+  <ItemGroup>
     <Compile Remove="Entities\Account.cs" />
     <Compile Remove="UserIdentity\IAuthenticationCommandAppService.cs" />
     <Compile Remove="UserIdentity\IAuthenticationQueryAppService.cs" />
@@ -35,9 +41,6 @@
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="1.1.0-msbuild3-final" PrivateAssets="All" />
     <PackageReference Include="Microsoft.VisualStudio.Web.BrowserLink" Version="1.1.0" />
     <PackageReference Include="Npgsql" Version="3.2.0" />
-    <PackageReference Include="Swashbuckle.AspNetCore.Swagger" Version="1.0.0-rc1" />
-    <PackageReference Include="Swashbuckle.AspNetCore.SwaggerGen" Version="1.0.0-rc1" />
-    <PackageReference Include="Swashbuckle.AspNetCore.SwaggerUi" Version="1.0.0-rc1" />
   </ItemGroup>
   <ItemGroup>
     <DotNetCliToolReference Include="Microsoft.Extensions.SecretManager.Tools" Version="1.0.0-msbuild3-final" />
