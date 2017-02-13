@@ -28,6 +28,7 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\DotNetLive.Framework\DotNetLive.Framework.csproj" />
+    <ProjectReference Include="..\DotNetLive.Account.Services\DotNetLive.Account.Services.csproj" />
   </ItemGroup>
 
 </Project>

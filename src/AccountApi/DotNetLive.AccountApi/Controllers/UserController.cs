@@ -1,6 +1,5 @@
-﻿using DotNetLive.AccountApi.Models;
+﻿using DotNetLive.Account.Services;
 using DotNetLive.AccountApi.Models.AccountModels;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -15,6 +14,13 @@ namespace DotNetLive.AccountApi.Controllers
     //[Authorize]
     public class UserController : Controller
     {
+        private UserQueryService _userQueryService;
+
+        public UserController(UserQueryService userQueryService)
+        {
+            this._userQueryService = userQueryService;
+        }
+
         /// <summary>
         /// 获取用户列表
         /// </summary>
