@@ -7,11 +7,18 @@ using System.Collections.Generic;
 
 namespace DotNetLive.AccountApi.Controllers
 {
+    /// <summary>
+    ///用户API
+    /// </summary>
     [Produces("application/json")]
     [Route("api/user")]
     //[Authorize]
     public class UserController : Controller
     {
+        /// <summary>
+        /// 获取用户列表
+        /// </summary>
+        /// <returns></returns>
         [HttpGet]
         //[Authorize("readAccess")]
         public IList<LoginResult> GetUserList()
@@ -24,6 +31,11 @@ namespace DotNetLive.AccountApi.Controllers
             return result;
         }
 
+        /// <summary>
+        /// 获取单个用户的信息
+        /// </summary>
+        /// <param name="userId"></param>
+        /// <returns></returns>
         [HttpGet, Route("{userId}")]
         //[Authorize("readAccess")]
         public LoginResult GetUserInfo([FromQuery]Guid userId)

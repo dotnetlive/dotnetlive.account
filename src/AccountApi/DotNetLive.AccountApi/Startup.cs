@@ -1,15 +1,10 @@
-﻿using DotNetLive.AccountApi.AuthorizationPolicy;
-using Microsoft.AspNetCore.Authorization;
+﻿using DotNetLive.Framework.DependencyManagement;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
-using Microsoft.IdentityModel.Tokens;
-using Swashbuckle.AspNetCore.Swagger;
 using System;
-using System.Collections.Generic;
-using System.Security.Claims;
 
 namespace DotNetLive.AccountApi
 {
@@ -28,13 +23,18 @@ namespace DotNetLive.AccountApi
         public IConfigurationRoot Configuration { get; }
 
         // This method gets called by the runtime. Use this method to add services to the container.
-        public void ConfigureServices(IServiceCollection services)
+        public IServiceProvider ConfigureServices(IServiceCollection services)
         {
-            // Add framework services.
-            services.AddMvc();
+            var env = services.BuildServiceProvider().GetService<IHostingEnvironment>();
+            services.AddSingleton(factory => services);
+            services.AddSingleton(factory => Configuration);
+
+            //先通过asp.net core ioc注册
+            services.AddDependencyRegister(Configuration);
 
             ConfigSwagger(services);
             ConfigureAuth(services);
+            return services.BuildServiceProvider();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
