@@ -17,15 +17,15 @@ delete_current_build:
 publish_web:
 	git clean -df
 	git pull
-	dotnet restore src/AccountWeb/DotNetLive.AccountWeb.sln 
-	cd src/AccountWeb/DotNetLive.AccountWeb && npm install && bower install --allow-root && gulp default
-	dotnet publish src/AccountWeb/DotNetLive.AccountWeb/DotNetLive.AccountWeb.csproj -c "Release" -o /var/dotnetlive/pubsite/dotnetlive.accountweb/ 
+	dotnet restore src/accountweb/DotNetLive.AccountWeb.sln 
+	cd src/accountweb/DotNetLive.AccountWeb && npm install && bower install --allow-root && gulp default
+	dotnet publish src/accountweb/DotNetLive.AccountWeb/DotNetLive.AccountWeb.csproj -c "Release" -o /var/dotnetlive/pubsite/dotnetlive.accountweb/ 
 
 publish_api:
 	git clean -df
 	git pull
-	dotnet restore src/AccountApi/DotNetLive.AccountApi.sln 
-	dotnet publish src/AccountApi/DotNetLive.AccountApi/DotNetLive.AccountApi.csproj -c "Release" -o /var/dotnetlive/pubsite/dotnetlive.accountapi/ 
+	dotnet restore src/accountapi/DotNetLive.AccountApi.sln 
+	dotnet publish src/accountapi/DotNetLive.AccountApi/DotNetLive.AccountApi.csproj -c "Release" -o /var/dotnetlive/pubsite/dotnetlive.accountapi/ 
 
 deploy_web: stop_web publish_web start_web
 deploy_api: stop_api publish_api start_api
