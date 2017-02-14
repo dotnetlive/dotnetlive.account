@@ -47,19 +47,21 @@ namespace DotNetLive.AccountApi.Controllers
         }
 
         [HttpPost, Route("create")]
-        public Guid CreateUser(SysUser user)
+        public Guid CreateUser([FromBody]SysUser user)
         {
+            if (user == null)
+                throw new Exception("新创建的用户不能为空");
             return _userCommandService.CreateUser(user);
         }
 
         [HttpPut, Route("update")]
-        public void UpdateUser(SysUser user)
+        public void UpdateUser([FromBody]SysUser user)
         {
             _userCommandService.UpdateUser(user);
         }
 
         [HttpDelete, Route("delete")]
-        public void DeleteUser(Guid userSysId)
+        public void DeleteUser([FromQuery]Guid userSysId)
         {
             _userCommandService.DeleteUser(userSysId);
         }

@@ -10,8 +10,8 @@ namespace DotNetLive.Account.Entities
     [Table("auth.sysuser")]
     public class SysUser : BaseEntity
     {
-        [Column("id")]
-        public int Id { get; set; }
+        //[Column("id")]
+        //public int Id { get; set; }
         [Column("username")]
         public string UserName { get; set; }
         [Column("email")]
