@@ -1,4 +1,5 @@
-﻿using DotNetLive.Account.Services;
+﻿using DotNetLive.Account.Entities;
+using DotNetLive.Account.Services;
 using DotNetLive.AccountApi.Models.AccountModels;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -15,38 +16,52 @@ namespace DotNetLive.AccountApi.Controllers
     public class UserController : Controller
     {
         private UserQueryService _userQueryService;
+        private UserCommandService _userCommandService;
 
-        public UserController(UserQueryService userQueryService)
+        public UserController(UserQueryService userQueryService, UserCommandService userCommandService)
         {
             this._userQueryService = userQueryService;
+            this._userCommandService = userCommandService;
         }
 
         /// <summary>
         /// 获取用户列表
         /// </summary>
         /// <returns></returns>
-        [HttpGet]
-        //[Authorize("readAccess")]
-        public IList<LoginResult> GetUserList()
+        [HttpGet, Route("search")]
+        public IEnumerable<SysUser> GetUserList()
         {
-            var result = new List<LoginResult>();
-            for (int i = 0; i < 10; i++)
-            {
-                result.Add(new LoginResult() { Token = Guid.NewGuid().ToString() });
-            }
-            return result;
+            return _userQueryService.SearchUser();
         }
 
         /// <summary>
         /// 获取单个用户的信息
         /// </summary>
-        /// <param name="userId"></param>
+        /// <param name="userSysId"></param>
         /// <returns></returns>
-        [HttpGet, Route("{userId}")]
+        [HttpGet, Route("get")]
         //[Authorize("readAccess")]
-        public LoginResult GetUserInfo([FromQuery]Guid userId)
+        public SysUser GetUserInfo([FromQuery]Guid userSysId)
         {
-            return new LoginResult();
+            return _userQueryService.GetUserById(userSysId);
+        }
+
+        [HttpPost, Route("create")]
+        public Guid CreateUser(SysUser user)
+        {
+            return _userCommandService.CreateUser(user);
+        }
+
+        [HttpPut, Route("update")]
+        public void UpdateUser(SysUser user)
+        {
+            _userCommandService.UpdateUser(user);
+        }
+
+        [HttpDelete, Route("delete")]
+        public void DeleteUser(Guid userSysId)
+        {
+            _userCommandService.DeleteUser(userSysId);
         }
     }
 }

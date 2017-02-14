@@ -13,10 +13,20 @@ namespace DotNetLive.Account.Services
             this._commandRepository = commandRepository;
         }
 
-        public Guid CreateUser(User user)
+        public Guid CreateUser(SysUser user)
         {
             _commandRepository.Add(user);
             return user.SysId;
+        }
+
+        public void UpdateUser(SysUser user)
+        {
+            _commandRepository.Update(user);
+        }
+
+        public void DeleteUser(Guid userSysId)
+        {
+            _commandRepository.Delete<SysUser>(userSysId);
         }
     }
 }

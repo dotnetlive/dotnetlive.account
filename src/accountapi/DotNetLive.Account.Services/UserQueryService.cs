@@ -1,6 +1,7 @@
 ﻿using DotNetLive.Account.Entities;
 using DotNetLive.Framework.Data.Repositories;
 using System;
+using System.Collections.Generic;
 
 namespace DotNetLive.Account.Services
 {
@@ -16,9 +17,14 @@ namespace DotNetLive.Account.Services
             this._queryRepository = queryRepository;
         }
 
-        public User GetUserById(Guid userId)
+        public SysUser GetUserById(Guid userId)
         {
-            return _queryRepository.Get<User>(userId);
+            return _queryRepository.Get<SysUser>(userId);
+        }
+
+        public IEnumerable<SysUser> SearchUser()
+        {
+            return _queryRepository.GetAll<SysUser>();
         }
     }
 }

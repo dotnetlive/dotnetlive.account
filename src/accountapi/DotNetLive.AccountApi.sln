@@ -11,6 +11,12 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DotNetLive.Account.Services
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DotNetLive.Account.Entities", "DotNetLive.Account.Entities\DotNetLive.Account.Entities.csproj", "{9AB91101-283D-4726-9D1D-6A47C0EC5899}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DotNetLive.AccountApi.UnitTests", "DotNetLive.AccountApi.UnitTests\DotNetLive.AccountApi.UnitTests.csproj", "{CA2F260E-9863-441D-A92B-7DD1A76A24C2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DotNetLive.AccountApi.IntegrationTests", "DotNetLive.AccountApi.IntegrationTests\DotNetLive.AccountApi.IntegrationTests.csproj", "{6FCF364B-053E-4EF8-ACA8-378FBAF98F4D}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{78A0CA8F-9FD0-406A-9491-CCE77E5A4DC0}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -69,8 +75,36 @@ Global
 		{9AB91101-283D-4726-9D1D-6A47C0EC5899}.Release|x64.Build.0 = Release|x64
 		{9AB91101-283D-4726-9D1D-6A47C0EC5899}.Release|x86.ActiveCfg = Release|x86
 		{9AB91101-283D-4726-9D1D-6A47C0EC5899}.Release|x86.Build.0 = Release|x86
+		{CA2F260E-9863-441D-A92B-7DD1A76A24C2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CA2F260E-9863-441D-A92B-7DD1A76A24C2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CA2F260E-9863-441D-A92B-7DD1A76A24C2}.Debug|x64.ActiveCfg = Debug|x64
+		{CA2F260E-9863-441D-A92B-7DD1A76A24C2}.Debug|x64.Build.0 = Debug|x64
+		{CA2F260E-9863-441D-A92B-7DD1A76A24C2}.Debug|x86.ActiveCfg = Debug|x86
+		{CA2F260E-9863-441D-A92B-7DD1A76A24C2}.Debug|x86.Build.0 = Debug|x86
+		{CA2F260E-9863-441D-A92B-7DD1A76A24C2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CA2F260E-9863-441D-A92B-7DD1A76A24C2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CA2F260E-9863-441D-A92B-7DD1A76A24C2}.Release|x64.ActiveCfg = Release|x64
+		{CA2F260E-9863-441D-A92B-7DD1A76A24C2}.Release|x64.Build.0 = Release|x64
+		{CA2F260E-9863-441D-A92B-7DD1A76A24C2}.Release|x86.ActiveCfg = Release|x86
+		{CA2F260E-9863-441D-A92B-7DD1A76A24C2}.Release|x86.Build.0 = Release|x86
+		{6FCF364B-053E-4EF8-ACA8-378FBAF98F4D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6FCF364B-053E-4EF8-ACA8-378FBAF98F4D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6FCF364B-053E-4EF8-ACA8-378FBAF98F4D}.Debug|x64.ActiveCfg = Debug|x64
+		{6FCF364B-053E-4EF8-ACA8-378FBAF98F4D}.Debug|x64.Build.0 = Debug|x64
+		{6FCF364B-053E-4EF8-ACA8-378FBAF98F4D}.Debug|x86.ActiveCfg = Debug|x86
+		{6FCF364B-053E-4EF8-ACA8-378FBAF98F4D}.Debug|x86.Build.0 = Debug|x86
+		{6FCF364B-053E-4EF8-ACA8-378FBAF98F4D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6FCF364B-053E-4EF8-ACA8-378FBAF98F4D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6FCF364B-053E-4EF8-ACA8-378FBAF98F4D}.Release|x64.ActiveCfg = Release|x64
+		{6FCF364B-053E-4EF8-ACA8-378FBAF98F4D}.Release|x64.Build.0 = Release|x64
+		{6FCF364B-053E-4EF8-ACA8-378FBAF98F4D}.Release|x86.ActiveCfg = Release|x86
+		{6FCF364B-053E-4EF8-ACA8-378FBAF98F4D}.Release|x86.Build.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{CA2F260E-9863-441D-A92B-7DD1A76A24C2} = {78A0CA8F-9FD0-406A-9491-CCE77E5A4DC0}
+		{6FCF364B-053E-4EF8-ACA8-378FBAF98F4D} = {78A0CA8F-9FD0-406A-9491-CCE77E5A4DC0}
 	EndGlobalSection
 EndGlobal
