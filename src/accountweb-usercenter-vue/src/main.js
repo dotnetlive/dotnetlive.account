@@ -4,15 +4,15 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import App from './App'
 import routers from './routers'
-import './assets/content/bootstrap.min.css'
+import './assets/bootstrap/css/bootstrap.css'
 import './assets/content/animate.css'
 import './assets/content/style.css'
 /* eslint-disable no-new */
 Vue.use(VueRouter)
 const router = new VueRouter(routers)
 new Vue({
-  el: '#app',
-  router,
-  template: '<App/>',
-  components: { App }
+    el: '#app',
+    router,
+    template: '<App/>',
+    components: { App }
 })
