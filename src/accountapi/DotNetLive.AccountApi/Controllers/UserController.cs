@@ -1,4 +1,5 @@
-﻿using DotNetLive.Account.Entities;
+﻿using AutoMapper;
+using DotNetLive.Account.Entities;
 using DotNetLive.Account.Services;
 using DotNetLive.AccountApi.Models.AccountModels;
 using DotNetLive.AccountApi.Models.UserModels;
@@ -18,11 +19,15 @@ namespace DotNetLive.AccountApi.Controllers
     {
         private UserQueryService _userQueryService;
         private UserCommandService _userCommandService;
+        private IMapper _mapper;
 
-        public UserController(UserQueryService userQueryService, UserCommandService userCommandService)
+        public UserController(UserQueryService userQueryService,
+            UserCommandService userCommandService,
+            IMapper mapper)
         {
             this._userQueryService = userQueryService;
             this._userCommandService = userCommandService;
+            this._mapper = mapper;
         }
 
         /// <summary>
@@ -30,9 +35,9 @@ namespace DotNetLive.AccountApi.Controllers
         /// </summary>
         /// <returns></returns>
         [HttpGet, Route("search")]
-        public IEnumerable<SysUser> GetUserList()
+        public IEnumerable<UserModel> GetUserList()
         {
-            return _userQueryService.SearchUser();
+            return _mapper.Map<IEnumerable<UserModel>>(_userQueryService.SearchUser());
         }
 
         /// <summary>
@@ -42,9 +47,9 @@ namespace DotNetLive.AccountApi.Controllers
         /// <returns></returns>
         [HttpGet, Route("get")]
         //[Authorize("readAccess")]
-        public SysUser GetUserInfo([FromQuery]Guid userSysId)
+        public UserModel GetUserInfo([FromQuery]Guid userSysId)
         {
-            return _userQueryService.GetUserById(userSysId);
+            return _mapper.Map<UserModel>(_userQueryService.GetUserById(userSysId));
         }
 
         [HttpPost, Route("create")]
@@ -52,13 +57,13 @@ namespace DotNetLive.AccountApi.Controllers
         {
             if (userCreateModel == null)
                 throw new Exception("新创建的用户不能为空");
-            return _userCommandService.CreateUser(new SysUser() { Email = userCreateModel.Email });
+            return _userCommandService.CreateUser(_mapper.Map<SysUser>(userCreateModel));
         }
 
         [HttpPut, Route("update")]
         public void UpdateUser([FromBody]UserUpdateModel userUpdateModel)
         {
-            _userCommandService.UpdateUser(new SysUser() { Email = userUpdateModel.Email });
+            _userCommandService.UpdateUser(_mapper.Map<SysUser>(userUpdateModel));
         }
 
         [HttpDelete, Route("delete")]

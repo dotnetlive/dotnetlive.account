@@ -1,4 +1,5 @@
-﻿using DotNetLive.Framework.Entities;
+﻿using DotNetLive.Framework.Dapper.Extensions;
+using DotNetLive.Framework.Entities;
 using System;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -10,8 +11,8 @@ namespace DotNetLive.Account.Entities
     [Table("auth.sysuser")]
     public class SysUser : BaseEntity
     {
-        //[Column("id")]
-        //public int Id { get; set; }
+        [Column("id"), DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        public int Id { get; set; }
         [Column("username")]
         public string UserName { get; set; }
         [Column("email")]
