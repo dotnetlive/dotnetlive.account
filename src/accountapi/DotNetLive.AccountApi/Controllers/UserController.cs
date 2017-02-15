@@ -1,6 +1,7 @@
 ﻿using DotNetLive.Account.Entities;
 using DotNetLive.Account.Services;
 using DotNetLive.AccountApi.Models.AccountModels;
+using DotNetLive.AccountApi.Models.UserModels;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -47,17 +48,17 @@ namespace DotNetLive.AccountApi.Controllers
         }
 
         [HttpPost, Route("create")]
-        public Guid CreateUser([FromBody]SysUser user)
+        public Guid CreateUser([FromBody]UserCreateModel userCreateModel)
         {
-            if (user == null)
+            if (userCreateModel == null)
                 throw new Exception("新创建的用户不能为空");
-            return _userCommandService.CreateUser(user);
+            return _userCommandService.CreateUser(new SysUser() { Email = userCreateModel.Email });
         }
 
         [HttpPut, Route("update")]
-        public void UpdateUser([FromBody]SysUser user)
+        public void UpdateUser([FromBody]UserUpdateModel userUpdateModel)
         {
-            _userCommandService.UpdateUser(user);
+            _userCommandService.UpdateUser(new SysUser() { Email = userUpdateModel.Email });
         }
 
         [HttpDelete, Route("delete")]

@@ -4,4 +4,8 @@
     <TargetFramework>netcoreapp1.0</TargetFramework>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\..\dotnetlive.framework\src\DotNetLive.Framework\DotNetLive.Framework.csproj" />
+  </ItemGroup>
+
 </Project>
