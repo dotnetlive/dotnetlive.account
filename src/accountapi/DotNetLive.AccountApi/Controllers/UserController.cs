@@ -3,6 +3,7 @@ using DotNetLive.Account.Entities;
 using DotNetLive.Account.Services;
 using DotNetLive.AccountApi.Models.AccountModels;
 using DotNetLive.AccountApi.Models.UserModels;
+using DotNetLive.Framework.WebFramework.Filters;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -66,7 +67,7 @@ namespace DotNetLive.AccountApi.Controllers
             _userCommandService.UpdateUser(_mapper.Map<SysUser>(userUpdateModel));
         }
 
-        [HttpDelete, Route("delete")]
+        [HttpPost, HttpDelete, Route("delete")]
         public void DeleteUser([FromQuery]Guid userSysId)
         {
             _userCommandService.DeleteUser(userSysId);
