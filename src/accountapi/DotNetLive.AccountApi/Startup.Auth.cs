@@ -19,7 +19,7 @@ namespace DotNetLive.AccountApi
         // Keep this safe on the server!
         private static readonly string secretKey = "mysupersecret_secretkey!123";
 
-        private void ConfigureAuth(IServiceCollection services)
+        private void ConfigureAuthorization(IServiceCollection services)
         {
             services.AddAuthorization(options =>
             {
@@ -53,7 +53,7 @@ namespace DotNetLive.AccountApi
             services.AddSingleton<IAuthorizationHandler, BadgeEntryHandler>();
         }
 
-        private void ConfigureAuth(IApplicationBuilder app)
+        private void ConfigureAuthorization(IApplicationBuilder app)
         {
             var signingKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(secretKey));
 
@@ -70,6 +70,7 @@ namespace DotNetLive.AccountApi
             {
                 // The signing key must match!
                 ValidateIssuerSigningKey = true,
+
                 IssuerSigningKey = signingKey,
 
                 // Validate the JWT Issuer (iss) claim
@@ -87,23 +88,17 @@ namespace DotNetLive.AccountApi
                 ClockSkew = TimeSpan.Zero
             };
 
-            app.UseJwtBearerAuthentication(new JwtBearerOptions
+            var options = new JwtBearerOptions
             {
                 AutomaticAuthenticate = true,
                 AutomaticChallenge = true,
                 TokenValidationParameters = tokenValidationParameters
-            });
+            };
 
-            //app.UseCookieAuthentication(new CookieAuthenticationOptions
-            //{
-            //    AutomaticAuthenticate = true,
-            //    AutomaticChallenge = true,
-            //    AuthenticationScheme = "Cookie",
-            //    CookieName = "access_token",
-            //    TicketDataFormat = new CustomJwtDataFormat(
-            //        SecurityAlgorithms.HmacSha256,
-            //        tokenValidationParameters)
-            //});
+            //这里默认是:System.IdentityModel.Tokens.Jwt.JwtSecurityToken, System.IdentityModel.Tokens.Jwt, Version=5.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35
+            options.SecurityTokenValidators.Clear();
+            options.SecurityTokenValidators.Add(new CustomSecurityValidater("DNLJWT"));
+            app.UseJwtBearerAuthentication(options);
         }
 
         private Task<ClaimsIdentity> GetIdentity(string username, string password)
@@ -117,5 +112,55 @@ namespace DotNetLive.AccountApi
             // Credentials are invalid, or account doesn't exist
             return Task.FromResult<ClaimsIdentity>(null);
         }
+    }
+
+    public class CustomSecurityValidater : ISecurityTokenValidator
+    {
+        public string AuthenticationScheme { get; }
+
+        public CustomSecurityValidater(string authenticationScheme)
+        {
+            AuthenticationScheme = authenticationScheme;
+        }
+
+        public bool CanValidateToken => true;
+
+        public int MaximumTokenSizeInBytes { get; set; }
+
+        public bool CanReadToken(string securityToken) => true;
+
+        public ClaimsPrincipal ValidateToken(string securityToken, TokenValidationParameters validationParameters, out SecurityToken validatedToken)
+        {
+            validatedToken = null;
+
+            //your logic here
+            var response = new JwtObject() { SysId = Guid.NewGuid(), Email = "dk@feinian.me", UserName = "Duke Cheng" }; //GetResponseFromMyAuthServer(securityToken);
+            //assuming response will contain info about the user
+
+            //if (response == null || response.IsError)
+            //    throw new SecurityTokenException("invalid");
+
+            //create your identity by generating its claims
+            var claims = new[]
+            {
+                new Claim(ClaimTypes.NameIdentifier, response.SysId.ToString()),
+                new Claim(ClaimTypes.Email, response.Email),
+                new Claim(ClaimsIdentity.DefaultNameClaimType, response.UserName),
+            };
+
+            var identity = new ClaimsIdentity(claims, AuthenticationScheme)
+            {
+
+            };
+
+            return new ClaimsPrincipal(identity);
+        }
+    }
+
+    public class JwtObject
+    {
+        public Guid SysId { get; set; }
+        public string Email { get; set; }
+        public string UserName { get; set; }
     }
 }
