@@ -1,5 +1,8 @@
 <template>
   <div class="hello">
+<<<<<<< HEAD
+<<<<<<< HEAD
+=======
     <h1>{{ msg }}</h1>
     <h2>Essential Links</h2>
     <ul>
@@ -17,20 +20,40 @@
       <li><a href="http://vue-loader.vuejs.org/" target="_blank">vue-loader</a></li>
       <li><a href="https://github.com/vuejs/awesome-vue" target="_blank">awesome-vue</a></li>
     </ul>
+>>>>>>> add ui
+=======
+>>>>>>> 99514e3e0a214704904fcb3c912370caf5d195a7
   </div>
 </template>
 
 <script>
+<<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 99514e3e0a214704904fcb3c912370caf5d195a7
+  export default {
+    name: 'hello',
+    data() {
+      return {
+        msg: 'Welcome to Your Vue.js App'
+      }
+<<<<<<< HEAD
+    }
+  }
+
+</script>
+=======
 export default {
   name: 'hello',
   data () {
     return {
       msg: 'Welcome to Your Vue.js App'
+=======
+>>>>>>> 99514e3e0a214704904fcb3c912370caf5d195a7
     }
   }
-}
-</script>
 
+<<<<<<< HEAD
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
 h1, h2 {
@@ -51,3 +74,7 @@ a {
   color: #42b983;
 }
 </style>
+>>>>>>> add ui
+=======
+</script>
+>>>>>>> 99514e3e0a214704904fcb3c912370caf5d195a7

@@ -1,4 +1,8 @@
 <template>
+<<<<<<< HEAD
+<<<<<<< HEAD
+  <router-view></router-view>
+=======
   <div id="wrapper">
     <nav class="navbar-default navbar-static-side" role="navigation">
       <div class="sidebar-collapse">
@@ -497,6 +501,11 @@
         </div>
       </div>
     </div>
+>>>>>>> add ui
+=======
+  <div>
+    <router-view></router-view>
+>>>>>>> 99514e3e0a214704904fcb3c912370caf5d195a7
   </div>
 </template>
 
