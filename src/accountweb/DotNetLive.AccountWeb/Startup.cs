@@ -33,18 +33,11 @@ namespace DotNetLive.AccountWeb
         public IServiceProvider ConfigureServices(IServiceCollection services)
         {
             var env = services.BuildServiceProvider().GetService<IHostingEnvironment>();
-            services.AddSingleton<IServiceCollection>(factory => services);
-            //services.AddSingleton<IContainer>(factory => ApplicationContainer);
-            services.AddSingleton<IConfigurationRoot>(factory => Configuration);
+            services.AddSingleton(factory => services);
+            services.AddSingleton(factory => Configuration);
 
             //先通过asp.net core ioc注册
             services.AddDependencyRegister(Configuration);
-            // Register the Swagger generator, defining one or more Swagger documents
-            //services.AddSwaggerGen(c =>
-            //{
-            //    c.SwaggerDoc("v1", new Info { Title = "DNL API V1", Version = "v1" });
-            //    c.SwaggerDoc("v2", new Info { Title = "DNL API V2", Version = "v2" });
-            //});
 
             return services.BuildServiceProvider();
         }
@@ -58,8 +51,6 @@ namespace DotNetLive.AccountWeb
             app.UseDeveloperExceptionPage();
             if (env.IsDevelopment())
             {
-                //app.UseDeveloperExceptionPage();
-                //app.UseDatabaseErrorPage();
                 app.UseBrowserLink();
             }
             else
@@ -70,26 +61,6 @@ namespace DotNetLive.AccountWeb
             app.UseStaticFiles();
 
             app.UseIdentity();
-
-            //// Enable middleware to serve generated Swagger as a JSON endpoint.
-            //app.UseSwagger();
-
-            //// Enable middleware to serve swagger-ui (HTML, JS, CSS etc.), specifying the Swagger JSON endpoint.
-            //app.UseSwaggerUi(c =>
-            //{
-            //    c.SwaggerEndpoint("/swagger/v1/swagger.json", "DNL Accont API V1");
-            //    c.SwaggerEndpoint("/swagger/v2/swagger.json", "DNL Accont API V2");
-
-            //    c.InjectStylesheet("/swagger.css");
-            //    c.EnabledValidator();
-            //    c.BooleanValues(new object[] { 0, 1 });
-            //    c.DocExpansion("full");
-            //    //c.InjectOnCompleteJavaScript("/swagger-ui/on-complete.js");
-            //    //c.InjectOnFailureJavaScript("/swagger-ui/on-failure.js");
-            //    c.SupportedSubmitMethods(new[] { "get", "post", "put", "patch" });
-            //    c.ShowRequestHeaders();
-            //    c.ShowJsonEditor();
-            //});
 
             app.UseCookieAuthentication();
 

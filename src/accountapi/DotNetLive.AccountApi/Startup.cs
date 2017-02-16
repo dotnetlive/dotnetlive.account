@@ -33,7 +33,7 @@ namespace DotNetLive.AccountApi
             services.AddDependencyRegister(Configuration);
 
             ConfigSwagger(services);
-            ConfigureAuth(services);
+            ConfigureAuthorization(services);
             return services.BuildServiceProvider();
         }
 
@@ -49,7 +49,7 @@ namespace DotNetLive.AccountApi
 
             ConfigSwagger(app);
 
-            ConfigureAuth(app);
+            ConfigureAuthorization(app);
 
             //// System.Security.Cryptography.X509Certificates.X509Certificate2 cert2 = new System.Security.Cryptography.X509Certificates.X509Certificate2(byte[] rawData);
             //System.Security.Cryptography.X509Certificates.X509Certificate2 cert2 = DotNetUtilities.CreateX509Cert2("mycert");
