@@ -1,6 +1,7 @@
 <template>
   <div class="hello">
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
     <h1>{{ msg }}</h1>
     <h2>Essential Links</h2>
@@ -20,17 +21,23 @@
       <li><a href="https://github.com/vuejs/awesome-vue" target="_blank">awesome-vue</a></li>
     </ul>
 >>>>>>> add ui
+=======
+>>>>>>> 99514e3e0a214704904fcb3c912370caf5d195a7
   </div>
 </template>
 
 <script>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 99514e3e0a214704904fcb3c912370caf5d195a7
   export default {
     name: 'hello',
     data() {
       return {
         msg: 'Welcome to Your Vue.js App'
       }
+<<<<<<< HEAD
     }
   }
 
@@ -41,11 +48,12 @@ export default {
   data () {
     return {
       msg: 'Welcome to Your Vue.js App'
+=======
+>>>>>>> 99514e3e0a214704904fcb3c912370caf5d195a7
     }
   }
-}
-</script>
 
+<<<<<<< HEAD
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
 h1, h2 {
@@ -67,3 +75,6 @@ a {
 }
 </style>
 >>>>>>> add ui
+=======
+</script>
+>>>>>>> 99514e3e0a214704904fcb3c912370caf5d195a7
