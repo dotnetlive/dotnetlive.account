@@ -4,7 +4,8 @@
             <ul class="nav metismenu" id="side-menu">
                 <li class="nav-header">
                     <div class="dropdown profile-element" v-bind:class="showMenus">
-                        <span><img alt="image" class="img-circle" src="./../assets/images/profile_small.jpg" />
+                        <span>
+                            <img alt="image" class="img-circle" src="./../assets/images/profile_small.jpg" />
                              </span>
                         <a data-toggle="dropdown" class="dropdown-toggle">
                             <span class="clear"> 
@@ -16,12 +17,12 @@
                         </a>
                         <ul class="dropdown-menu animated fadeInRight m-t-xs">
                             <li>
-                                <router-link :to="{ path: 'profile'}">Profile</router-link>
+                                <router-link :to="{ path: '/home/profile'}">Profile</router-link>
                             </li>
-                            <li><a href="contacts.html">Contacts</a></li>
-                            <li><a href="mailbox.html">Mailbox</a></li>
                             <li class="divider"></li>
-                            <li><a href="login.html">Logout</a></li>
+                            <li>
+                                <router-link :to="{ path: '/'}">Logout</router-link>
+                            </li>
                         </ul>
                     </div>
                     <div class="logo-element">
@@ -48,9 +49,7 @@
             }
         },
         created() {
-            // document.onclick = (e) => {
-            //     this.showMenus = false;
-            // };
+
         },
         methods: {
             menusNav() {

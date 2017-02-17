@@ -3,7 +3,6 @@
         <Menus></Menus>
         <router-view></router-view>
         <div class="small-chat-box fadeInRight animated">
-
             <div class="heading" draggable="true">
                 <small class="chat-date pull-right">
                     02.19.2015
