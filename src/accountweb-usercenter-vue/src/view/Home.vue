@@ -1,40 +1,6 @@
 <template>
     <div id="wrapper">
-        <nav class="navbar-default navbar-static-side" role="navigation">
-            <div class="sidebar-collapse">
-                <ul class="nav metismenu" id="side-menu">
-                    <li class="nav-header">
-                        <div class="dropdown profile-element">
-                            <span><img alt="image" class="img-circle" src="./../assets/images/profile_small.jpg" />
-                             </span>
-                            <a data-toggle="dropdown" class="dropdown-toggle" href="#">
-                                <span class="clear"> <span class="block m-t-xs"> <strong class="font-bold">David Williams</strong>
-                             </span> <span class="text-muted text-xs block">Art Director <b class="caret"></b></span>                                </span>
-                            </a>
-                            <ul class="dropdown-menu animated fadeInRight m-t-xs">
-                                <li>
-                                    <router-link :to="{ path: 'profile'}">Profile</router-link>
-                                </li>
-                                <li><a href="contacts.html">Contacts</a></li>
-                                <li><a href="mailbox.html">Mailbox</a></li>
-                                <li class="divider"></li>
-                                <li><a href="login.html">Logout</a></li>
-                            </ul>
-                        </div>
-                        <div class="logo-element">
-                            IN+
-                        </div>
-                    </li>
-                    <li class="active">
-                        <router-link :to="{ path: '/home/index'}"><i class="fa fa-th-large"></i> <span class="nav-label">首页</span><span class="fa arrow"></span></router-link>
-                    </li>
-                    <li>
-                        <router-link :to="{ path: '/home/profile'}"><i class="fa fa-diamond"></i> <span class="nav-label">个人中心</span></router-link>
-                    </li>
-                </ul>
-
-            </div>
-        </nav>
+        <Menus></Menus>
         <router-view></router-view>
         <div class="small-chat-box fadeInRight animated">
 
@@ -975,14 +941,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="footer">
-                                        <div class="pull-right">
-                                            10GB of <strong>250GB</strong> Free.
-                                        </div>
-                                        <div>
-                                            <strong>Copyright</strong> Example Company &copy; 2014-2017
-                                        </div>
-                                    </div>
+                                    <MyFoot></MyFoot>
                                 </div>
                             </div>
                         </div>
@@ -991,8 +950,13 @@
 </template>
 
 <script>
+    import Menus from './../components/Menus'
+    import MyFoot from './../components/Footer'
     export default {
-        name: 'hello',
+        components: {
+            Menus,
+            MyFoot
+        },
         data() {
             return {
                 msg: 'Welcome to Your Vue.js App'
