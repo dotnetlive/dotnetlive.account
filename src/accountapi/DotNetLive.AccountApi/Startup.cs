@@ -38,7 +38,7 @@ namespace DotNetLive.AccountApi
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory, IServiceProvider serviceProvider)
         {
             loggerFactory.AddConsole(Configuration.GetSection("Logging"));
             loggerFactory.AddDebug();
@@ -49,45 +49,7 @@ namespace DotNetLive.AccountApi
 
             ConfigSwagger(app);
 
-            ConfigureAuthorization(app);
-
-            //// System.Security.Cryptography.X509Certificates.X509Certificate2 cert2 = new System.Security.Cryptography.X509Certificates.X509Certificate2(byte[] rawData);
-            //System.Security.Cryptography.X509Certificates.X509Certificate2 cert2 = DotNetUtilities.CreateX509Cert2("mycert");
-            //Microsoft.IdentityModel.Tokens.SecurityKey secKey = new X509SecurityKey(cert2);
-
-            //var tokenValidationParameters = new Microsoft.IdentityModel.Tokens.TokenValidationParameters
-            //{
-            //    // The signing key must match!
-            //    ValidateIssuerSigningKey = true,
-            //    IssuerSigningKey = signingKey,
-
-            //    // Validate the JWT Issuer (iss) claim
-            //    ValidateIssuer = true,
-            //    ValidIssuer = "ExampleIssuer",
-
-            //    // Validate the JWT Audience (aud) claim
-            //    ValidateAudience = true,
-            //    ValidAudience = "ExampleAudience",
-
-            //    // Validate the token expiry
-            //    ValidateLifetime = true,
-
-            //    // If you want to allow a certain amount of clock drift, set that here:
-            //    ClockSkew = TimeSpan.Zero,
-            //};
-
-            //var bearerOptions = new JwtBearerOptions()
-            //{
-            //    AutomaticAuthenticate = true,
-            //    AutomaticChallenge = true,
-            //    TokenValidationParameters = tokenValidationParameters,
-            //    Events = new CustomBearerEvents()
-            //};
-
-            //// Optional 
-            //// bearerOptions.SecurityTokenValidators.Clear();
-            //// bearerOptions.SecurityTokenValidators.Add(new MyTokenHandler());
-            //app.UseJwtBearerAuthentication(bearerOptions);
+            ConfigureAuthorization(app, serviceProvider);
 
             app.UseMvcWithDefaultRoute();
         }
