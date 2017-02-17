@@ -2,9 +2,11 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using System;
 using System.Collections.Generic;
+using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
 using System.Security.Claims;
 using System.Security.Principal;
@@ -53,18 +55,10 @@ namespace DotNetLive.AccountApi
             services.AddSingleton<IAuthorizationHandler, BadgeEntryHandler>();
         }
 
-        private void ConfigureAuthorization(IApplicationBuilder app)
+        private void ConfigureAuthorization(IApplicationBuilder app, IServiceProvider serviceProvider)
         {
+            var tokenSettings = serviceProvider.GetService<IOptions<TokenSettings>>().Value;
             var signingKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(secretKey));
-
-            app.UseSimpleTokenProvider(new TokenProviderOptions
-            {
-                Path = "/api/token",
-                Audience = "ExampleAudience",
-                Issuer = "ExampleIssuer",
-                SigningCredentials = new SigningCredentials(signingKey, SecurityAlgorithms.HmacSha256),
-                IdentityResolver = GetIdentity
-            });
 
             var tokenValidationParameters = new TokenValidationParameters
             {
@@ -75,11 +69,11 @@ namespace DotNetLive.AccountApi
 
                 // Validate the JWT Issuer (iss) claim
                 ValidateIssuer = true,
-                ValidIssuer = "ExampleIssuer",
+                ValidIssuer = tokenSettings.Issuer,
 
                 // Validate the JWT Audience (aud) claim
                 ValidateAudience = true,
-                ValidAudience = "ExampleAudience",
+                ValidAudience = tokenSettings.Audience,
 
                 // Validate the token expiry
                 ValidateLifetime = true,
@@ -95,9 +89,9 @@ namespace DotNetLive.AccountApi
                 TokenValidationParameters = tokenValidationParameters
             };
 
-            //这里默认是:System.IdentityModel.Tokens.Jwt.JwtSecurityToken, System.IdentityModel.Tokens.Jwt, Version=5.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35
+            //这里默认是:System.IdentityModel.Tokens.Jwt.JwtSecurityTokenHandler, System.IdentityModel.Tokens.Jwt, Version=5.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35
             options.SecurityTokenValidators.Clear();
-            options.SecurityTokenValidators.Add(new CustomSecurityValidater("DNLJWT"));
+            options.SecurityTokenValidators.Add(new CustomSecurityValidater("DotNetLive Jwt Auth"));
             app.UseJwtBearerAuthentication(options);
         }
 
@@ -114,45 +108,23 @@ namespace DotNetLive.AccountApi
         }
     }
 
-    public class CustomSecurityValidater : ISecurityTokenValidator
+    public class CustomSecurityValidater : JwtSecurityTokenHandler, ISecurityTokenValidator
     {
         public string AuthenticationScheme { get; }
 
-        public CustomSecurityValidater(string authenticationScheme)
+        public CustomSecurityValidater(string authenticationScheme) : base()
         {
             AuthenticationScheme = authenticationScheme;
         }
 
-        public bool CanValidateToken => true;
-
-        public int MaximumTokenSizeInBytes { get; set; }
-
-        public bool CanReadToken(string securityToken) => true;
-
-        public ClaimsPrincipal ValidateToken(string securityToken, TokenValidationParameters validationParameters, out SecurityToken validatedToken)
+        public override ClaimsPrincipal ValidateToken(string token, TokenValidationParameters validationParameters, out SecurityToken validatedToken)
         {
-            validatedToken = null;
+            var cp = base.ValidateToken(token, validationParameters, out validatedToken);
 
-            //your logic here
-            var response = new JwtObject() { SysId = Guid.NewGuid(), Email = "dk@feinian.me", UserName = "Duke Cheng" }; //GetResponseFromMyAuthServer(securityToken);
-            //assuming response will contain info about the user
-
-            //if (response == null || response.IsError)
-            //    throw new SecurityTokenException("invalid");
-
-            //create your identity by generating its claims
-            var claims = new[]
-            {
-                new Claim(ClaimTypes.NameIdentifier, response.SysId.ToString()),
-                new Claim(ClaimTypes.Email, response.Email),
-                new Claim(ClaimsIdentity.DefaultNameClaimType, response.UserName),
-            };
-
-            var identity = new ClaimsIdentity(claims, AuthenticationScheme)
-            {
-
-            };
-
+            var jti = cp.Claims.SingleOrDefault(x => x.Type == JwtRegisteredClaimNames.Jti);
+            //Do check in Redis is the jti in the appliedTokenList, 
+            //Refreshed: 已经申请刷新则直接过期旧的Token
+            var identity = new ClaimsIdentity(cp.Claims, AuthenticationScheme);
             return new ClaimsPrincipal(identity);
         }
     }
