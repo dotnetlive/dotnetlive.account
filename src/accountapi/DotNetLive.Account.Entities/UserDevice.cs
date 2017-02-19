@@ -10,6 +10,8 @@ namespace DotNetLive.Account.Entities
     [Table("auth.user_device")]
     public class UserDevice : BaseEntity
     {
+        public Guid UserSysId { get; set; }
+
         /// <summary>
         /// 生成的token
         /// </summary>
@@ -21,5 +23,6 @@ namespace DotNetLive.Account.Entities
         /// </summary>
         [Column("expire_time")]
         public DateTime ExpireTime { get; set; }
+        public DateTime IssueTime { get; set; }
     }
 }

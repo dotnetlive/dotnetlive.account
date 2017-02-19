@@ -6,9 +6,6 @@ using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using System;
 using System.Collections.Generic;
-using System.IdentityModel.Tokens.Jwt;
-using System.Linq;
-using System.Security.Claims;
 using System.Security.Principal;
 using System.Text;
 using System.Threading.Tasks;
@@ -55,7 +52,7 @@ namespace DotNetLive.AccountApi
             services.AddSingleton<IAuthorizationHandler, BadgeEntryHandler>();
         }
 
-        private void ConfigureAuthorization(IApplicationBuilder app, IServiceProvider serviceProvider)
+        private void ConfigureAuthentication(IApplicationBuilder app, IServiceProvider serviceProvider)
         {
             var tokenSettings = serviceProvider.GetService<IOptions<TokenSettings>>().Value;
             var signingKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(secretKey));
@@ -91,48 +88,8 @@ namespace DotNetLive.AccountApi
 
             //这里默认是:System.IdentityModel.Tokens.Jwt.JwtSecurityTokenHandler, System.IdentityModel.Tokens.Jwt, Version=5.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35
             options.SecurityTokenValidators.Clear();
-            options.SecurityTokenValidators.Add(new CustomSecurityValidater("DotNetLive Jwt Auth"));
+            options.SecurityTokenValidators.Add(new DnlJwtSecurityValidater("DotNetLive Jwt Auth"));
             app.UseJwtBearerAuthentication(options);
         }
-
-        private Task<ClaimsIdentity> GetIdentity(string username, string password)
-        {
-            // Don't do this in production, obviously!
-            if (username == "TEST" && password == "TEST123")
-            {
-                return Task.FromResult(new ClaimsIdentity(new GenericIdentity(username, "Token"), new Claim[] { }));
-            }
-
-            // Credentials are invalid, or account doesn't exist
-            return Task.FromResult<ClaimsIdentity>(null);
-        }
-    }
-
-    public class CustomSecurityValidater : JwtSecurityTokenHandler, ISecurityTokenValidator
-    {
-        public string AuthenticationScheme { get; }
-
-        public CustomSecurityValidater(string authenticationScheme) : base()
-        {
-            AuthenticationScheme = authenticationScheme;
-        }
-
-        public override ClaimsPrincipal ValidateToken(string token, TokenValidationParameters validationParameters, out SecurityToken validatedToken)
-        {
-            var cp = base.ValidateToken(token, validationParameters, out validatedToken);
-
-            var jti = cp.Claims.SingleOrDefault(x => x.Type == JwtRegisteredClaimNames.Jti);
-            //Do check in Redis is the jti in the appliedTokenList, 
-            //Refreshed: 已经申请刷新则直接过期旧的Token
-            var identity = new ClaimsIdentity(cp.Claims, AuthenticationScheme);
-            return new ClaimsPrincipal(identity);
-        }
-    }
-
-    public class JwtObject
-    {
-        public Guid SysId { get; set; }
-        public string Email { get; set; }
-        public string UserName { get; set; }
     }
 }

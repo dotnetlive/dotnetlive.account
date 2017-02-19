@@ -72,19 +72,25 @@ namespace DotNetLive.AccountApi.Controllers
         private async Task<LoginResult> GenerateToken(SysUser user, bool withBearerPrefix = true)
         {
             var now = DateTime.UtcNow;
+            var userDevice = new UserDevice()
+            {
+                UserSysId = user.SysId,
+                IssueTime = now,
+                ExpireTime = now.Add(TokenSettings.Expiration)
+            };
+
 
             // Specifically add the jti (nonce), iat (issued timestamp), and sub (subject/user) claims.
             // You can add other claims here, if you want:
             var claims = new List<Claim>
             {
                 new Claim(JwtRegisteredClaimNames.Sub, user.UserName),
-                new Claim(JwtRegisteredClaimNames.Jti,Guid.NewGuid().ToString()),
-                new Claim(JwtRegisteredClaimNames.Iat, ToUnixEpochDate(now).ToString(), ClaimValueTypes.Integer64)
+                new Claim(JwtRegisteredClaimNames.Jti, userDevice.SysId.ToString()),
+                new Claim(JwtRegisteredClaimNames.Iat, ToUnixEpochDate(now).ToString(), ClaimValueTypes.Integer64),
+                new Claim(ClaimTypes.NameIdentifier, user.SysId.ToString()),
+                new Claim(ClaimTypes.Email, user.Email),
+                new Claim(ClaimsIdentity.DefaultNameClaimType, user.UserName)
             };
-
-            claims.Add(new Claim(ClaimTypes.NameIdentifier, user.SysId.ToString()));
-            claims.Add(new Claim(ClaimTypes.Email, user.Email));
-            claims.Add(new Claim(ClaimsIdentity.DefaultNameClaimType, user.UserName));
 
             var signingKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(TokenSettings.SigningKey));
 
@@ -93,17 +99,23 @@ namespace DotNetLive.AccountApi.Controllers
                 issuer: TokenSettings.Issuer,
                 audience: TokenSettings.Audience,
                 claims: claims,
-                notBefore: now,
-                expires: now.Add(TokenSettings.Expiration),
+                notBefore: userDevice.IssueTime,
+                expires: userDevice.ExpireTime,
                 signingCredentials: new SigningCredentials(signingKey, SecurityAlgorithms.HmacSha256));
 
             var encodedJwt = new JwtSecurityTokenHandler().WriteToken(jwt);
+            userDevice.Token = encodedJwt;
 
             var loginResult = new LoginResult
             {
-                Token = withBearerPrefix ? "Bearer " : string.Empty + encodedJwt,
+                Token = encodedJwt,
                 ExpiresIn = TokenSettings.Expiration.TotalSeconds
             };
+
+            if (withBearerPrefix)
+            {
+                loginResult.Token.Insert(0, "Bearer ");
+            }
 
             return await Task.FromResult(loginResult);
         }

@@ -49,7 +49,7 @@ namespace DotNetLive.AccountApi
 
             ConfigSwagger(app);
 
-            ConfigureAuthorization(app, serviceProvider);
+            ConfigureAuthentication(app, serviceProvider);
 
             app.UseMvcWithDefaultRoute();
         }
