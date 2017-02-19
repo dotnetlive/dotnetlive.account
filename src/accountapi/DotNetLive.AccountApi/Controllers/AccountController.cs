@@ -27,18 +27,22 @@ namespace DotNetLive.AccountApi.Controllers
     [ProducesResponseType(typeof(ErrorResponse), 500)]
     public class AccountController : Controller
     {
-        public AccountController(AccountService accountSrevice,
+        public AccountController(IOptions<TokenSettings> tokenSettings,
+            AccountService accountSrevice,
             UserQueryService userQueryService,
-            IOptions<TokenSettings> tokenSettings)
+            UserCommandService userCommandService
+            )
         {
+            this.TokenSettings = tokenSettings.Value;
             this.AccountService = accountSrevice;
             this.UserQueryService = userQueryService;
-            this.TokenSettings = tokenSettings.Value;
+            this.UserCommandService = userCommandService;
         }
 
         public AccountService AccountService { get; private set; }
         public UserQueryService UserQueryService { get; private set; }
         public TokenSettings TokenSettings { get; private set; }
+        public UserCommandService UserCommandService { get; private set; }
 
         /// <summary>
         /// 登陆
@@ -125,6 +129,26 @@ namespace DotNetLive.AccountApi.Controllers
                 throw new ApiException("User not exists", 500);
             }
             return await GenerateToken(userInfo);
+        }
+
+        [HttpPut, Route("superuser/resetUserPassword")]
+        public async Task AdminResetPassword([FromQuery]Guid userSysId, [FromQuery]string newPasswordHash)
+        {
+            UserCommandService.ResetPassword(userSysId, newPasswordHash);
+            await Task.FromResult(0);
+        }
+
+        /// <summary>
+        /// 任意用户修改用户密码(近作为开发阶段使用)
+        /// </summary>
+        /// <param name="userSysId"></param>
+        /// <param name="newPasswordHash"></param>
+        /// <returns></returns>
+        [HttpPut, Route("anonymous/resetUserPassword"), AllowAnonymous]
+        public async Task AnonymousResetPassword([FromQuery]Guid userSysId, [FromQuery]string newPasswordHash)
+        {
+            UserCommandService.ResetPassword(userSysId, newPasswordHash);
+            await Task.FromResult(0);
         }
 
 

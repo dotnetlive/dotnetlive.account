@@ -1,4 +1,5 @@
 ﻿using DotNetLive.Account.Entities;
+using DotNetLive.Framework.Data;
 using DotNetLive.Framework.Data.Repositories;
 using System;
 
@@ -27,6 +28,11 @@ namespace DotNetLive.Account.Services
         public void DeleteUser(Guid userSysId)
         {
             _commandRepository.Delete<SysUser>(userSysId);
+        }
+
+        public void ResetPassword(Guid userSysId, string newPasswordHash)
+        {
+            _commandRepository.Execute($"update {EntityMapper<SysUser>.GetTableName()} set passwordhash = @newPasswordHash where sysid = @userSysId", new { userSysId, newPasswordHash });
         }
     }
 }
