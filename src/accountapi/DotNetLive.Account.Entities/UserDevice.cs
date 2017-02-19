@@ -10,6 +10,7 @@ namespace DotNetLive.Account.Entities
     [Table("auth.user_device")]
     public class UserDevice : BaseEntity
     {
+        [Column("user_sysid")]
         public Guid UserSysId { get; set; }
 
         /// <summary>
@@ -23,6 +24,8 @@ namespace DotNetLive.Account.Entities
         /// </summary>
         [Column("expire_time")]
         public DateTime ExpireTime { get; set; }
+
+        [Column("issue_time")]
         public DateTime IssueTime { get; set; }
     }
 }

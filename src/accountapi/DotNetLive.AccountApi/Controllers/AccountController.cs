@@ -30,19 +30,22 @@ namespace DotNetLive.AccountApi.Controllers
         public AccountController(IOptions<TokenSettings> tokenSettings,
             AccountService accountSrevice,
             UserQueryService userQueryService,
-            UserCommandService userCommandService
+            UserCommandService userCommandService,
+            UserDeviceCommandService userDeviceCommandService
             )
         {
             this.TokenSettings = tokenSettings.Value;
             this.AccountService = accountSrevice;
             this.UserQueryService = userQueryService;
             this.UserCommandService = userCommandService;
+            this.UserDeviceCommandService = userDeviceCommandService;
         }
 
         public AccountService AccountService { get; private set; }
         public UserQueryService UserQueryService { get; private set; }
         public TokenSettings TokenSettings { get; private set; }
         public UserCommandService UserCommandService { get; private set; }
+        public UserDeviceCommandService UserDeviceCommandService { get; private set; }
 
         /// <summary>
         /// 登陆
@@ -103,12 +106,12 @@ namespace DotNetLive.AccountApi.Controllers
                 expires: userDevice.ExpireTime,
                 signingCredentials: new SigningCredentials(signingKey, SecurityAlgorithms.HmacSha256));
 
-            var encodedJwt = new JwtSecurityTokenHandler().WriteToken(jwt);
-            userDevice.Token = encodedJwt;
+            userDevice.Token = new JwtSecurityTokenHandler().WriteToken(jwt);
+            //UserDeviceCommandService.CreateUserDevice(userDevice); //Perisit UserDevice
 
             var loginResult = new LoginResult
             {
-                Token = encodedJwt,
+                Token = userDevice.Token,
                 ExpiresIn = TokenSettings.Expiration.TotalSeconds
             };
 

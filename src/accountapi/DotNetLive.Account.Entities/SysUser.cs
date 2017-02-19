@@ -35,5 +35,7 @@ namespace DotNetLive.Account.Entities
         public DateTime CreatedOn { get; set; }
         [Column("deletedon")]
         public DateTime DeletedOn { get; set; }
+        [Column("status")]
+        public int Status { get; set; }
     }
 }

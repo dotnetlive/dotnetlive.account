@@ -12,6 +12,8 @@ namespace DotNetLive.Account.Services.DependencyRegister
             services.AddScoped<UserCommandService>();
             services.AddScoped<UserQueryService>();
             services.AddScoped<AccountService>();
+            services.AddScoped<UserDeviceCommandService>();
+            services.AddScoped<UserDeviceQueryService>();
         }
     }
 }

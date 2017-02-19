@@ -1,4 +1,5 @@
-﻿using DotNetLive.AccountApi.AuthorizationPolicy;
+﻿using DotNetLive.Account.Services;
+using DotNetLive.AccountApi.AuthorizationPolicy;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
@@ -88,7 +89,13 @@ namespace DotNetLive.AccountApi
 
             //这里默认是:System.IdentityModel.Tokens.Jwt.JwtSecurityTokenHandler, System.IdentityModel.Tokens.Jwt, Version=5.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35
             options.SecurityTokenValidators.Clear();
-            options.SecurityTokenValidators.Add(new DnlJwtSecurityValidater("DotNetLive Jwt Auth"));
+            var tokenValidater = new DnlJwtSecurityValidater("DotNetLive Jwt Auth", (jwtId, userSysId) =>
+                {
+                    var userService = serviceProvider.GetService<UserQueryService>();
+                    var user = userService.GetUserById(userSysId);
+                    return user != null;
+                });
+            options.SecurityTokenValidators.Add(tokenValidater);
             app.UseJwtBearerAuthentication(options);
         }
     }
