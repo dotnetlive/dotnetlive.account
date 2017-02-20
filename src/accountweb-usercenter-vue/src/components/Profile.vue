@@ -1,361 +1,240 @@
 <template>
-    <div id="page-wrapper" class="gray-bg">
-        <div class="row border-bottom">
-            <nav class="navbar navbar-static-top" role="navigation" style="margin-bottom: 0">
-                <div class="navbar-header">
-                    <a class="navbar-minimalize minimalize-styl-2 btn btn-primary " href="#"><i class="fa fa-bars"></i> </a>
-                    <form role="search" class="navbar-form-custom" action="search_results.html">
-                        <div class="form-group">
-                            <input type="text" placeholder="Search for something..." class="form-control" name="top-search" id="top-search">
-                        </div>
-                    </form>
-                </div>
-                <ul class="nav navbar-top-links navbar-right">
-                    <li>
-                        <span class="m-r-sm text-muted welcome-message">Welcome to INSPINIA+ Admin Theme.</span>
-                    </li>
-                    <li class="dropdown">
-                        <a class="dropdown-toggle count-info" data-toggle="dropdown" href="#">
-                            <i class="fa fa-envelope"></i> <span class="label label-warning">16</span>
-                        </a>
-                        <ul class="dropdown-menu dropdown-messages">
-                            <li>
-                                <div class="dropdown-messages-box">
-                                    <a href="profile.html" class="pull-left">
-                                        <img alt="image" class="img-circle" src="./../assets/images/a7.jpg">
-                                    </a>
-                                    <div class="media-body">
-                                        <small class="pull-right">46h ago</small>
-                                        <strong>Mike Loreipsum</strong> started following <strong>Monica Smith</strong>.
-                                        <br>
-                                        <small class="text-muted">3 days ago at 7:58 pm - 10.06.2014</small>
-                                    </div>
-                                </div>
-                            </li>
-                            <li class="divider"></li>
-                            <li>
-                                <div class="dropdown-messages-box">
-                                    <a href="profile.html" class="pull-left">
-                                        <img alt="image" class="img-circle" src="./../assets/images/a4.jpg">
-                                    </a>
-                                    <div class="media-body ">
-                                        <small class="pull-right text-navy">5h ago</small>
-                                        <strong>Chris Johnatan Overtunk</strong> started following <strong>Monica Smith</strong>.
-                                        <br>
-                                        <small class="text-muted">Yesterday 1:21 pm - 11.06.2014</small>
-                                    </div>
-                                </div>
-                            </li>
-                            <li class="divider"></li>
-                            <li>
-                                <div class="dropdown-messages-box">
-                                    <a href="profile.html" class="pull-left">
-                                        <img alt="image" class="img-circle" src="./../assets/images/profile.jpg">
-                                    </a>
-                                    <div class="media-body ">
-                                        <small class="pull-right">23h ago</small>
-                                        <strong>Monica Smith</strong> love <strong>Kim Smith</strong>. <br>
-                                        <small class="text-muted">2 days ago at 2:30 am - 11.06.2014</small>
-                                    </div>
-                                </div>
-                            </li>
-                            <li class="divider"></li>
-                            <li>
-                                <div class="text-center link-block">
-                                    <a href="mailbox.html">
-                                        <i class="fa fa-envelope"></i> <strong>Read All Messages</strong>
-                                    </a>
-                                </div>
-                            </li>
-                        </ul>
-                    </li>
-                    <li class="dropdown">
-                        <a class="dropdown-toggle count-info" data-toggle="dropdown" href="#">
-                            <i class="fa fa-bell"></i> <span class="label label-primary">8</span>
-                        </a>
-                        <ul class="dropdown-menu dropdown-alerts">
-                            <li>
-                                <a href="mailbox.html">
-                                    <div>
-                                        <i class="fa fa-envelope fa-fw"></i> You have 16 messages
-                                        <span class="pull-right text-muted small">4 minutes ago</span>
-                                    </div>
-                                </a>
-                            </li>
-                            <li class="divider"></li>
-                            <li>
-                                <a href="profile.html">
-                                    <div>
-                                        <i class="fa fa-twitter fa-fw"></i> 3 New Followers
-                                        <span class="pull-right text-muted small">12 minutes ago</span>
-                                    </div>
-                                </a>
-                            </li>
-                            <li class="divider"></li>
-                            <li>
-                                <a href="grid_options.html">
-                                    <div>
-                                        <i class="fa fa-upload fa-fw"></i> Server Rebooted
-                                        <span class="pull-right text-muted small">4 minutes ago</span>
-                                    </div>
-                                </a>
-                            </li>
-                            <li class="divider"></li>
-                            <li>
-                                <div class="text-center link-block">
-                                    <a href="notifications.html">
-                                        <strong>See All Alerts</strong>
-                                        <i class="fa fa-angle-right"></i>
-                                    </a>
-                                </div>
-                            </li>
-                        </ul>
-                    </li>
-
-
-                    <li>
-                        <a href="login.html">
-                            <i class="fa fa-sign-out"></i> Log out
-                        </a>
-                    </li>
-                </ul>
-
-            </nav>
-        </div>
-        <div class="row wrapper border-bottom white-bg page-heading">
-            <div class="col-lg-10">
-                <h2>Profile</h2>
-                <ol class="breadcrumb">
-                    <li>
-                        <a href="index.html">Home</a>
-                    </li>
-                    <li>
-                        <a>Extra Pages</a>
-                    </li>
-                    <li class="active">
-                        <strong>Profile</strong>
-                    </li>
-                </ol>
-            </div>
-            <div class="col-lg-2">
-
-            </div>
-        </div>
-        <div class="wrapper wrapper-content">
-            <div class="row animated fadeInRight">
-                <div class="col-md-4">
-                    <div class="ibox float-e-margins">
-                        <div class="ibox-title">
-                            <h5>Profile Detail</h5>
-                        </div>
-                        <div>
-                            <div class="ibox-content no-padding border-left-right">
-                                <img alt="image" class="img-responsive" src="./../assets/images/profile_big.jpg">
-                            </div>
-                            <div class="ibox-content profile-content">
-                                <h4><strong>Monica Smith</strong></h4>
-                                <p><i class="fa fa-map-marker"></i> Riviera State 32/106</p>
-                                <h5>
-                                    About me
-                                </h5>
-                                <p>
-                                    Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                                    Ut enim ad minim veniam, quis nostrud exercitat.
-                                </p>
-                                <div class="row m-t-lg">
-                                    <div class="col-md-4">
-                                        <span class="bar">5,3,9,6,5,9,7,3,5,2</span>
-                                        <h5><strong>169</strong> Posts</h5>
-                                    </div>
-                                    <div class="col-md-4">
-                                        <span class="line">5,3,9,6,5,9,7,3,5,2</span>
-                                        <h5><strong>28</strong> Following</h5>
-                                    </div>
-                                    <div class="col-md-4">
-                                        <span class="bar">5,3,2,-1,-3,-2,2,3,5,2</span>
-                                        <h5><strong>240</strong> Followers</h5>
-                                    </div>
-                                </div>
-                                <div class="user-button">
-                                    <div class="row">
-                                        <div class="col-md-6">
-                                            <button type="button" class="btn btn-primary btn-sm btn-block"><i class="fa fa-envelope"></i> Send Message</button>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <button type="button" class="btn btn-default btn-sm btn-block"><i class="fa fa-coffee"></i> Buy a coffee</button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+    <main class="main-container">
+        <!-- Page content-->
+        <section>
+            <div class="container-overlap bg-blue-500">
+                <div class="media m0 pv">
+                    <div class="media-left">
+                        <a href="#"><img src="./../assets/images/user/03.jpg" alt="User" class="media-object img-circle thumb64"></a>
+                    </div>
+                    <div class="media-body media-middle">
+                        <h4 class="media-heading">Christine Matthews</h4><span class="text-muted">Sed eget lacus quis diam molestie mollis.</span>
                     </div>
                 </div>
-                <div class="col-md-8">
-                    <div class="ibox float-e-margins">
-                        <div class="ibox-title">
-                            <h5>Activites</h5>
-                            <div class="ibox-tools">
-                                <a class="collapse-link">
-                                    <i class="fa fa-chevron-up"></i>
-                                </a>
-                                <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                                    <i class="fa fa-wrench"></i>
-                                </a>
-                                <ul class="dropdown-menu dropdown-user">
-                                    <li><a href="#">Config option 1</a>
+            </div>
+            <div class="container-fluid">
+                <div class="row">
+                    <!-- Left column-->
+                    <div class="col-md-7 col-lg-8">
+                        <form editable-form="" name="user.profileForm" class="card">
+                            <h5 class="card-heading pb0">
+                                <!-- START dropdown-->
+                                <div class="pull-right dropdown">
+                                    <button type="button" data-toggle="dropdown" class="btn btn-default btn-flat btn-flat-icon"><em class="ion-android-more-vertical"></em></button>
+                                    <ul role="menu" class="dropdown-menu md-dropdown-menu dropdown-menu-right">
+                                        <li><a href="#">Action 1</a></li>
+                                        <li><a href="#">Action 2</a></li>
+                                    </ul>
+                                </div>
+                                <!-- END dropdown-->About
+                            </h5>
+                            <div class="card-body">
+                                <p data-type="textarea" class="is-editable text-inherit editable editable-pre-wrapped editable-click editable-disabled" tabindex="-1">Pellentesque porta tincidunt justo, non fringilla erat iaculis in. Sed nisi erat, ornare
+                                    eu pellentesque quis, pellentesque non nulla. Proin rutrum, est pellentesque commodo
+                                    mattis, sem justo porttitor odio, id aliquet lacus augue nec nisl.</p>
+                            </div>
+                            <div class="card-divider"></div>
+                            <div class="card-offset">
+                                <div class="card-offset-item text-right">
+                                    <button id="edit-enable" type="button" class="btn-raised btn btn-warning btn-circle btn-lg"><em class="ion-edit"></em></button>
+                                    <button id="edit-disable" type="submit" class="btn-raised btn btn-success btn-circle btn-lg hidden"><em class="ion-checkmark-round"></em></button>
+                                </div>
+                            </div>
+                            <h5 class="card-heading pb0">Contact Information</h5>
+                            <div class="card-body">
+                                <table class="table table-striped">
+                                    <tbody>
+                                        <tr>
+                                            <td><em class="ion-document-text icon-fw mr"></em>Area</td>
+                                            <td>Research &amp; development</td>
+                                        </tr>
+                                        <tr>
+                                            <td><em class="ion-egg icon-fw mr"></em>Birthday</td>
+                                            <td>
+                                                <span data-type="date" data-mode="popup" class="is-editable text-inherit editable editable-click editable-disabled" tabindex="-1">10/11/2000</span>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td><em class="ion-ios-body icon-fw mr"></em>Member since</td>
+                                            <td>
+                                                <span data-type="date" data-mode="popup" class="is-editable text-inherit editable editable-click editable-disabled" tabindex="-1">05/11/2015</span>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td><em class="ion-man icon-fw mr"></em>Gender</td>
+                                            <td>
+                                                <a id="gender" href="#" data-type="select" data-pk="1" data-value="2" data-title="Select sex" class="text-inherit editable editable-click editable-disabled"
+                                                    tabindex="-1">Female</a>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td><em class="ion-android-home icon-fw mr"></em>Address</td>
+                                            <td>
+                                                <span class="is-editable text-inherit editable editable-click editable-disabled" tabindex="-1">Some street, 123</span>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td><em class="ion-email icon-fw mr"></em>Email</td>
+                                            <td>
+                                                <span class="is-editable text-inherit editable editable-click editable-disabled" tabindex="-1"><a href="#">user@mail.com</a></span>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td><em class="ion-ios-telephone icon-fw mr"></em>Contact phone</td>
+                                            <td>
+                                                <span class="is-editable text-inherit editable editable-click editable-disabled" tabindex="-1">13-123-46578</span>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="card-divider"></div>
+                            <h5 class="card-heading pb0">Recent articles</h5>
+                            <div class="card-body">
+                                <ul class="mda-list">
+                                    <li class="mda-list-item pl0 bb">
+                                        <div class="mda-list-item-text">
+                                            <h3><a href="#">Release 3.0 is out</a></h3>
+                                            <p>Proin metus justo, commodo in ultrices...</p><small class="text-muted">2 days ago</small>
+                                        </div>
+                                        <div class="pull-right">
+                                            <div class="pt-lg"><em tooltip="Active" class="icon-2x ion-checkmark-circled text-success"></em></div>
+                                        </div>
                                     </li>
-                                    <li><a href="#">Config option 2</a>
+                                    <li class="mda-list-item pl0 bb">
+                                        <div class="mda-list-item-text">
+                                            <h3><a href="#">Improving compatibility</a></h3>
+                                            <p>Proin metus justo, commodo in ultrices...</p><small class="text-muted">3 days ago</small>
+                                        </div>
+                                        <div class="pull-right">
+                                            <div class="pt-lg"><em tooltip="Active" class="icon-2x ion-checkmark-circled text-success"></em></div>
+                                        </div>
+                                    </li>
+                                    <li class="mda-list-item pl0">
+                                        <div class="mda-list-item-text">
+                                            <h3><a href="#">Small decisions count</a></h3>
+                                            <p>Proin metus justo, commodo in ultrices...</p><small class="text-muted">3 days ago</small>
+                                        </div>
+                                        <div class="pull-right">
+                                            <div class="pt-lg"><em tooltip="Pending" class="icon-2x ion-minus-circled text-warning"></em></div>
+                                        </div>
                                     </li>
                                 </ul>
-                                <a class="close-link">
-                                    <i class="fa fa-times"></i>
-                                </a>
                             </div>
-                        </div>
-                        <div class="ibox-content">
-
-                            <div>
-                                <div class="feed-activity-list">
-
-                                    <div class="feed-element">
-                                        <a href="#" class="pull-left">
-                                            <img alt="image" class="img-circle" src="./../assets/images/a1.jpg">
-                                        </a>
-                                        <div class="media-body ">
-                                            <small class="pull-right text-navy">1m ago</small>
-                                            <strong>Sandra Momot</strong> started following <strong>Monica Smith</strong>.
-                                            <br>
-                                            <small class="text-muted">Today 4:21 pm - 12.06.2014</small>
-                                            <div class="actions">
-                                                <a class="btn btn-xs btn-white"><i class="fa fa-thumbs-up"></i> Like </a>
-                                                <a class="btn btn-xs btn-danger"><i class="fa fa-heart"></i> Love</a>
-                                            </div>
-                                        </div>
+                        </form>
+                    </div>
+                    <!-- Right column-->
+                    <div class="col-md-5 col-lg-4">
+                        <div class="card">
+                            <h5 class="card-heading">
+                                <!-- START dropdown-->
+                                <div class="pull-right dropdown">
+                                    <button type="button" data-toggle="dropdown" class="btn btn-default btn-flat btn-flat-icon"><em class="ion-android-more-vertical"></em></button>
+                                    <ul role="menu" class="dropdown-menu md-dropdown-menu dropdown-menu-right">
+                                        <li><a href="#">Action 1</a></li>
+                                        <li><a href="#">Action 2</a></li>
+                                    </ul>
+                                </div>
+                                <!-- END dropdown-->Contacts
+                            </h5>
+                            <div class="mda-list">
+                                <div class="mda-list-item"><img src="./../assets/images/user/01.jpg" alt="List user" class="mda-list-item-img">
+                                    <div class="mda-list-item-text mda-2-line">
+                                        <h3><a href="#">Eric Graves</a></h3>
+                                        <div class="text-muted text-ellipsis">Ut ac nisi id mauris</div>
                                     </div>
-
-                                    <div class="feed-element">
-                                        <a href="#" class="pull-left">
-                                            <img alt="image" class="img-circle" src="./../assets/images/profile.jpg">
-                                        </a>
-                                        <div class="media-body ">
-                                            <small class="pull-right">5m ago</small>
-                                            <strong>Monica Smith</strong> posted a new blog. <br>
-                                            <small class="text-muted">Today 5:60 pm - 12.06.2014</small>
-
-                                        </div>
+                                </div>
+                                <div class="mda-list-item"><img src="./../assets/images/user/02.jpg" alt="List user" class="mda-list-item-img">
+                                    <div class="mda-list-item-text mda-2-line">
+                                        <h3><a href="#">Jessie Cox</a></h3>
+                                        <div class="text-muted text-ellipsis">Sed lacus nisl luctus</div>
                                     </div>
-
-                                    <div class="feed-element">
-                                        <a href="#" class="pull-left">
-                                            <img alt="image" class="img-circle" src="./../assets/images/a2.jpg">
-                                        </a>
-                                        <div class="media-body ">
-                                            <small class="pull-right">2h ago</small>
-                                            <strong>Mark Johnson</strong> posted message on <strong>Monica Smith</strong>                                            site. <br>
-                                            <small class="text-muted">Today 2:10 pm - 12.06.2014</small>
-                                            <div class="well">
-                                                Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy
-                                                text ever since the 1500s. Over the years, sometimes by accident, sometimes
-                                                on purpose (injected humour and the like).
-                                            </div>
-                                            <div class="pull-right">
-                                                <a class="btn btn-xs btn-white"><i class="fa fa-thumbs-up"></i> Like </a>
-                                                <a class="btn btn-xs btn-white"><i class="fa fa-heart"></i> Love</a>
-                                                <a class="btn btn-xs btn-primary"><i class="fa fa-pencil"></i> Message</a>
-                                            </div>
-                                        </div>
+                                </div>
+                                <div class="mda-list-item"><img src="./../assets/images/user/03.jpg" alt="List user" class="mda-list-item-img">
+                                    <div class="mda-list-item-text mda-2-line">
+                                        <h3><a href="#">Marie Hall</a></h3>
+                                        <div class="text-muted text-ellipsis">Donec congue sagittis mi</div>
                                     </div>
-                                    <div class="feed-element">
-                                        <a href="#" class="pull-left">
-                                            <img alt="image" class="img-circle" src="./../assets/images/a3.jpg">
-                                        </a>
-                                        <div class="media-body ">
-                                            <small class="pull-right">2h ago</small>
-                                            <strong>Janet Rosowski</strong> add 1 photo on <strong>Monica Smith</strong>.
-                                            <br>
-                                            <small class="text-muted">2 days ago at 8:30am</small>
-                                            <div class="photos">
-                                                <a target="_blank" href="http://24.media.tumblr.com/20a9c501846f50c1271210639987000f/tumblr_n4vje69pJm1st5lhmo1_1280.jpg">
-                                                    <img alt="image" class="feed-photo" src="./../assets/images/p1.jpg"></a>
-                                                <a target="_blank" href="http://37.media.tumblr.com/9afe602b3e624aff6681b0b51f5a062b/tumblr_n4ef69szs71st5lhmo1_1280.jpg">
-                                                    <img alt="image" class="feed-photo" src="./../assets/images/p3.jpg"></a>
-                                            </div>
-                                        </div>
+                                </div>
+                                <div class="mda-list-item"><img src="./../assets/images/user/04.jpg" alt="List user" class="mda-list-item-img">
+                                    <div class="mda-list-item-text mda-2-line">
+                                        <h3><a href="#">Guy Carpenter</a></h3>
+                                        <div class="text-muted text-ellipsis">Donec convallis arcu sit</div>
                                     </div>
-                                    <div class="feed-element">
-                                        <a href="#" class="pull-left">
-                                            <img alt="image" class="img-circle" src="./../assets/images/a4.jpg">
-                                        </a>
-                                        <div class="media-body ">
-                                            <small class="pull-right text-navy">5h ago</small>
-                                            <strong>Chris Johnatan Overtunk</strong> started following <strong>Monica Smith</strong>.
-                                            <br>
-                                            <small class="text-muted">Yesterday 1:21 pm - 11.06.2014</small>
-                                            <div class="actions">
-                                                <a class="btn btn-xs btn-white"><i class="fa fa-thumbs-up"></i> Like </a>
-                                                <a class="btn btn-xs btn-white"><i class="fa fa-heart"></i> Love</a>
-                                            </div>
-                                        </div>
+                                </div>
+                            </div>
+                            <div class="card-body pv0 text-right"><a href="#" class="btn btn-flat btn-info">View all</a></div>
+                            <div class="card-divider"></div>
+                            <h5 class="card-heading">Activity</h5>
+                            <div class="card-body pb0">
+                                <p class="pull-left mr"><em class="ion-record text-info"></em></p>
+                                <div class="oh">
+                                    <p><strong class="mr-sm">Added</strong><span class="mr-sm">a new issue</span><a href="#">#5478</a></p>
+                                    <div class="clearfix">
+                                        <div class="pull-left text-muted"><em class="ion-android-time mr-sm"></em><span>an hour ago</span></div>
                                     </div>
-                                    <div class="feed-element">
-                                        <a href="#" class="pull-left">
-                                            <img alt="image" class="img-circle" src="./../assets/images/a5.jpg">
-                                        </a>
-                                        <div class="media-body ">
-                                            <small class="pull-right">2h ago</small>
-                                            <strong>Kim Smith</strong> posted message on <strong>Monica Smith</strong> site.
-                                            <br>
-                                            <small class="text-muted">Yesterday 5:20 pm - 12.06.2014</small>
-                                            <div class="well">
-                                                Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy
-                                                text ever since the 1500s. Over the years, sometimes by accident, sometimes
-                                                on purpose (injected humour and the like).
-                                            </div>
-                                            <div class="pull-right">
-                                                <a class="btn btn-xs btn-white"><i class="fa fa-thumbs-up"></i> Like </a>
-                                            </div>
-                                        </div>
+                                </div>
+                            </div>
+                            <div class="card-body pb0">
+                                <p class="pull-left mr"><em class="ion-record text-danger"></em></p>
+                                <div class="oh">
+                                    <p><strong class="mr-sm">Commented</strong><span class="mr-sm"> on the project</span><a
+                                            href="#">Material</a></p>
+                                    <p class="bl pl"><i>That's awesome!</i></p>
+                                    <div class="clearfix">
+                                        <div class="pull-left text-muted"><em class="ion-android-time mr-sm"></em><span>2 hours ago</span></div>
                                     </div>
-                                    <div class="feed-element">
-                                        <a href="#" class="pull-left">
-                                            <img alt="image" class="img-circle" src="./../assets/images/profile.jpg">
-                                        </a>
-                                        <div class="media-body ">
-                                            <small class="pull-right">23h ago</small>
-                                            <strong>Monica Smith</strong> love <strong>Kim Smith</strong>. <br>
-                                            <small class="text-muted">2 days ago at 2:30 am - 11.06.2014</small>
-                                        </div>
+                                </div>
+                            </div>
+                            <div class="card-body pb0">
+                                <p class="pull-left mr"><em class="ion-record text-success"></em></p>
+                                <div class="oh">
+                                    <p><strong class="mr-sm">Completed</strong><span> all tasks asigned this week</span></p>
+                                    <div class="clearfix">
+                                        <div class="pull-left text-muted"><em class="ion-android-time mr-sm"></em><span>3 hours ago</span></div>
                                     </div>
-                                    <div class="feed-element">
-                                        <a href="#" class="pull-left">
-                                            <img alt="image" class="img-circle" src="./../assets/images/a7.jpg">
-                                        </a>
-                                        <div class="media-body ">
-                                            <small class="pull-right">46h ago</small>
-                                            <strong>Mike Loreipsum</strong> started following <strong>Monica Smith</strong>.
-                                            <br>
-                                            <small class="text-muted">3 days ago at 7:58 pm - 10.06.2014</small>
+                                </div>
+                            </div>
+                            <div class="card-body pb0">
+                                <p class="pull-left mr"><em class="ion-record text-info"></em></p>
+                                <div class="oh">
+                                    <p><strong class="mr-sm">Published</strong><span class="mr-sm"> new photos on the album</span><a
+                                            href="#">WorldTrip</a></p>
+                                    <p>
+                                        <a href="#"><img src="./../assets/images/pic4.jpg" alt="Pic" class="mr-sm thumb48"></a>
+                                        <a href="#"><img src="./../assets/images/pic5.jpg" alt="Pic" class="mr-sm thumb48"></a>
+                                        <a href="#"><img src="./../assets/images/pic6.jpg" alt="Pic" class="mr-sm thumb48"></a>
+                                    </p>
+                                    <div class="clearfix">
+                                        <div class="pull-left text-muted"><em class="ion-android-time mr-sm"></em><span>4 hours ago</span></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card-body">
+                                <div class="clearfix">
+                                    <p class="pull-left mr"><em class="ion-record text-primary"></em></p>
+                                    <div class="oh">
+                                        <p><strong class="mr-sm">Following</strong><span class="mr-sm">Jane Kuhn</span></p>
+                                        <p><span class="image-list"><a href="#"><img src="./../assets/images/user/03.jpg" alt="User" class="img-circle thumb32"></a>
+                                        <a href="#"><img src="./../assets/images/user/04.jpg" alt="User" class="img-circle thumb32"></a>
+                                        <a href="#"><img src="./../assets/images/user/05.jpg" alt="User" class="img-circle thumb32"></a>
+                                        <a href="#"><img src="./../assets/images/user/06.jpg" alt="User" class="img-circle thumb32"></a>
+                                        <a href="#"><img src="./../assets/images/user/07.jpg" alt="User" class="img-circle thumb32"></a><strong>
+                                            <a href="#" class="ml-sm link-unstyled">+200</a></strong></span></p>
+                                        <div class="clearfix">
+                                            <div class="pull-left text-muted"><em class="ion-android-time mr-sm"></em><span>yesterday</span></div>
                                         </div>
                                     </div>
                                 </div>
-                                <button class="btn btn-primary btn-block m"><i class="fa fa-arrow-down"></i> Show More</button>
                             </div>
                         </div>
                     </div>
-
                 </div>
             </div>
-        </div>
-        <div class="footer">
-            <div class="pull-right">
-                10GB of <strong>250GB</strong> Free.
-            </div>
-            <div>
-                <strong>Copyright</strong> Example Company &copy; 2014-2017
-            </div>
-        </div>
-
-    </div>
+        </section>
+        <!-- Page footer-->
+        <footer><span>2017 - Centric app.</span></footer>
+    </main>
 </template>
 
 <script>
