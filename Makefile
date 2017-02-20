@@ -1,22 +1,23 @@
-{
-    "DbSettings": {
-        "CommandDbConnectionString": "Server=qd1.niusys.com;User Id=dev_user; Password=dotnet.live; Database=blog;",
-        "QueryDbConnectionString": "Server=qd1.niusys.com;User Id=dev_user; Password=dotnet.live; Database=blog;"
-    },
-    "AppSettings": {
-        "MainSite": "http://dotnet.live"
-    },
-    "SecuritySettings": {
-        "DomainName": ".dotnet.live",
-        "DataProtectionPath": "/data/dotnetlive/dpkeys"
-    },
-    "Logging": {
-        "IncludeScopes": false,
-        "LogLevel": {
-            "Default": "Warning"
-        }
-    }
-}	dotnet restore src/accountweb/DotNetLive.AccountWeb.sln 
+start_web:
+	systemctl start kestrel-dotnetlive-accountweb.service
+
+stop_web:
+	systemctl stop kestrel-dotnetlive-accountweb.service
+
+start_api:
+	systemctl start kestrel-dotnetlive-accountapi.service
+
+stop_api:
+	systemctl stop kestrel-dotnetlive-accountapi.service
+
+delete_current_build:
+	rm -rf /data/dotnetlive/pubsite/dotnetlive.accountweb/
+	rm -rf /data/dotnetlive/pubsite/dotnetlive.accountapi/
+
+publish_web:
+	git clean -df
+	git pull
+	dotnet restore src/accountweb/DotNetLive.AccountWeb.sln 
 	cd src/accountweb/DotNetLive.AccountWeb && npm install && bower install --allow-root && gulp default
 	dotnet publish src/accountweb/DotNetLive.AccountWeb/DotNetLive.AccountWeb.csproj -c "Release" -o /data/dotnetlive/pubsite/dotnetlive.accountweb/ 
 
