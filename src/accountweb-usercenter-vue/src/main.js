@@ -4,9 +4,8 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import App from './App'
 import routers from './routers'
-import './assets/content/bootstrap.min.css'
-import './assets/content/animate.css'
-import './assets/content/style.css'
+import './assets/less/index.less'
+import './assets/less/style.less'
 /* eslint-disable no-new */
 Vue.use(VueRouter)
 const router = new VueRouter(routers)
