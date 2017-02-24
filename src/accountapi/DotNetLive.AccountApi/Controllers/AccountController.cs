@@ -56,7 +56,7 @@ namespace DotNetLive.AccountApi.Controllers
         /// <returns></returns>
         //header:[[token:string[64]]]
         [HttpGet, Route("login"), AllowAnonymous]
-        public async Task<LoginResult> Login([FromQuery]string username, [FromQuery]string passwordHash, [FromHeader]string token, [FromQuery] bool withBearerPrefix = true)
+        public async Task<LoginResult> Login([FromQuery]string username, [FromQuery]string passwordHash, [FromHeader]string token, [FromQuery] bool withBearerPrefix)
         {
             var userInfo = UserQueryService.GetUserByEmail(username);
             if (userInfo == null)
