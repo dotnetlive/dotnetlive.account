@@ -9,6 +9,7 @@ using System;
 using NLog.Web;
 using NLog.Extensions.Logging;
 using NLog;
+using Npgsql.Logging;
 
 namespace DotNetLive.AccountWeb
 {
@@ -42,6 +43,16 @@ namespace DotNetLive.AccountWeb
 
             services.AddScoped<LogFilter>();
 
+            services.AddMemoryCache();
+            // Adds a default in-memory implementation of IDistributedCache.
+            services.AddDistributedMemoryCache();
+
+            services.AddSession(options =>
+            {
+                options.CookieName = ".dnl.session";
+                options.IdleTimeout = TimeSpan.FromSeconds(10);
+            });
+
             //先通过asp.net core ioc注册
             services.AddDependencyRegister(Configuration);
 
@@ -51,6 +62,7 @@ namespace DotNetLive.AccountWeb
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
         {
+            loggerFactory = NpgsqlLogManager.LoggerFactory;
             //loggerFactory.AddConsole(Configuration.GetSection("Logging"));
             //loggerFactory.AddDebug();
             loggerFactory.AddNLog();
@@ -65,6 +77,8 @@ namespace DotNetLive.AccountWeb
             ////LogManager.ReconfigExistingLoggers();
 
             LogManager.Configuration.Variables["connectionString"] = Configuration.GetConnectionString("NLogDb");
+
+            app.UseSession();
 
             app.UseDeveloperExceptionPage();
             if (env.IsDevelopment())
