@@ -1,7 +1,9 @@
-﻿using DotNetLive.Account.Entities;
+﻿using AutoMapper;
+using DotNetLive.Account.Entities;
 using DotNetLive.Account.Services;
 using DotNetLive.AccountApi.Models;
 using DotNetLive.AccountApi.Models.AccountModels;
+using DotNetLive.Framework.Security;
 using DotNetLive.Framework.WebFramework.Filters;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -31,14 +33,16 @@ namespace DotNetLive.AccountApi.Controllers
             AccountService accountSrevice,
             UserQueryService userQueryService,
             UserCommandService userCommandService,
-            UserDeviceCommandService userDeviceCommandService
+            UserDeviceCommandService userDeviceCommandService,
+            IMapper mapper
             )
         {
             this.TokenSettings = tokenSettings.Value;
             this.AccountService = accountSrevice;
             this.UserQueryService = userQueryService;
             this.UserCommandService = userCommandService;
-            this.UserDeviceCommandService = userDeviceCommandService;
+            UserDeviceCommandService = userDeviceCommandService;
+            this.Mapper = mapper;
         }
 
         public AccountService AccountService { get; private set; }
@@ -46,25 +50,26 @@ namespace DotNetLive.AccountApi.Controllers
         public TokenSettings TokenSettings { get; private set; }
         public UserCommandService UserCommandService { get; private set; }
         public UserDeviceCommandService UserDeviceCommandService { get; private set; }
+        public IMapper Mapper { get; private set; }
 
         /// <summary>
         /// 登陆
         /// </summary>
-        /// <param name="username"></param>
+        /// <param name="email"></param>
         /// <param name="passwordHash"></param>
         /// <param name="token"></param>
         /// <returns></returns>
         //header:[[token:string[64]]]
         [HttpGet, Route("login"), AllowAnonymous]
-        public async Task<LoginResult> Login([FromQuery]string username, [FromQuery]string passwordHash, [FromHeader]string token, [FromQuery] bool withBearerPrefix)
+        public async Task<LoginResult> Login([FromQuery]string email, [FromQuery]string passwordHash, [FromHeader]string token, [FromQuery] bool withBearerPrefix)
         {
-            var userInfo = UserQueryService.GetUserByEmail(username);
+            var userInfo = UserQueryService.GetUserByEmail(email);
             if (userInfo == null)
             {
                 throw new ApiException("User not exists", 500);
             }
 
-            if (!passwordHash.Equals(userInfo.PasswordHash, StringComparison.OrdinalIgnoreCase))
+            if (!string.Equals(passwordHash, userInfo.PasswordHash, StringComparison.OrdinalIgnoreCase))
             {
                 throw new ApiException("Authentication Fail, Please confirm your username and password", 500);
             }
@@ -112,7 +117,8 @@ namespace DotNetLive.AccountApi.Controllers
             var loginResult = new LoginResult
             {
                 Token = userDevice.Token,
-                ExpiresIn = TokenSettings.Expiration.TotalSeconds
+                ExpiresIn = TokenSettings.Expiration.TotalSeconds,
+                LoginUser = Mapper.Map<LoginUser>(user)
             };
 
             if (withBearerPrefix)
