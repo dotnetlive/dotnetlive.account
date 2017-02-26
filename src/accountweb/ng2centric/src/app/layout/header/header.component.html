@@ -1,0 +1,45 @@
+<div class="header-container">
+    <nav>
+        <ul>
+            <li [ngClass]="{'active': settings.app.sidebar.visible}" class="visible-xs visible-sm hidden-md">
+                <a (click)="toggleSidebar()" [ngClass]="settings.app.header.menulink" class="menu-link">
+                    <span><em></em></span>
+                </a>
+            </li>
+            <li [ngClass]="{'active': settings.app.sidebar.offcanvasVisible}" *ngIf="settings.app.sidebar.offcanvas" class="hidden-xs hidden-sm">
+                <a (click)="toggleSidebarOffcanvasVisible()" [ngClass]="settings.app.header.menulink" class="menu-link">
+                    <span><em></em></span>
+                </a>
+            </li>
+        </ul>
+        <h2 [innerHTML]="pt.getTitle()" class="header-title"></h2>
+        <ul class="pull-right">
+            <li>
+                <a (click)="headerSearch.searchModal.show()" class="ripple">
+                    <em class="ion-ios-search-strong"></em>
+                </a>
+            </li>
+            <li dropdown class="dropdown">
+                <a dropdownToggle class="dropdown-toggle has-badge ripple">
+                    <em class="ion-person"></em>
+                    <sup class="badge bg-danger">3</sup>
+                </a>
+                <ul dropdownMenu class="dropdown-menu dropdown-menu-right md-dropdown-menu">
+                    <li class="ripple ripple-block">
+                        <a><em class="ion-home icon-fw"></em>Profile</a>
+                    </li>
+                    <li class="ripple ripple-block">
+                        <a><em class="ion-gear-a icon-fw"></em>Settings</a>
+                    </li>
+                    <li role="presentation" class="divider"></li>
+                    <li class="ripple ripple-block">
+                        <a><em class="ion-log-out icon-fw"></em>Logout</a>
+                    </li>
+                </ul>
+            </li>
+            <li><a (click)="seetingsBar.settingsModal.show()" class="ripple"><em class="ion-gear-b"></em></a></li>
+        </ul>
+    </nav>
+</div>
+<header-search #headerSearch></header-search>
+<app-settings #seetingsBar></app-settings>

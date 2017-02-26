@@ -1,0 +1,19 @@
+<div class="container-fluid">
+    <div class="card">
+        <div class="card-heading">Basic Map</div>
+        <div class="card-body">
+            <sebm-google-map [latitude]="lat" [longitude]="lng" [zoom]="zoom" [scrollwheel]="scrollwheel" [style.height]="'300px'" class="center-block">
+                <sebm-google-map-marker [latitude]="lat" [longitude]="lng"></sebm-google-map-marker>
+            </sebm-google-map>
+        </div>
+    </div>
+    <div class="card">
+        <div class="card-heading">Multiple markers</div>
+        <div class="card-body">
+            <sebm-google-map [latitude]="lat" [longitude]="lng" [zoom]="zoom" [scrollwheel]="scrollwheel" [style.height]="'300px'" class="center-block">
+                <sebm-google-map-marker [latitude]="lat" [longitude]="lng"></sebm-google-map-marker>
+                <sebm-google-map-marker [latitude]="33.787453" [longitude]="lng"></sebm-google-map-marker>
+            </sebm-google-map>
+        </div>
+    </div>
+</div>

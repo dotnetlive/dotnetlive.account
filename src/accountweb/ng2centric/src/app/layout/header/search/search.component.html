@@ -1,0 +1,20 @@
+<div bsModal #searchModal="bs-modal" [config]="{backdrop: false}" (onShown)="onModalShown()" class="modal fade modal-top">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-body" >
+                <div class="pull-left">
+                    <button type="button" (click)="searchModal.hide()" class="btn btn-flat"><em class="ion-arrow-left-c icon-24"></em></button>
+                </div>
+                <div class="pull-right">
+                    <button type="button" class="btn btn-flat"><em class="ion-android-microphone icon-24"></em></button>
+                </div>
+                <form action="" class="oh">
+                    <div class="mda-form-control pt0">
+                        <input type="text" placeholder="{{ 'header.SEARCH' | translate }}" class="form-control header-input-search" />
+                        <div class="mda-form-control-line"></div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
