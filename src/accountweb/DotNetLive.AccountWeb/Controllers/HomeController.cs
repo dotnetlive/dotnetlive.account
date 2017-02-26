@@ -23,14 +23,15 @@ namespace DotNetLive.AccountWeb.Controllers
 
         public IActionResult Index()
         {
-            if (_hostingEnvironment.IsDevelopment())
-            {
-                return View();
-            }
-            else
-            {
-                return Redirect(_assSettings.MainSite);
-            }
+            //if (_hostingEnvironment.IsDevelopment())
+            //{
+            //    return View();
+            //}
+            //else
+            //{
+            //    return Redirect(_assSettings.MainSite);
+            //}
+            return View();
         }
 
         public IActionResult About()
