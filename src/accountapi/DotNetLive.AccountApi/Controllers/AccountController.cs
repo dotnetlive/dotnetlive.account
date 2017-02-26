@@ -117,7 +117,7 @@ namespace DotNetLive.AccountApi.Controllers
 
             if (withBearerPrefix)
             {
-                loginResult.Token.Insert(0, "Bearer ");
+                loginResult.Token = loginResult.Token.Insert(0, "Bearer ");
             }
 
             return await Task.FromResult(loginResult);

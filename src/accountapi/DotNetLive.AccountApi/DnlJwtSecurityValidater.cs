@@ -27,7 +27,8 @@ namespace DotNetLive.AccountApi
 
             #region Viery User is valid
             Guid userSysId;
-            if (!Guid.TryParse(cp.Claims.Single(x => x.Type == ClaimTypes.NameIdentifier)?.Value, out userSysId))
+            var userSysIdString = cp.Claims.SingleOrDefault(x => x.Type == ClaimTypes.NameIdentifier);
+            if (!Guid.TryParse(userSysIdString.Value, out userSysId))
             {
                 return null;
             }
