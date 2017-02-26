@@ -90,12 +90,12 @@ namespace DotNetLive.AccountApi.Controllers
                 new Claim(JwtRegisteredClaimNames.Sub, user.UserName),
                 new Claim(JwtRegisteredClaimNames.Jti, userDevice.SysId.ToString()),
                 new Claim(JwtRegisteredClaimNames.Iat, ToUnixEpochDate(now).ToString(), ClaimValueTypes.Integer64),
-                new Claim(ClaimTypes.NameIdentifier, user.SysId.ToString()),
+                new Claim(ClaimTypes.Sid, user.SysId.ToString()),
                 new Claim(ClaimTypes.Email, user.Email),
                 new Claim(ClaimsIdentity.DefaultNameClaimType, user.UserName)
             };
 
-            var signingKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(TokenSettings.SigningKey));
+            //var signingKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(TokenSettings.SigningKey));
 
             // Create the JWT and write it to a string
             var jwt = new JwtSecurityToken(
@@ -104,7 +104,7 @@ namespace DotNetLive.AccountApi.Controllers
                 claims: claims,
                 notBefore: userDevice.IssueTime,
                 expires: userDevice.ExpireTime,
-                signingCredentials: new SigningCredentials(signingKey, SecurityAlgorithms.HmacSha256));
+                signingCredentials: TokenSettings.GetSigningCredentials());
 
             userDevice.Token = new JwtSecurityTokenHandler().WriteToken(jwt);
             //UserDeviceCommandService.CreateUserDevice(userDevice); //Perisit UserDevice

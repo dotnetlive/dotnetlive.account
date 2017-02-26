@@ -56,14 +56,13 @@ namespace DotNetLive.AccountApi
         private void ConfigureAuthentication(IApplicationBuilder app, IServiceProvider serviceProvider)
         {
             var tokenSettings = serviceProvider.GetService<IOptions<TokenSettings>>().Value;
-            var signingKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(secretKey));
 
             var tokenValidationParameters = new TokenValidationParameters
             {
                 // The signing key must match!
                 ValidateIssuerSigningKey = true,
 
-                IssuerSigningKey = signingKey,
+                IssuerSigningKey = tokenSettings.GetSecurityKey(),
 
                 // Validate the JWT Issuer (iss) claim
                 ValidateIssuer = true,
