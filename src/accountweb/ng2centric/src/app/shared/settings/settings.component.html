@@ -1,0 +1,79 @@
+<div bsModal #settingsModal="bs-modal" [config]="{backdrop: false}" class="modal fade modal-right">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div (click)="settingsModal.hide()" class="modal-header">
+                <div class="pull-right"><em class="ion-close-round text-soft"></em></div>
+                <h4 class="modal-title"><span>Settings</span></h4>
+            </div>
+            <div class="modal-body">
+                <div class="clearfix mb">
+                    <div *ngFor="let theme of settings.themes" class="pull-left wd-tiny mb">
+                        <div class="setting-color">
+                            <label [ngClass]="'preview-' + theme">
+                                <input type="radio" name="settingTheme" (click)="settings.setSetting('theme', theme)" [checked]="settings.getSetting('theme') === theme" (change)="updateTheme()" />
+                                <span class="ion-checkmark-round"></span>
+                                <div class="t-grid">
+                                    <div class="t-row">
+                                        <div class="t-col preview-header"></div>
+                                        <div class="t-col preview-sidebar"></div>
+                                        <div class="t-col preview-content"></div>
+                                    </div>
+                                </div>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <hr/>
+                <p>
+                    <label class="mda-checkbox">
+                        <input type="checkbox" [(ngModel)]="settings.app.sidebar.showheader" /><em class="bg-indigo-500"></em>Sidebar header
+                    </label>
+                </p>
+                <p>
+                    <label class="mda-checkbox">
+                        <input type="checkbox" [(ngModel)]="settings.app.sidebar.showtoolbar" /><em class="bg-indigo-500"></em>Sidebar toolbar
+                    </label>
+                </p>
+                <p>
+                    <label class="mda-checkbox">
+                        <input type="checkbox" [(ngModel)]="settings.app.sidebar.offcanvas" /><em class="bg-indigo-500"></em>Sidebar offcanvas
+                    </label>
+                </p>
+                <hr/>
+                <p>Navigation icon</p>
+                <p>
+                    <label class="mda-radio">
+                        <input type="radio" name="headerMenulink" [(ngModel)]="settings.app.header.menulink" value="menu-link-close" /><em class="bg-indigo-500"></em>Close icon
+                    </label>
+                </p>
+                <p>
+                    <label class="mda-radio">
+                        <input type="radio" name="headerMenulink" [(ngModel)]="settings.app.header.menulink" value="menu-link-slide" /><em class="bg-indigo-500"></em>Slide arrow
+                    </label>
+                </p>
+                <p>
+                    <label class="mda-radio">
+                        <input type="radio" name="headerMenulink" [(ngModel)]="settings.app.header.menulink" value="menu-link-arrow" /><em class="bg-indigo-500"></em>Big arrow
+                    </label>
+                </p>
+                <hr/>
+                <button type="button" #fsbutton (click)="toggleFullScreen()" class="btn btn-default btn-raised">Toggle fullscreen</button>
+                <hr/>
+                <p>Change language</p>
+                <!-- START Language list-->
+                <div dropdown class="btn-group">
+                    <button type="button" dropdownToggle class="btn btn-default btn-block btn-raised">
+                        {{translator.getCurrentLang()}}
+                        <span class="caret"></span>
+                    </button>
+                    <ul dropdownMenu role="menu" class="dropdown-menu animated fadeInUpShort">
+                        <li *ngFor="let lang of translator.getAvailableLanguages()">
+                            <a (click)="translator.useLanguage(lang.code)">{{lang.text}}</a>
+                        </li>
+                    </ul>
+                </div>
+                <!-- END Language list-->
+            </div>
+        </div>
+    </div>
+</div>

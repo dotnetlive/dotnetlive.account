@@ -1,0 +1,29 @@
+/**
+ * Form Editors
+ */
+
+@import '../../../shared/styles/common/variables';
+@import '../../../shared/styles/common/mixins';
+
+.note-editor {
+    .note-editing-area .note-editable {
+        color: inherit !important;
+    }
+    .note-statusbar {
+        background-color: rgba($gray-base,.26) !important;
+    }
+    &.note-frame {
+        border-color: rgba(162, 162, 162, 0.26) !important;
+    }
+
+    .dropdown-menu {
+        max-height: 280px;
+        overflow: auto;
+    }
+}
+
+.summernote-air {
+    + .note-editor .note-editing-area .note-editable {
+        background-color: transparent !important;
+    }
+}
