@@ -5,15 +5,23 @@ using System.Threading.Tasks;
 using DotNetLive.Framework.WebApiClient.Query;
 using DotNetLive.Framework.WebApiClient;
 using Newtonsoft.Json;
+using Microsoft.Extensions.Options;
 
 namespace DotNetLive.AccountWeb.ApiClients
 {
     public class AccountApiClient
     {
-        public static ApiResponse<LoginResult> Login(LoginQuery loginQuery)
+        public AccountApiClient(IOptions<ApiHostSettings> apiHostSettings)
+        {
+            this.ApiHostSettings = apiHostSettings.Value;
+        }
+
+        public ApiHostSettings ApiHostSettings { get; private set; }
+
+        public ApiResponse<LoginResult> Login(LoginQuery loginQuery)
         {
             loginQuery.AddParameter("withBearerPrefix", "true");
-            var rsp = ApiClient.NExecute<LoginResult>("http://localhost:57165/", "account/login", loginQuery);
+            var rsp = ApiClient.NExecute<LoginResult>(ApiHostSettings.AccountApi, "account/login", loginQuery);
             return rsp;
         }
     }
