@@ -1,0 +1,4 @@
+启动项目用postman请求路径xxxx:xxx/api/login?userName=111111&pwd=111111得到token。 Get方式即可
+得到token后，用postman做如下请求xxxx:xxx/api/values，头部需要做如下处理{Authorization:'Bearer ' + token值}注意Bearer后面的空格不能省略
+还有一个接口xxxx:xxx/api/values/1 需要请求userName=222222 pwd=222222才能访问
+可以自行增加redis做已登录的用户储存，体验更好，这个demo所有数据都静态模拟的
