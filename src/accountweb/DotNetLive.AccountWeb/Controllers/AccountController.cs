@@ -70,7 +70,7 @@ namespace DotNetLive.AccountWeb.Controllers
                     //    return RedirectToLocal(newUrl);
                     //}
                 }
-                return RedirectToLocal(returnUrl);
+                return RedirectToUrl(returnUrl);
             }
 
             ViewData["ReturnUrl"] = returnUrl;
@@ -86,7 +86,7 @@ namespace DotNetLive.AccountWeb.Controllers
         {
             if (HttpContext.User.Identity.IsAuthenticated)
             {
-                return RedirectToLocal(returnUrl);
+                return RedirectToUrl(returnUrl);
             }
 
             ViewData["ReturnUrl"] = returnUrl;
@@ -119,7 +119,7 @@ namespace DotNetLive.AccountWeb.Controllers
                 if (result.Succeeded)
                 {
                     _logger.LogInformation(1, "User logged in.");
-                    return RedirectToLocal(returnUrl);
+                    return RedirectToUrl(returnUrl);
                 }
                 if (result.RequiresTwoFactor)
                 {
@@ -173,7 +173,7 @@ namespace DotNetLive.AccountWeb.Controllers
                     //    $"Please confirm your account by clicking this link: <a href='{callbackUrl}'>link</a>");
                     await _signInManager.SignInAsync(user, isPersistent: false);
                     _logger.LogInformation(3, "User created a new account with password.");
-                    return RedirectToLocal(returnUrl);
+                    return RedirectToUrl(returnUrl);
                 }
                 AddErrors(result);
             }
@@ -243,7 +243,7 @@ namespace DotNetLive.AccountWeb.Controllers
             if (result.Succeeded)
             {
                 _logger.LogInformation(5, "User logged in with {Name} provider.", info.LoginProvider);
-                return RedirectToLocal(returnUrl);
+                return RedirectToUrl(returnUrl);
             }
             if (result.RequiresTwoFactor)
             {
@@ -287,7 +287,7 @@ namespace DotNetLive.AccountWeb.Controllers
                     {
                         await _signInManager.SignInAsync(user, isPersistent: false);
                         _logger.LogInformation(6, "User created an account using {Name} provider.", info.LoginProvider);
-                        return RedirectToLocal(returnUrl);
+                        return RedirectToUrl(returnUrl);
                     }
                 }
                 AddErrors(result);
@@ -493,7 +493,7 @@ namespace DotNetLive.AccountWeb.Controllers
             var result = await _signInManager.TwoFactorSignInAsync(model.Provider, model.Code, model.RememberMe, model.RememberBrowser);
             if (result.Succeeded)
             {
-                return RedirectToLocal(model.ReturnUrl);
+                return RedirectToUrl(model.ReturnUrl);
             }
             if (result.IsLockedOut)
             {
@@ -522,16 +522,21 @@ namespace DotNetLive.AccountWeb.Controllers
             return _userManager.GetUserAsync(HttpContext.User);
         }
 
-        private IActionResult RedirectToLocal(string returnUrl)
+        private IActionResult RedirectToUrl(string returnUrl)
         {
-            if (Url.IsLocalUrl(returnUrl))
-            {
-                return Redirect(returnUrl);
-            }
-            else
+            // if (Url.IsLocalUrl(returnUrl))
+            // {
+            //     return Redirect(returnUrl);
+            // }
+            // else
+            // {
+            //     return RedirectToAction(nameof(HomeController.Index), "Home");
+            // }
+            if(string.IsNullOrWhiteSpace(returnUrl))
             {
                 return RedirectToAction(nameof(HomeController.Index), "Home");
             }
+            return Redirect(returnUrl);
         }
 
         #endregion
