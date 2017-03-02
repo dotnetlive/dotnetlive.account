@@ -12,6 +12,8 @@ namespace DotNetLive.AccountWeb.DependencyRegister
 {
     public class ServiceDependencyRegister : IDependencyRegister
     {
+        ExecuteOrderType IDependencyRegister.ExecuteOrder =>  ExecuteOrderType.Normal ;
+
         public void Register(IServiceCollection services, IConfigurationRoot configuration, IServiceProvider serviceProvider)
         {
             // Add application services.
