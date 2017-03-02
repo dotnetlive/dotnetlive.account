@@ -30,6 +30,7 @@ namespace DotNetLive.AccountWeb.Controllers
         private readonly ISmsSender _smsSender;
         private readonly ILogger _logger;
         private IHostingEnvironment _hostingEnvironment;
+        private AccountApiClient _accountApiClient;
 
         public AccountController(
             UserManager<ApplicationUser> userManager,
@@ -37,7 +38,7 @@ namespace DotNetLive.AccountWeb.Controllers
             IEmailSender emailSender,
             ISmsSender smsSender,
             ILoggerFactory loggerFactory,
-            IHostingEnvironment hostingEnvironment)
+            IHostingEnvironment hostingEnvironment, AccountApiClient accountApiClient)
         {
             _userManager = userManager;
             _signInManager = signInManager;
@@ -45,6 +46,7 @@ namespace DotNetLive.AccountWeb.Controllers
             _smsSender = smsSender;
             _logger = loggerFactory.CreateLogger<AccountController>();
             _hostingEnvironment = hostingEnvironment;
+            _accountApiClient = accountApiClient;
         }
 
         //
@@ -101,7 +103,7 @@ namespace DotNetLive.AccountWeb.Controllers
                 // To enable password failures to trigger account lockout, set lockoutOnFailure: true
                 //var result = await _signInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, lockoutOnFailure: false);
                 var result = SignInStatus.Failed;
-                var loginResult = AccountApiClient.Login(new LoginQuery() { Email = model.Email, Password = model.Password, DeviceType = 1 });
+                var loginResult = _accountApiClient.Login(new LoginQuery() { Email = model.Email, Password = model.Password, DeviceType = 1 });
                 if (loginResult.Success)
                 {
                     result = SignInStatus.Success;
