@@ -1,16 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using DotNetLive.AccountWeb.Models.ManageViewModels;
+using DotNetLive.AccountWeb.Services;
+using DotNetLive.Framework.Web.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
-using DotNetLive.AccountWeb.Models;
-using DotNetLive.AccountWeb.Models.ManageViewModels;
-using DotNetLive.AccountWeb.Services;
-using DotNetLive.Framework.Models;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace DotNetLive.AccountWeb.Controllers
 {
