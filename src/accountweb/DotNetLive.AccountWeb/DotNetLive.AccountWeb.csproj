@@ -53,13 +53,9 @@
     <Folder Include="UserIdentity\" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="..\..\..\..\dotnetlive.website\src\DotNetLive.Web\Views\Shared\_Footer.cshtml" Link="Views\Shared\_Footer.cshtml" />
-    <None Include="..\..\..\..\dotnetlive.website\src\DotNetLive.Web\Views\Shared\_Header.cshtml" Link="Views\Shared\_Header.cshtml" />
-    <None Include="..\..\..\..\dotnetlive.website\src\DotNetLive.Web\Views\Shared\_Layout.Root.cshtml" Link="Views\Shared\_Layout.Root.cshtml" />
-    <None Include="..\..\..\..\dotnetlive.website\src\DotNetLive.Web\Views\Shared\_LoginPartial.cshtml" Link="Views\Shared\_LoginPartial.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
+    <ProjectReference Include="..\..\..\..\dotnetlive.framework\src\DotNetLive.Framework.Mvc\DotNetLive.Framework.Mvc.csproj" />
     <ProjectReference Include="..\..\..\..\dotnetlive.framework\src\DotNetLive.Framework.WebApiClient\DotNetLive.Framework.WebApiClient.csproj" />
+    <ProjectReference Include="..\..\..\..\dotnetlive.framework\src\DotNetLive.Framework.Web\DotNetLive.Framework.Web.csproj" />
     <ProjectReference Include="..\..\..\..\dotnetlive.framework\src\DotNetLive.Framework\DotNetLive.Framework.csproj" />
   </ItemGroup>
 </Project>
