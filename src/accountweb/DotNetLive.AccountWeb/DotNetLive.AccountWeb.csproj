@@ -22,6 +22,12 @@
     <Compile Remove="UserIdentity\UserStore.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Remove="Views\Shared\_Footer.cshtml" />
+    <Content Remove="Views\Shared\_Header.cshtml" />
+    <Content Remove="Views\Shared\_Layout.cshtml" />
+    <Content Remove="Views\Shared\_LoginPartial.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
     <PackageReference Include="AutoMapper" Version="5.2.0" />
     <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="1.2.0" />
     <PackageReference Include="Dapper" Version="1.50.2" />
