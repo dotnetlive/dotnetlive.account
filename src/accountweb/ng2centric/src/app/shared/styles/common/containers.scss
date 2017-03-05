@@ -1,0 +1,106 @@
+/**
+ * Container variants
+ */
+
+.container-full {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    overflow-x: hidden;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+    // min-height: calc(100vh - #{$header-hg});
+    > .row {
+        margin: 0;
+        > [class*="col-"] {
+            &:first-child { padding-left: 0; }
+            &:last-child { padding-right: 0; }
+        }
+    }
+}
+
+
+.container-fluid,
+.container-lg,
+.container-md,
+.container-sm,
+.container-xs {
+    padding: 8px;
+    width: auto;
+
+    @media #{$min-mobile} {
+        padding: 16px;
+    }
+
+    @media #{$min-desktop} {
+        padding: 24px;
+    }
+}
+
+.container-lg {
+    max-width: $screen-lg-min;
+}
+
+.container-md {
+    max-width: $screen-md-min;
+}
+
+.container-sm {
+    max-width: $screen-sm-min;
+}
+
+.container-xs {
+    max-width: $screen-xs-min;
+}
+
+// remove extra spaces on mobile
+@media #{$max-desktop} {
+    .container-unwrap {
+        padding: 0;
+        > .row {
+            margin: 0;
+            > [class*="col-"] {
+                padding-left: 0;
+                padding-right: 0;
+            }
+        }
+        .card { margin-bottom: 0; }
+
+    }
+}
+
+.container-overlap {
+    position: relative;
+    padding: 32px 16px 64px 16px;
+    + .container-fluid,
+    + .container-lg,
+    + .container-md,
+    + .container-sm,
+    + .container-xs {
+        padding-top: 0;
+        margin-top: -32px;
+        .push-down {
+            display: block;
+            height: (32px + 16px);
+        }
+    }
+    &:before {
+        background-color: inherit;
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        z-index: -1;
+    }
+}
+
+.page-container {
+    &, & > div {
+        width: 100%;
+        height: 100%;
+    }
+}

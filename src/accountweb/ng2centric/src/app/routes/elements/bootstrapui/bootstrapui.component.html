@@ -1,0 +1,482 @@
+<div class="container-fluid">
+    <!-- Breadcrumb next to view title-->
+    <ul class="breadcrumb">
+        <li><a>Breadcrumb</a></li>
+        <li><a>Dashboard</a></li>
+        <li class="active">
+            <span>ng2Bootstrap</span>
+        </li>
+    </ul>
+    <!-- START row-->
+    <div class="jumbotron">
+        <div class="container">
+            <h1>Jumbotron</h1>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum tincidunt est vitae ultrices accumsan. Aliquam ornare lacus adipiscing, posuere lectus et, fringilla augue. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum tincidunt est vitae ultrices accumsan. Aliquam ornare lacus adipiscing.</p>
+            <p><a role="button" class="btn btn-primary btn-lg">Learn more</a></p>
+        </div>
+    </div>
+    <!-- END row-->
+    <!-- START row-->
+    <div class="row">
+        <div class="col-lg-6">
+            <!-- START panel-->
+            <div class="panel">
+                <div class="panel-heading">Alert Styles</div>
+                <div class="panel-body">
+                    <div class="alert alert-success">Lorem ipsum dolor sit amet, consectetur adipisicing elit.<a href="#" class="alert-link">Alert Link</a></div>
+                    <div class="alert alert-info">Lorem ipsum dolor sit amet, consectetur adipisicing elit.<a href="#" class="alert-link">Alert Link</a></div>
+                    <div>
+                        <alert *ngFor="let alert of alerts;let i = index" [type]="alert.type" dismissible="true" (close)="closeAlert(i)">
+                            {{ alert?.msg }}
+                        </alert>
+                        <button type="button" class='btn btn-primary' (click)="addAlert()">Add Alert</button>
+                    </div>
+                </div>
+            </div>
+            <!-- END panel-->
+            <!-- START panel-->
+            <div ng-controller="ProgressDemoCtrl as prog" class="panel">
+                <div class="panel-heading">Progress Bar
+                    <div class="btn-group pull-right">
+                        <button type="button" class="btn btn-xs btn-primary" (click)="randomStacked()">Stacked</button>
+                        <button type="button" class="btn btn-xs btn-primary" (click)="random()">Randomize</button>
+                    </div>
+                </div>
+                <div class="panel-body">
+                    <h4>Static</h4>
+                    <div class="row">
+                        <div class="col-sm-4">
+                            <progressbar value="55"></progressbar>
+                        </div>
+                        <div class="col-sm-4">
+                            <progressbar class="progress-striped" value="22" type="warning">22%</progressbar>
+                        </div>
+                        <div class="col-sm-4">
+                            <progressbar class="progress-striped active" max="200" value="166" type="danger"><i>166 / 200</i></progressbar>
+                        </div>
+                    </div>
+                    <h4>Dynamic</h4>
+                    <progressbar [max]="max" [value]="dynamic"><span style="color:white; white-space:nowrap;">{{dynamic}} / {{max}}</span>
+                    </progressbar>
+                    <small><em>No animation</em></small>
+                    <progressbar [animate]="false" [value]="dynamic" type="success"><b>{{dynamic}}%</b></progressbar>
+                    <small><em>Object (changes type based on value)</em></small>
+                    <progressbar class="progress-striped active" [value]="dynamic" [type]="type">{{type}} <i *ngIf="showWarning">!!! Watch out !!!</i></progressbar>
+                    <h4>Stacked</h4>
+                    <bs-progress>
+                        <bar *ngFor="let baz of stacked" [value]="baz.value" [type]="baz?.type">
+                            <span *ngIf="baz.value > 5">{{baz?.value}}%</span>
+                        </bar>
+                    </bs-progress>
+                </div>
+            </div>
+            <!-- END panel-->
+        </div>
+        <div class="col-lg-6">
+            <!-- START panel-->
+            <div class="panel">
+                <div class="panel-heading">Modals</div>
+                <div class="panel-body">
+                    <!-- CLassic modal -->
+                    <button type="button" class="btn btn-primary" (click)="classicModal.show()">Classc modal</button>
+                    <!-- Small modal -->
+                    <button type="button" class="btn btn-primary" (click)="smModal.show()">Small modal</button>
+                    <!-- Small modal -->
+                    <div bsModal #smModal="bs-modal" [config]="{backdrop: false}" (onShow)="showBackdrop()" (onHide)="hideBackdrop()" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+                        <div class="modal-dialog modal-sm">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="close" aria-label="Close" (click)="smModal.hide()">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                    <h4 class="modal-title">Small modal</h4>
+                                </div>
+                                <div class="modal-body">
+                                    ...
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Classc modal -->
+                    <div class="modal fade" bsModal #classicModal="bs-modal" [config]="{backdrop: false}" (onShow)="showBackdrop()" (onHide)="hideBackdrop()" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+                        <div class="modal-dialog modal-sm">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="close" aria-label="Close" (click)="classicModal.hide()">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                    <h4 class="modal-title">Classic modal</h4>
+                                </div>
+                                <div class="modal-body">
+                                    Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- END panel-->
+            <!-- START panel-->
+            <div class="panel">
+                <div class="panel-heading">Ratings</div>
+                <div class="panel-body">
+                    <h4>Default</h4>
+                    <rating [(ngModel)]="rate" [max]="maxRat" [readonly]="isReadonly" (onHover)="hoveringOver($event)" (onLeave)="resetStar($event)" [titles]="['one','two','three']" stateOn="ion-ios-star text-warning" stateOff="ion-ios-star-outline"></rating>
+                    <span class="label" [ngClass]="{'label-warning': percent<30, 'label-info': percent>=30 && percent<70, 'label-success': percent>=70}" [ngStyle]="{display: (overStar && !isReadonly) ? 'inline' : 'none'}">{{percent}}%</span>
+                    <pre class="card card-block card-header" style="margin:15px 0;">Rate: <b>{{rate}}</b> - Readonly is: <i>{{isReadonly}}</i> - Hovering over: <b>{{overStar || "none"}}</b></pre>
+                    <button type="button" class="btn btn-sm btn-danger" (click)="rate = 0" [disabled]="isReadonly">Clear
+                    </button>
+                    <button type="button" class="btn btn-sm btn-default" (click)="isReadonly = ! isReadonly">Toggle Readonly
+                    </button>
+                    <hr/>
+                    <h4>Custom icons</h4>
+                    <div>
+                        <rating [(ngModel)]="x" max="15" stateOn="ion-wifi text-info" stateOff="ion-wifi"></rating>
+                        <p><b>(<i>Strenght:</i> {{x}})</b></p>
+                    </div>
+                    <div>
+                        <rating [(ngModel)]="y" [ratingStates]="ratingStates"></rating>
+                        <p><b>(<i>Things:</i> {{y}})</b></p>
+                    </div>
+                </div>
+            </div>
+            <!-- END panel-->
+            <!-- START panel-->
+            <div class="panel">
+                <div class="panel-heading">Tooltips</div>
+                <div class="panel-body">
+                    <div class="form-group">
+                        <label>Dynamic Tooltip Text</label>
+                        <input type="text" [(ngModel)]="dynamicTooltipText" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label>Dynamic Tooltip Popup Text</label>
+                        <input type="text" [(ngModel)]="dynamicTooltip" class="form-control">
+                    </div>
+                    <p>
+                        Pellentesque <a href="#" [tooltip]="dynamicTooltip">{{dynamicTooltipText}}</a>, sit amet venenatis urna cursus eget nunc scelerisque viverra mauris, in aliquam. Tincidunt lobortis feugiat vivamus at
+                        <a href="#" tooltipPlacement="left" tooltip="On the Left!">left</a> eget arcu dictum varius duis at consectetur lorem. Vitae elementum curabitur
+                        <a href="#" tooltipPlacement="right" tooltip="On the Right!">right</a> nunc sed velit dignissim sodales ut eu sem integer vitae. Turpis egestas
+                        <a href="#" tooltipPlacement="bottom" tooltip="On the Bottom!">bottom</a> pharetra convallis posuere morbi leo urna,
+                        <a href="#" [tooltipAnimation]="false" tooltip="I don't fade. :-(">fading</a> at elementum eu, facilisis sed odio morbi quis commodo odio. In cursus
+                        <a href="#" tooltipPopupDelay='1000' tooltip='appears with delay'>delayed</a> turpis massa tincidunt dui ut. nunc sed velit dignissim sodales ut eu sem integer vitae. Turpis egestas
+                    </p>
+                    <p>
+                        I can even contain HTML. <a href="#" [tooltipHtml]="htmlTooltip" (tooltipStateChanged)="tooltipStateChanged($event)">Check me out!</a>
+                    </p>
+                    <template #toolTipTemplate let-model="model">
+                        <h4>Tool tip custom content defined inside a template</h4>
+                        <h5>With context binding: {{model.text}}</h5>
+                    </template>
+                    <form role="form">
+                        <div class="form-group">
+                            <label>Or use custom triggers, like focus: </label>
+                            <input type="text" name="clickMe" value="Click me!" tooltip="See? Now click away..." tooltipTrigger="focus" tooltipPlacement="right" class="form-control" />
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <!-- END panel-->
+        </div>
+    </div>
+    <!-- END row-->
+    <div class="panel">
+        <div class="panel-heading">Carousel</div>
+        <div class="panel-body">
+            <div class="row">
+                <div class="col-md-6">
+                    <carousel [interval]="myInterval" [noWrap]="false">
+                        <slide *ngFor="let slidez of slides; let index=index" [active]="slidez.active">
+                            <img [src]="slidez.image" class="img-responsive">
+                            <div class="carousel-caption">
+                                <h4>Slide {{index}}</h4>
+                                <p>{{slidez.text}}</p>
+                            </div>
+                        </slide>
+                    </carousel>
+                </div>
+                <div class="col-md-6">
+                    <p>Interval, in milliseconds:</p>
+                    <input class="form-control" type="number" [(ngModel)]="myInterval" />
+                    <p>Add a slide with a random image</p>
+                    <button class="btn btn-info" type="button" (click)="addSlide()">Add Slide</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="panel">
+        <div class="panel-heading">Typeahead</div>
+        <div class="panel-body">
+            <!-- Static arrays -->
+            <p>Static arrays</p>
+            <pre class="card card-block card-header">Model: {{selected | json}}</pre>
+            <input [(ngModel)]="selected" [typeahead]="states" (typeaheadOnSelect)="typeaheadOnSelect($event)" class="form-control">
+            <!-- Custom item template -->
+            <template #customItemTemplate let-model="item" let-index="index">
+                <h5>This is: {{model | json}} Index: {{ index }}</h5>
+            </template>
+            <p class="mt">Custom item template</p>
+            <pre class="card card-block card-header">Model: {{customSelected | json}}</pre>
+            <input [(ngModel)]="customSelected" [typeahead]="statesComplex" [typeaheadItemTemplate]="customItemTemplate" [typeaheadOptionField]="'name'" (typeaheadOnSelect)="typeaheadOnSelect($event)" class="form-control">
+            <!-- Asynchronous results -->
+            <p class="mt">Asynchronous results</p>
+            <pre class="card card-block card-header">Model: {{asyncSelected | json}}</pre>
+            <input [(ngModel)]="asyncSelected" [typeahead]="dataSource" (typeaheadLoading)="changeTypeaheadLoading($event)" (typeaheadNoResults)="changeTypeaheadNoResults($event)" (typeaheadOnSelect)="typeaheadOnSelect($event)" [typeaheadOptionsLimit]="7" [typeaheadOptionField]="'name'" placeholder="Locations loaded with timeout" class="form-control">
+            <div *ngIf="typeaheadLoading===true">
+                <i class="fa fa-refresh ng-hide" style=""></i>
+            </div>
+            <div *ngIf="typeaheadNoResults===true" class="" style="">
+                <i class="fa fa-times"></i> No Results Found
+            </div>
+            <!--Typeahead inside a form-->
+            <p class="mt">Typeahead inside a form</p>
+            <pre class="card card-block card-header">Model: {{myForm.value.state | json}}</pre>
+            <form [formGroup]="myForm">
+                <input formControlName="state" [typeahead]="states" (typeaheadOnSelect)="typeaheadOnSelect($event)" [typeaheadOptionsLimit]="7" [typeaheadOptionField]="'name'" [typeaheadMinLength]="0" placeholder="Typeahead inside a form" class="form-control">
+            </form>
+        </div>
+    </div>
+    <h4 class="page-header">Panel Styles</h4>
+    <!-- START row-->
+    <div class="row">
+        <div class="col-lg-4">
+            <!-- START panel-->
+            <div id="panelDemo7" class="panel panel-default">
+                <div class="panel-heading">
+                    <div class="panel-title">Default Panel</div>
+                </div>
+                <div class="panel-body">
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum tincidunt est vitae ultrices accumsan. Aliquam ornare lacus adipiscing, posuere lectus et, fringilla augue.</p>
+                </div>
+                <div class="panel-footer">Panel Footer</div>
+            </div>
+            <!-- END panel-->
+        </div>
+        <div class="col-lg-4">
+            <!-- START panel-->
+            <div id="panelDemo8" class="panel panel-primary">
+                <div class="panel-heading">
+                    <div class="panel-title">Primary Panel</div>
+                </div>
+                <div class="panel-body">
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum tincidunt est vitae ultrices accumsan. Aliquam ornare lacus adipiscing, posuere lectus et, fringilla augue.</p>
+                </div>
+                <div class="panel-footer">Panel Footer</div>
+            </div>
+            <!-- END panel-->
+        </div>
+        <div class="col-lg-4">
+            <!-- START panel-->
+            <div id="panelDemo9" class="panel panel-success">
+                <div class="panel-heading">
+                    <div class="panel-title">Success Panel</div>
+                </div>
+                <div class="panel-body">
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum tincidunt est vitae ultrices accumsan. Aliquam ornare lacus adipiscing, posuere lectus et, fringilla augue.</p>
+                </div>
+                <div class="panel-footer">Panel Footer</div>
+            </div>
+            <!-- END panel-->
+        </div>
+    </div>
+    <!-- END row-->
+    <!-- START row-->
+    <div class="row">
+        <div class="col-lg-4">
+            <!-- START panel-->
+            <div id="panelDemo10" class="panel panel-info">
+                <div class="panel-heading">
+                    <div class="panel-title">Info Panel</div>
+                </div>
+                <div class="panel-body">
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum tincidunt est vitae ultrices accumsan. Aliquam ornare lacus adipiscing, posuere lectus et, fringilla augue.</p>
+                </div>
+                <div class="panel-footer">Panel Footer</div>
+            </div>
+            <!-- END panel-->
+        </div>
+        <div class="col-lg-4">
+            <!-- START panel-->
+            <div id="panelDemo11" class="panel panel-warning">
+                <div class="panel-heading">
+                    <div class="panel-title">Warning Panel</div>
+                </div>
+                <div class="panel-body">
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum tincidunt est vitae ultrices accumsan. Aliquam ornare lacus adipiscing, posuere lectus et, fringilla augue.</p>
+                </div>
+                <div class="panel-footer">Panel Footer</div>
+            </div>
+            <!-- END panel-->
+        </div>
+        <div class="col-lg-4">
+            <!-- START panel-->
+            <div id="panelDemo12" class="panel panel-danger">
+                <div class="panel-heading">
+                    <div class="panel-title">Danger Panel</div>
+                </div>
+                <div class="panel-body">
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum tincidunt est vitae ultrices accumsan. Aliquam ornare lacus adipiscing, posuere lectus et, fringilla augue.</p>
+                </div>
+                <div class="panel-footer">Panel Footer</div>
+            </div>
+            <!-- END panel-->
+        </div>
+    </div>
+    <!-- END row-->
+    <!-- START row-->
+    <div class="row">
+        <div class="col-lg-12">
+            <!-- START panel-->
+            <div id="panelDemo13" class="panel">
+                <div class="panel-heading">Collapsible Accordion Panel Group</div>
+                <div class="panel-body">
+                    <div class="checkbox c-checkbox">
+                        <label>
+                            <input type="checkbox" [(ngModel)]="oneAtATime" /><span class="ion-checkmark-round"></span>Open only one at a time
+                        </label>
+                    </div>
+                    <accordion closeOthers="oneAtATime" class="panel-group">
+                        <accordion-group>
+                            <div accordion-heading>Accordion Heading #1</div>
+                            <p>In vitae porttitor eros. Vivamus et urna magna. Mauris a velit id neque dignissim congue. Phasellus ut neque sem, ac vestibulum tellus. Integer eu diam neque, quis euismod turpis.</p>
+                        </accordion-group>
+                        <accordion-group>
+                            <div accordion-heading>Accordion Heading #2</div>
+                            <p>In vitae porttitor eros. Vivamus et urna magna. Sed euismod massa quis diam viverra eu consectetur elit imperdiet. Aenean rhoncus, est vel vestibulum tristique, ante lectus elementum augue, eu dictum turpis dui ut ipsum.</p>
+                        </accordion-group>
+                        <accordion-group>
+                            <div accordion-heading>Accordion Heading #3</div>
+                            <p>In vitae porttitor eros. Vivamus et urna magna. In consequat massa eget dui ultrices sit amet auctor libero molestie. Vestibulum nec viverra libero.</p>
+                        </accordion-group>
+                    </accordion>
+                </div>
+            </div>
+            <!-- END panel-->
+        </div>
+    </div>
+    <!-- END row-->
+    <!-- START row-->
+    <div class="row">
+        <div class="col-lg-6">
+            <!-- START panel-->
+            <div id="panelDemo14" class="panel">
+                <div class="panel-heading">Basic Tabs</div>
+                <div class="panel-body">
+                    <tabset>
+                        <tab heading="Home">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nul qui officia deserunt mollit anim id est laborum.</tab>
+                        <tab heading="Profile">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat , sunt in culpa qui officia deserunt mollit anim id est laborum.</tab>
+                        <tab heading="Messages">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident.</tab>
+                        <tab heading="Settings">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</tab>
+                    </tabset>
+                </div>
+            </div>
+            <!-- END panel-->
+        </div>
+        <div class="col-lg-6">
+            <!-- START panel-->
+            <div id="panelDemo15" class="panel">
+                <div class="panel-heading">Pill Tabs</div>
+                <div class="panel-body">
+                    <tabset type="pills">
+                        <tab heading="Home">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nul qui officia deserunt mollit anim id est laborum.</tab>
+                        <tab heading="Profile">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat , sunt in culpa qui officia deserunt mollit anim id est laborum.</tab>
+                        <tab heading="Messages">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident.</tab>
+                        <tab heading="Settings">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</tab>
+                    </tabset>
+                </div>
+            </div>
+            <!-- END panel-->
+        </div>
+    </div>
+    <!-- END row-->
+    <!-- START row-->
+    <div class="row">
+        <div class="col-lg-4">
+            <div class="well well-lg">
+                <h4 class="mt0">Large Well</h4>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum tincidunt est vitae ultrices accumsan. Aliquam ornare lacus adipiscing, posuere lectus et, fringilla augue.</p>
+            </div>
+        </div>
+        <div class="col-lg-4">
+            <div class="well">
+                <h4 class="mt0">Normal Well</h4>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum tincidunt est vitae ultrices accumsan. Aliquam ornare lacus adipiscing, posuere lectus et, fringilla augue.</p>
+            </div>
+        </div>
+        <div class="col-lg-4">
+            <div class="well well-sm">
+                <h4 class="mt0">Small Well</h4>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum tincidunt est vitae ultrices accumsan. Aliquam ornare lacus adipiscing, posuere lectus et, fringilla augue.</p>
+            </div>
+        </div>
+    </div>
+    <!-- END row-->
+    <!-- START panel-->
+    <div class="panel">
+        <div class="panel-heading">
+            <h3 class="panel-title">Pagination</h3>
+        </div>
+        <div class="panel-body">
+            <!-- START row-->
+            <div class="row">
+                <div class="col-lg-6">
+                    <div>
+                        <div class="pull-right">
+                            <button class="btn btn-info" (click)="setPage(3)">Set current page to: 3</button>
+                        </div>
+                        <p>Default</p>
+                        <pagination [totalItems]="totalItems" [(ngModel)]="currentPage" (pageChanged)="pageChanged($event)"></pagination>
+                        <pagination [directionLinks]="false" [totalItems]="totalItems" [(ngModel)]="currentPage" (numPages)="smallnumPages"></pagination>
+                        <pre>The selected page no: {{currentPage}}</pre>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <p>Pager</p>
+                    <pager [totalItems]="totalItems" [(ngModel)]="currentPage"></pager>
+                    <hr/>
+                    <p>Limit the maximum visible buttons</p>
+                    <pagination class="pagination-sm" [totalItems]="bigTotalItems" [(ngModel)]="bigCurrentPage" [maxSize]="maxSize" [boundaryLinks]="true" [rotate]="false" (numPages)="numPages"></pagination>
+                    <pre>Page: {{bigCurrentPage}} / {{numPages}}</pre>
+                </div>
+            </div>
+            <!-- END row-->
+        </div>
+    </div>
+    <!-- END panel-->
+    <!-- START panel-->
+    <div class="panel">
+        <div class="panel-body">
+            <h5 class="mt0">Button actions</h5>
+            <!-- START row-->
+            <div class="row">
+                <div class="col-lg-4">
+                    <h4>Single toggle</h4><pre>{{singleModel}}</pre>
+                    <button class="btn btn-primary" type="button" [(ngModel)]="singleModel" btnCheckbox>Single Toggle</button>
+                </div>
+                <div class="col-lg-4">
+                    <h4>Checkbox</h4>
+                    <pre>{{checkModel | json}}</pre>
+                    <div class="btn-group">
+                        <label class="btn btn-primary" [(ngModel)]="checkModel.left" btnCheckbox>Left</label>
+                        <label class="btn btn-primary" [(ngModel)]="checkModel.middle" btnCheckbox>Middle</label>
+                        <label class="btn btn-primary" [(ngModel)]="checkModel.right" btnCheckbox>Right</label>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <h4>Radio &amp; Uncheckable Radio</h4><pre>{{radioModel || 'null'}}</pre>
+                    <div class="btn-group">
+                        <label class="btn btn-primary" [(ngModel)]="radioModel" btnRadio="'Left'">Left</label>
+                        <label class="btn btn-primary" [(ngModel)]="radioModel" btnRadio="'Middle'">Middle</label>
+                        <label class="btn btn-primary" [(ngModel)]="radioModel" btnRadio="'Right'">Right</label>
+                    </div>
+                    <div class="btn-group">
+                        <label class="btn btn-success" [(ngModel)]="radioModel" btnRadio="'Left'" uncheckable>Left</label>
+                        <label class="btn btn-success" [(ngModel)]="radioModel" btnRadio="'Middle'" uncheckable>Middle</label>
+                        <label class="btn btn-success" [(ngModel)]="radioModel" btnRadio="'Right'" uncheckable>Right</label>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- END panel-->
+</div>

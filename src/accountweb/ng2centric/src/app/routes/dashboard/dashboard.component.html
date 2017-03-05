@@ -1,0 +1,346 @@
+<div class="content-heading bg-white">
+    <div class="row">
+        <div class="col-sm-9">
+            <h4 class="m0 text-thin">Welcome to Centric dashboard</h4><small>Bootstrap admin dashboard template</small>
+        </div>
+        <div class="col-sm-3 text-right hidden-xs">
+            <button type="button" class="mt-sm btn btn-labeled btn-default ripple">Apps<span class="btn-label btn-label-right"><i class="ion-plus-round"></i></span></button>
+        </div>
+    </div>
+</div>
+<div ng-controller="DashboardController as dash" class="container-fluid">
+    <div class="row">
+        <div class="col-xs-6 col-lg-3">
+            <div class="card">
+                <div class="card-body pv">
+                    <div class="clearfix">
+                        <div class="pull-left">
+                            <h4 class="m0 text-thin">350</h4><small class="m0 text-muted"><em class="mr-sm ion-arrow-up-b"></em>New visitors</small>
+                        </div>
+                        <div class="pull-right mt-lg">
+                            <div sparkline [values]="sparkValue2" [options]="sparkOpts2"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-xs-6 col-lg-3">
+            <div class="card">
+                <div class="card-body pv">
+                    <div class="clearfix">
+                        <div class="pull-left">
+                            <h4 class="m0 text-thin">10,200</h4><small class="m0 text-muted"><em class="mr-sm ion-arrow-down-b"></em>Page views</small>
+                        </div>
+                        <div class="pull-right mt-lg">
+                            <div sparkline [values]="sparkValue1" [options]="sparkOpts1"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-xs-6 col-lg-3 visible-lg">
+            <div class="card">
+                <div class="card-body pv">
+                    <div class="clearfix">
+                        <div class="pull-left">
+                            <h4 class="m0 text-thin">880</h4><small class="m0 text-muted"><em class="mr-sm ion-arrow-up-b"></em>Last income</small>
+                        </div>
+                        <div class="pull-right mt-lg">
+                            <div sparkline [values]="sparkValue3" [options]="sparkOpts3"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-xs-6 col-lg-3 visible-lg">
+            <div class="card">
+                <div class="card-body pv">
+                    <div class="clearfix">
+                        <div class="pull-left">
+                            <h4 class="m0 text-thin">780</h4><small class="m0 text-muted"><em class="mr-sm ion-arrow-up-b"></em>Reservations</small>
+                        </div>
+                        <div class="pull-right mt-lg">
+                            <div sparkline [values]="sparkValue4" [options]="sparkOpts4"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-9 col-md-12">
+            <div class="row">
+                <div class="col-lg-8">
+                    <div class="card">
+                        <div class="card-heading">
+                            <!-- START dropdown-->
+                            <div dropdown class="pull-right dropdown">
+                                <button type="button" dropdownToggle class="btn btn-default btn-flat btn-flat-icon ripple">
+                                    <em class="ion-android-more-vertical"></em>
+                                </button>
+                                <ul dropdownMenu role="menu" class="dropdown-menu md-dropdown-menu dropdown-menu-right">
+                                    <li><a>Last 30 days</a></li>
+                                    <li><a>Last week</a></li>
+                                    <li><a>Last year</a></li>
+                                </ul>
+                            </div>
+                            <!-- END dropdown-->
+                            <div class="card-title">Analytic board</div><small>Nulla commodo blandit cursus.</small>
+                        </div>
+                        <div class="card-body">
+                            <div role="group" aria-label="..." class="pull-right pr-sm btn-group btn-group-sm">
+                                <button type="button" class="btn btn-default btn-xs btn-default">Total</button>
+                                <button type="button" class="btn btn-default btn-xs btn-default">Average</button>
+                            </div>
+                            <div flot [dataset]="chartData" [options]="chartOptions" height="275" class="flot-chart flot-chart-lg flot-legend-left"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="card">
+                        <div class="card-heading">
+                            <div class="pull-right">
+                                <p class="m0 text-muted"><em class="mr-sm ion-arrow-up-b"></em>20%</p>
+                            </div>
+                            <div class="card-title">Earnings</div><small>Based on last month analytics.</small>
+                        </div>
+                        <div class="card-body">
+                            <div role="group" aria-label="..." class="btn-group btn-group-sm">
+                                <button type="button" class="btn btn-default btn-xs btn-default">2015</button>
+                                <button type="button" class="btn btn-default btn-xs btn-default">2016</button>
+                            </div>
+                            <div flot [dataset]="stackedChartData" [options]="stackedChartOptions" height="245" class="flot-chart"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-12 col-lg-4">
+                    <div class="card">
+                        <div class="card-heading">
+                            <div class="pull-right">
+                                <span class="mr"><em class="ion-record spr text-primary"></em>
+                                <small class="va-middle">2016</small></span>
+                                <span><em class="ion-record spr text-success"></em>
+                                <small class="va-middle">2015</small></span>
+                            </div>
+                            <div class="card-title">Sales</div>
+                        </div>
+                        <div class="card-body">
+                            <div flot [dataset]="barChartData" [options]="barChartOptions" height="235" class="flot-chart"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xs-12 col-lg-8">
+                    <div class="card">
+                        <!-- START table-responsive-->
+                        <div class="table-responsive">
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th>#</th>
+                                        <th>Project</th>
+                                        <th>Completion</th>
+                                        <th class="text-right">Trend</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td class="va-middle"><span class="badge bg-pink-500">1</span></td>
+                                        <td>
+                                            <p class="m0">Vestibulum
+                                                <br/><small class="text-thin">Nunc posuere eleifend lobortis.</small></p>
+                                        </td>
+                                        <td class="va-middle">50%</td>
+                                        <td class="text-right va-middle"><em class="ion-arrow-graph-up-right text-success"></em></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="va-middle"><span class="badge bg-purple-400">2</span></td>
+                                        <td>
+                                            <p class="m0">Runfaster
+                                                <br/><small class="text-thin">Nunc posuere eleifend lobortis.</small></p>
+                                        </td>
+                                        <td class="va-middle">30%</td>
+                                        <td class="text-right va-middle"><em class="ion-arrow-graph-down-right text-warning"></em></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="va-middle"><span class="badge bg-indigo-500">3</span></td>
+                                        <td>
+                                            <p class="m0">Medic Healthcare
+                                                <br/><small class="text-thin">Nunc posuere eleifend lobortis.</small></p>
+                                        </td>
+                                        <td class="va-middle">80%</td>
+                                        <td class="text-right va-middle"><em class="ion-arrow-graph-up-right text-success"></em></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="va-middle"><span class="badge bg-info">4</span></td>
+                                        <td>
+                                            <p class="m0">Videotubeyou
+                                                <br/><small class="text-thin">Nunc posuere eleifend lobortis.</small></p>
+                                        </td>
+                                        <td class="va-middle">50%</td>
+                                        <td class="text-right va-middle"><em class="ion-arrow-graph-down-right text-warning"></em></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <!-- END table-responsive-->
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3 col-xs-12">
+            <!-- Activity feed-->
+            <div class="card">
+                <div class="card-heading">
+                    <!-- START dropdown-->
+                    <div dropdown class="pull-right dropdown">
+                        <button type="button" dropdownToggle class="btn btn-default btn-flat btn-flat-icon"><em class="ion-android-more-vertical"></em></button>
+                        <ul dropdownMenu role="menu" class="dropdown-menu md-dropdown-menu dropdown-menu-right">
+                            <li><a>Last 30 days</a></li>
+                            <li><a>Last week</a></li>
+                            <li><a>Last year</a></li>
+                        </ul>
+                    </div>
+                    <!-- END dropdown-->
+                    <div class="card-title">Activity</div><small>What's people doing right now</small>
+                </div>
+                <div class="card-body bb">
+                    <p class="pull-left mr">
+                        <a><img src="assets/img/user/04.jpg" alt="User" class="img-circle thumb32" /></a>
+                    </p>
+                    <div class="oh">
+                        <p><strong class="spr">Adam</strong><span class="spr">posted in</span><a>Material</a></p>
+                        <p class="bl pl"><i>That's awesome!</i></p>
+                        <div class="clearfix">
+                            <div class="pull-left text-muted"><em class="ion-android-time mr-sm"></em><span>2 hours ago</span></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-body bb">
+                    <p class="pull-left mr">
+                        <a><img src="assets/img/user/06.jpg" alt="User" class="img-circle thumb32" /></a>
+                    </p>
+                    <div class="oh">
+                        <p><strong class="spr">Dora</strong><span>added a new task</span></p>
+                        <p><em class="ion-calendar icon-fw"></em><a>Start migration</a></p>
+                        <div class="clearfix">
+                            <div class="pull-left text-muted"><em class="ion-android-time mr-sm"></em><span>3 hours ago</span></div>
+                            <div class="pull-right"><span>2</span><em class="ion-star ml-sm text-warning"></em></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-body bb">
+                    <p class="pull-left mr">
+                        <a><img src="assets/img/user/07.jpg" alt="User" class="img-circle thumb32" /></a>
+                    </p>
+                    <div class="oh">
+                        <p><strong class="spr">Kathryn</strong><span class="spr">published</span><a>Trip</a></p>
+                        <p>
+                            <a><img src="assets/img/pic1.jpg" alt="Pic" class="mr-sm thumb48" /></a>
+                            <a><img src="assets/img/pic2.jpg" alt="Pic" class="mr-sm thumb48" /></a>
+                        </p>
+                        <div class="clearfix">
+                            <div class="pull-left text-muted"><em class="ion-android-time mr-sm"></em><span>4 hours ago</span></div>
+                            <div class="pull-right"><span>2</span><em class="ion-ios-heart ml-sm text-danger"></em></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-body bb">
+                    <p class="pull-left mr">
+                        <a><img src="assets/img/user/02.jpg" alt="User" class="img-circle thumb32" /></a>
+                    </p>
+                    <div class="oh">
+                        <p><strong class="spr">Daniel</strong><span class="spr">joined to</span><a>Group</a></p>
+                        <p><span class="image-list"><a><img src="assets/img/user/03.jpg" alt="User" class="img-circle thumb32"/></a><a><img src="assets/img/user/04.jpg" alt="User" class="img-circle thumb32"/></a><a><img src="assets/img/user/05.jpg" alt="User" class="img-circle thumb32"/></a><a><img src="assets/img/user/07.jpg" alt="User" class="img-circle thumb32"/></a><strong><a class="ml-sm link-unstyled">+3</a></strong></span></p>
+                        <div class="clearfix">
+                            <div class="pull-left text-muted"><em class="ion-android-time mr-sm"></em><span>yesterday</span></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-body bb">
+                    <p class="pull-left mr">
+                        <a><img src="assets/img/user/03.jpg" alt="User" class="img-circle thumb32" /></a>
+                    </p>
+                    <div class="oh">
+                        <p><strong class="spr">Leroy Day</strong><span class="spr">wakes up!</span></p>
+                        <p class="bl pl"><i>That's awesome!</i></p>
+                        <div class="clearfix">
+                            <div class="pull-left text-muted"><em class="ion-android-time mr-sm"></em><span>2 weeks ago</span></div>
+                        </div>
+                    </div>
+                </div><a class="card-footer btn btn-flat btn-default"><small class="text-center text-muted lh1">See more activities</small></a>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-4 col-md-6">
+            <div class="card">
+                <div class="card-heading bg-pink-500 ripple ripple-block">
+                    <div (click)="today()" class="card-title text-center"><small>{{ dt | date: 'MMMM' }}</small>
+                        <h4 class="mv-sm text-md">{{ dt | date: 'dd' }}</h4><span>{{ dt | date: 'EEEE' }}</span>
+                    </div>
+                </div>
+                <div class="ui-datepicker-responsive">
+                    <div class="ui-datepicker dp-table-pink">
+                        <datepicker [(ngModel)]="dt" [showWeeks]="false"></datepicker>
+                    </div>
+                    <!-- <div uib-datepicker="uib-datepicker" ng-model="dash.dt" uib-datepicker-options="dash.dpOptions" ></div> -->
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-4 col-md-6">
+            <div class="card">
+                <div class="card-heading">
+                    <div class="card-title">
+                        <div class="pull-right"><em class="ion-ios-people text-soft icon-lg"></em></div>Resources distribution
+                    </div>
+                </div>
+                <div class="card-body pt0">
+                    <div vectormap class="vector-map" [mapHeight]="240" [mapSeries]="seriesData" [mapMarkers]="markersData" [mapOptions]="mapOptions"></div>
+                    <!-- <div vector-map="" map-options="dash.usa_options" map-markers="dash.usa_markers" height="240" ></div> -->
+                </div>
+                <ul class="list-group m0">
+                    <li class="list-group-item"><span>Silicon Valley</span><span class="badge badge-xs bg-green-500">15</span></li>
+                    <li class="list-group-item"><span>Chicago</span><span class="badge badge-xs bg-pink-500">9</span></li>
+                    <li class="list-group-item"><span>Houston</span><span class="badge badge-xs bg-purple-500">3</span></li>
+                    <li class="list-group-item"><span>Others</span><span class="badge badge-xs bg-blue-500">25</span></li>
+                </ul>
+            </div>
+        </div>
+        <div class="col-lg-4 col-md-12">
+            <div class="card">
+                <div class="card-heading">
+                    <div class="card-title">
+                        <div class="pull-right"><a><em class="ion-plus-round text-soft"></em></a></div>Tasks
+                    </div>
+                </div>
+                <div class="card-body text-center pt0">
+                    <div easypiechart [options]="pieOptionsTask" [percent]="percentTask" class="easypie-chart block-center">
+                        <small class="percentage">Goal</small>
+                    </div>
+                    <p class="mv">85% productivity</p>
+                </div>
+                <div class="list-group m0">
+                    <a class="list-group-item bt0">
+                        <span class="text-sm">Work on project presentation</span>
+                        <span class="pull-right"><em class="ion-ios-arrow-right"></em></span>
+                    </a>
+                    <a class="list-group-item">
+                        <span class="text-sm">Prepare a call with Robert</span>
+                        <span class="pull-right"><em class="ion-ios-arrow-right"></em></span>
+                    </a>
+                    <a class="list-group-item">
+                        <span class="text-sm">Release a new version</span>
+                        <span class="pull-right"><em class="ion-ios-arrow-right"></em></span>
+                    </a>
+                    <a class="list-group-item bb0">
+                        <span class="text-sm">Tell Houston there's no problem</span>
+                        <span class="pull-right"><em class="ion-ios-arrow-right"></em></span>
+                    </a>
+                </div>
+                <div flot [dataset]="chartTaskData" [options]="chartTaskOptions" height="90" class="flot-chart"></div>
+            </div>
+        </div>
+    </div>
+</div>

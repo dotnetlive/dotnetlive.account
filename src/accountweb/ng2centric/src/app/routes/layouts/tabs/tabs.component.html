@@ -1,0 +1,8 @@
+<div>
+    <tabset [justified]="true">
+        <tab *ngFor="let t of tabs" [heading]="t.heading" (select)="go(t.route)" [active]="isActive(t.route)"></tab>
+    </tabset>
+</div>
+<div class="container-fluid text-center">
+    <router-outlet></router-outlet>
+</div>

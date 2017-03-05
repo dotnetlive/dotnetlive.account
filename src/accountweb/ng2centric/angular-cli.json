@@ -1,0 +1,79 @@
+{
+  "project": {
+    "version": "1.0.0-beta.21",
+    "name": "ng2centric"
+  },
+  "apps": [
+    {
+      "root": "src",
+      "outDir": "dist",
+      "assets": [
+        "assets",
+        "favicon.ico"
+      ],
+      "index": "index.html",
+      "main": "main.ts",
+      "test": "test.ts",
+      "tsconfig": "tsconfig.json",
+      "prefix": "app",
+      "mobile": false,
+      "styles": [
+        "app/core/preloader/preloader.scss",
+        "styles.scss"
+      ],
+      "scripts": [
+        "../node_modules/jquery/dist/jquery.js",
+        "../node_modules/flot/jquery.flot.js",
+        "../node_modules/jquery.flot.tooltip/js/jquery.flot.tooltip.js",
+        "../node_modules/flot/jquery.flot.resize.js",
+        "../node_modules/flot/jquery.flot.pie.js",
+        "../node_modules/flot/jquery.flot.time.js",
+        "../node_modules/flot/jquery.flot.categories.js",
+        "../node_modules/jquery.flot.spline/jquery.flot.spline.js",
+        "../node_modules/jquery-sparkline/jquery.sparkline.js",
+        "../node_modules/easy-pie-chart/dist/easypiechart.js",
+        "../node_modules/bootstrap/js/modal.js",
+        "../node_modules/bootstrap/js/dropdown.js",
+        "../node_modules/bootstrap/js/tooltip.js",
+        "../node_modules/summernote/dist/summernote.js",
+        "../node_modules/jquery-knob/dist/jquery.knob.min.js",
+        "../node_modules/blueimp-gallery/js/jquery.blueimp-gallery.min.js",
+        "app/core/preloader/preloader.ts",
+        "vendor.ts"
+      ],
+      "environments": {
+        "source": "environments/environment.ts",
+        "dev": "environments/environment.ts",
+        "prod": "environments/environment.prod.ts"
+      }
+    }
+  ],
+  "addons": [],
+  "packages": [],
+  "e2e": {
+    "protractor": {
+      "config": "./protractor.conf.js"
+    }
+  },
+  "test": {
+    "karma": {
+      "config": "./karma.conf.js"
+    }
+  },
+  "defaults": {
+    "styleExt": "scss",
+    "prefixInterfaces": false,
+    "inline": {
+      "style": false,
+      "template": false
+    },
+    "spec": {
+      "class": false,
+      "component": true,
+      "directive": true,
+      "module": false,
+      "pipe": true,
+      "service": true
+    }
+  }
+}

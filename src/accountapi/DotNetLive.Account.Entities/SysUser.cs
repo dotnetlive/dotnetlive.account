@@ -30,10 +30,12 @@ namespace DotNetLive.Account.Entities
         [Column("islockoutenabled")]
         public bool IsLockoutEnabled { get; set; }
         [Column("lockoutenddate")]
-        public DateTime LockoutEndDate { get; set; }
+        public DateTime? LockoutEndDate { get; set; }
         [Column("createdon")]
-        public DateTime CreatedOn { get; set; }
+        public DateTime? CreatedOn { get; set; }
         [Column("deletedon")]
-        public DateTime DeletedOn { get; set; }
+        public DateTime? DeletedOn { get; set; }
+        [Column("status")]
+        public int Status { get; set; }
     }
 }

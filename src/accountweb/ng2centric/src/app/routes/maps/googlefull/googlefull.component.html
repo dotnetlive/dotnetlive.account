@@ -1,0 +1,20 @@
+<div class="container-full">
+    <div class="row fh bg-white">
+        <div class="col-md-3 fh hidden-sm hidden-xs pr0">
+            <div class="p-lg">
+                <h5 *ngIf="myMarkers.length" class="text-center">Places</h5>
+                <p class="text-center">Click on each item to focus a marker in the map</p>
+            </div>
+            <div class="list-group list-group-unstyle">
+                <a *ngFor="let marker of myMarkers" (click)="moveTo(marker.coords)" class="list-group-item">
+                    <em class="pull-right ion-ios-arrow-forward"></em> {{marker.name}}
+                </a>
+            </div>
+        </div>
+        <div class="col-md-9 fh pl0">
+            <sebm-google-map [latitude]="currLatitude" [longitude]="currLongitude" [zoom]="zoom" [scrollwheel]="scrollwheel" [usePanning]="true" class="center-block fh">
+                <sebm-google-map-marker *ngFor="let marker of myMarkers" [latitude]="marker.coords.latitude" [longitude]="marker.coords.longitude"></sebm-google-map-marker>
+            </sebm-google-map>
+        </div>
+    </div>
+</div>

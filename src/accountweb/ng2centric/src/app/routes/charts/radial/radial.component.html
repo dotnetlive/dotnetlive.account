@@ -1,0 +1,82 @@
+<div class="container-fluid">
+    <h4 class="page-header clearfix mt0">
+    <div class="pull-left">Knob</div>
+    <div class="pull-right">
+      <button type="button" (click)="randomize('knob')" class="btn btn-sm btn-primary"><em class="ion-refresh"></em></button>
+    </div>
+  </h4>
+    <div class="row">
+        <div class="col-lg-3 col-sm-6">
+            <div class="card">
+                <div class="card-heading">Default</div>
+                <div class="card-body text-center">
+                    <input knob [data]="knobLoaderData1" [options]="knobLoaderOptions1"/>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3 col-sm-6">
+            <div class="card">
+                <div class="card-heading">Ready only</div>
+                <div class="card-body text-center">
+                    <input knob [data]="knobLoaderData2" [options]="knobLoaderOptions2"/>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3 col-sm-6">
+            <div class="card">
+                <div class="card-heading">Offset and arc</div>
+                <div class="card-body text-center">
+                    <input knob [data]="knobLoaderData4" [options]="knobLoaderOptions4"/>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3 col-sm-6">
+            <div class="card">
+                <div class="card-heading">Display previous</div>
+                <div class="card-body text-center">
+                    <input knob [data]="knobLoaderData3" [options]="knobLoaderOptions3"/>
+                </div>
+            </div>
+        </div>
+    </div>
+    <h4 class="page-header clearfix">
+    <div class="pull-left">Easypie Charts</div>
+    <div class="pull-right">
+      <button type="button" (click)="randomize('easy')" class="btn btn-sm btn-primary"><em class="ion-refresh"></em></button>
+    </div>
+  </h4>
+    <div class="row">
+        <div class="col-lg-3 col-sm-6">
+            <div class="card">
+                <div class="card-heading">Default</div>
+                <div class="card-body text-center">
+                    <div easypiechart [options]="pieOptions1" [percent]="piePercent1" class="easypie-chart"><span>{{piePercent1}}</span></div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3 col-sm-6">
+            <div class="card">
+                <div class="card-heading">Slim</div>
+                <div class="card-body text-center">
+                    <div easypiechart [options]="pieOptions2" [percent]="piePercent2" class="easypie-chart"><span>{{piePercent2}}</span></div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3 col-sm-6">
+            <div class="card">
+                <div class="card-heading">Track color</div>
+                <div class="card-body text-center">
+                    <div easypiechart [options]="pieOptions3" [percent]="piePercent3" class="easypie-chart"><span>{{piePercent3}}</span></div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3 col-sm-6">
+            <div class="card">
+                <div class="card-heading">Scale color</div>
+                <div class="card-body text-center">
+                    <div easypiechart [options]="pieOptions4" [percent]="piePercent4" class="easypie-chart"><span>{{piePercent4}}</span></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

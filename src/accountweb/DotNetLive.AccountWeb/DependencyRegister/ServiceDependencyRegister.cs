@@ -1,4 +1,5 @@
-﻿using DotNetLive.AccountWeb.Configurations;
+﻿using DotNetLive.AccountWeb.ApiClients;
+using DotNetLive.AccountWeb.Configurations;
 using DotNetLive.AccountWeb.Services;
 using DotNetLive.Framework.DependencyManagement;
 using DotNetLive.Framework.Models;
@@ -21,7 +22,8 @@ namespace DotNetLive.AccountWeb.DependencyRegister
 
             services.Configure<AppSettings>(configuration.GetSection("AppSettings"));
 
-      
+            services.Configure<ApiHostSettings>(configuration.GetSection("ApiHostSettings"));
+            services.AddScoped<AccountApiClient>();
         }
     }
 }

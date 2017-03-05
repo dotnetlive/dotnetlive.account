@@ -1,0 +1,531 @@
+<div class="container-fluid">
+    <div class="card">
+        <div class="card-heading">
+            <div class="card-title">Material Forms</div>
+        </div>
+        <div class="card-body bg-blue-grey-900">
+            <div class="row">
+                <div class="col-sm-4">
+                    <div class="mda-form-group">
+                        <div class="mda-form-control mda-form-control-dark">
+                            <input nane="user-title" [(ngModel)]="user.title" tabindex="0" aria-invalid="false" class="form-control" />
+                            <div class="mda-form-control-line"></div>
+                            <label>Title</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-4">
+                    <div class="mda-form-group">
+                        <div class="mda-form-control mda-form-control-dark">
+                            <input name="user-email" [(ngModel)]="user.email" tabindex="0" aria-invalid="false" class="form-control" />
+                            <div class="mda-form-control-line"></div>
+                            <label>Email</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="card-body">
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="mda-form-group">
+                        <div class="mda-form-control">
+                            <input disabled="" name="user-company" [(ngModel)]="user.company" tabindex="0" aria-invalid="false" class="form-control" />
+                            <div class="mda-form-control-line"></div>
+                            <label>Company(disabled)</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="mda-form-group float-label">
+                        <div class="mda-form-control">
+                            <input name="user-firsname" [(ngModel)]="user.firstName" required="" tabindex="0" aria-required="true" aria-invalid="true" class="form-control" />
+                            <div class="mda-form-control-line"></div>
+                            <label>First Name</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="mda-form-group float-label">
+                        <div class="mda-form-control">
+                            <input name="user-lastname" [(ngModel)]="user.lastName" required="" tabindex="0" aria-required="true" aria-invalid="true" class="form-control" />
+                            <div class="mda-form-control-line"></div>
+                            <label>Last Name</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-12">
+                    <div class="mda-form-group">
+                        <div class="mda-form-control">
+                            <input name="user-address" [(ngModel)]="user.address" tabindex="0" aria-invalid="false" class="form-control" />
+                            <div class="mda-form-control-line"></div>
+                            <label>Address</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-12">
+                    <div class="mda-form-group">
+                        <div class="mda-form-control">
+                            <input name="user-address2" [(ngModel)]="user.address2" tabindex="0" aria-invalid="false" class="form-control" />
+                            <div class="mda-form-control-line"></div>
+                            <label>Address 2</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-4">
+                    <div class="mda-form-group">
+                        <div class="mda-form-control">
+                            <input name="user-city" [(ngModel)]="user.city" tabindex="0" aria-invalid="false" class="form-control" />
+                            <div class="mda-form-control-line"></div>
+                            <label>City</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-4">
+                    <div class="mda-form-group">
+                        <div class="mda-form-control">
+                            <input name="user-state" [(ngModel)]="user.state" tabindex="0" aria-invalid="false" class="form-control" />
+                            <div class="mda-form-control-line"></div>
+                            <label>State</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-4">
+                    <div class="mda-form-group">
+                        <div class="mda-form-control">
+                            <input name="user-pc" [(ngModel)]="user.postalCode" tabindex="0" aria-invalid="false" class="form-control" />
+                            <div class="mda-form-control-line"></div>
+                            <label>Postal Code</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="mda-form-group">
+                        <div class="mda-form-control">
+                            <textarea name="user-bio" [(ngModel)]="user.biography" rows="4" aria-multiline="true" tabindex="0" aria-invalid="false" class="form-control"></textarea>
+                            <div class="mda-form-control-line"></div>
+                            <label>Biography</label><span class="mda-form-msg right">Any message here</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="mda-form-group">
+                        <div class="mda-form-control">
+                            <select name="user-select" [(ngModel)]="user.select" class="form-control">
+                                <option value="1">Option 1</option>
+                                <option value="2">Option 2</option>
+                                <option value="3">Option 3</option>
+                                <option value="4">Option 4</option>
+                                <option value="5">Option 5</option>
+                            </select>
+                            <div class="mda-form-control-line"></div>
+                            <label>Select</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="card">
+        <div class="card-heading bg-primary">
+            <div class="pull-right"><em class="ion-ios-browsers-outline icon-2x va-top"></em></div>
+            <div class="card-title">Material Forms</div>
+        </div>
+        <div class="card-toolbar bg-primary">Errors</div>
+        <div class="card-body">
+            <form class="form-validate">
+                <div class="mda-form-group float-label mb">
+                    <div class="mda-form-control">
+                        <input name="user-clientname" [(ngModel)]="user.clientName" required="" tabindex="0" aria-required="true" aria-invalid="true" class="form-control" />
+                        <div class="mda-form-control-line"></div>
+                        <label>Client Name</label>
+                    </div><span class="mda-form-msg">Input should match 'a-zA-Z0-9' and 6-10 length</span>
+                </div>
+                <div class="mda-form-group">
+                    <div class="mda-form-control">
+                        <input name="user-salary" [(ngModel)]="user.salary" tabindex="0" aria-invalid="true" class="form-control" />
+                        <div class="mda-form-control-line"></div>
+                        <label>Salary</label>
+                    </div><span class="mda-form-msg">Your salary must be at least 6 digits</span>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div class="card">
+        <div class="card-heading bg-primary">
+            <div class="card-title">Icons</div>
+        </div>
+        <div class="card-body">
+            <div class="mda-form-group float-label mb mda-input-group">
+                <div class="mda-form-control">
+                    <input name="username" type="text" [(ngModel)]="username" class="form-control" />
+                    <div class="mda-form-control-line"></div>
+                    <label>Username</label>
+                </div><span class="mda-input-group-addon"><em class="ion-person icon-lg"></em></span>
+            </div>
+            <div class="mda-form-group mb mda-input-group">
+                <div class="mda-form-control">
+                    <input name="phone" type="text" [(ngModel)]="phone" class="form-control" />
+                    <div class="mda-form-control-line"></div>
+                    <label>Phone</label>
+                </div><span class="mda-input-group-addon"><em class="ion-ios-telephone text-primary icon-lg"></em></span>
+            </div>
+        </div>
+    </div>
+    <!-- Switchers-->
+    <div class="card">
+        <div class="card-heading bg-primary">
+            <div class="card-title">Switches</div>
+        </div>
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="row mb">
+                        <div class="col-sm-8">
+                            <label class="switch">
+                                <input type="checkbox" checked="checked" name="switch1" [(ngModel)]="switch1"/><span></span>
+                            </label>Switch is: {{switch1}}
+                        </div>
+                    </div>
+                    <div class="row mb">
+                        <div class="col-sm-8">
+                            <label class="switch switch-warn">
+                                <input type="checkbox" checked="checked" name="switch2" [(ngModel)]="switch2"/><span></span>
+                            </label>Switch warn is: {{switch2}}
+                        </div>
+                    </div>
+                    <div class="row mb">
+                        <div class="col-sm-8">
+                            <label class="switch switch-warn">
+                                <input type="checkbox" disabled="true" /><span></span>
+                            </label>Switch disabled
+                        </div>
+                    </div>
+                    <div class="row mb">
+                        <div class="col-sm-8">
+                            <label class="switch switch-warn">
+                                <input type="checkbox" checked="checked" disabled="true" name="switch3" [(ngModel)]="switch3"/><span></span>
+                            </label>Switch disabled active
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="row mb">
+                        <div class="col-sm-8">
+                            <label class="switch switch-primary">
+                                <input type="checkbox" checked="checked" name="switch01" [(ngModel)]="switch01"/><span></span>
+                            </label>Switch primary is: {{switch01}}
+                        </div>
+                    </div>
+                    <div class="row mb">
+                        <div class="col-sm-8">
+                            <label class="switch switch-purple">
+                                <input type="checkbox" checked="checked" name="switch02" [(ngModel)]="switch02"/><span></span>
+                            </label>Switch purple is: {{switch02}}
+                        </div>
+                    </div>
+                    <div class="row mb">
+                        <div class="col-sm-8">
+                            <label class="switch switch-info">
+                                <input type="checkbox" checked="checked" name="switch03" [(ngModel)]="switch03"/><span></span>
+                            </label>Switch info is: {{switch03}}
+                        </div>
+                    </div>
+                    <div class="row mb">
+                        <div class="col-sm-8">
+                            <label class="switch switch-success">
+                                <input type="checkbox" checked="checked" name="switch04" [(ngModel)]="switch04"/><span></span>
+                            </label>Switch success is: {{switch04}}
+                        </div>
+                    </div>
+                    <div class="row mb">
+                        <div class="col-sm-8">
+                            <label class="switch switch-warning">
+                                <input type="checkbox" checked="checked" name="switch05" [(ngModel)]="switch05"/><span></span>
+                            </label>Switch warning is: {{switch05}}
+                        </div>
+                    </div>
+                    <div class="row mb">
+                        <div class="col-sm-8">
+                            <label class="switch switch-danger">
+                                <input type="checkbox" checked="checked" name="switch06" [(ngModel)]="switch06"/><span></span>
+                            </label>Switch danger is: {{switch06}}
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="row mb">
+                        <div class="col-sm-8">
+                            <label class="switch switch-warn switch-primary">
+                                <input type="checkbox" checked="checked" name="switchw01" [(ngModel)]="switchw01"/><span></span>
+                            </label>Switch warn primary is: {{switchw01}}
+                        </div>
+                    </div>
+                    <div class="row mb">
+                        <div class="col-sm-8">
+                            <label class="switch switch-warn switch-purple">
+                                <input type="checkbox" checked="checked" name="switchw02" [(ngModel)]="switchw02"/><span></span>
+                            </label>Switch warn purple is: {{switchw02}}
+                        </div>
+                    </div>
+                    <div class="row mb">
+                        <div class="col-sm-8">
+                            <label class="switch switch-warn switch-info">
+                                <input type="checkbox" checked="checked" name="switchw03" [(ngModel)]="switchw03"/><span></span>
+                            </label>Switch warn info is: {{switchw03}}
+                        </div>
+                    </div>
+                    <div class="row mb">
+                        <div class="col-sm-8">
+                            <label class="switch switch-warn switch-success">
+                                <input type="checkbox" checked="checked" name="switchw04" [(ngModel)]="switchw04"/><span></span>
+                            </label>Switch warn success is: {{switchw04}}
+                        </div>
+                    </div>
+                    <div class="row mb">
+                        <div class="col-sm-8">
+                            <label class="switch switch-warn switch-warning">
+                                <input type="checkbox" checked="checked" name="switchw05" [(ngModel)]="switchw05"/><span></span>
+                            </label>Switch warn warning is: {{switchw05}}
+                        </div>
+                    </div>
+                    <div class="row mb">
+                        <div class="col-sm-8">
+                            <label class="switch switch-warn switch-danger">
+                                <input type="checkbox" checked="checked" name="switchw06" [(ngModel)]="switchw06"/><span></span>
+                            </label>Switch warn danger is: {{switchw06}}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Checkbox and radios-->
+    <div class="card">
+        <div class="card-heading bg-primary">
+            <div class="card-title">Checkboxes</div>
+        </div>
+        <div class="card-body">
+            <div class="row">
+                <div class="col-lg-4">
+                    <div class="mb">
+                        <label class="mda-checkbox">
+                            <input type="checkbox" /><em class="bg-indigo-500"></em>This is a Checkbox
+                        </label>
+                    </div>
+                    <div class="mb">
+                        <label class="mda-checkbox">
+                            <input type="checkbox" checked="" /><em class="bg-purple-500"></em>This is a Checkbox checked
+                        </label>
+                    </div>
+                    <div class="mb">
+                        <label class="mda-checkbox">
+                            <input type="checkbox" disabled="" /><em class="bg-indigo-500"></em>This is a Checkbox disabled
+                        </label>
+                    </div>
+                    <div class="mb">
+                        <label class="mda-checkbox">
+                            <input type="checkbox" checked="" disabled="" /><em class="bg-indigo-500"></em>This is a Checkbox checked and disabled
+                        </label>
+                    </div>
+                    <div class="mb">
+                        <label class="mda-checkbox">
+                            <input type="checkbox" checked="" /><em class="bg-blue-500 empty"></em>This is a Checkbox empty
+                        </label>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="mb">
+                        <label class="mda-checkbox">
+                            <input type="checkbox" checked="" /><em class="bg-red-500"></em>This a checkbox red
+                        </label>
+                    </div>
+                    <div class="mb">
+                        <label class="mda-checkbox">
+                            <input type="checkbox" checked="" /><em class="bg-pink-500"></em>This a checkbox pink
+                        </label>
+                    </div>
+                    <div class="mb">
+                        <label class="mda-checkbox">
+                            <input type="checkbox" checked="" /><em class="bg-purple-500"></em>This a checkbox purple
+                        </label>
+                    </div>
+                    <div class="mb">
+                        <label class="mda-checkbox">
+                            <input type="checkbox" checked="" /><em class="bg-deep-purple-500"></em>This a checkbox purple
+                        </label>
+                    </div>
+                    <div class="mb">
+                        <label class="mda-checkbox">
+                            <input type="checkbox" checked="" /><em class="bg-indigo-500"></em>This a checkbox indigo
+                        </label>
+                    </div>
+                    <div class="mb">
+                        <label class="mda-checkbox">
+                            <input type="checkbox" checked="" /><em class="bg-blue-500"></em>This a checkbox blue
+                        </label>
+                    </div>
+                    <div class="mb">
+                        <label class="mda-checkbox">
+                            <input type="checkbox" checked="" /><em class="bg-cyan-500"></em>This a checkbox cyan
+                        </label>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="mb">
+                        <label class="mda-checkbox">
+                            <input type="checkbox" checked="" /><em class="bg-teal-500"></em>This a checkbox teal
+                        </label>
+                    </div>
+                    <div class="mb">
+                        <label class="mda-checkbox">
+                            <input type="checkbox" checked="" /><em class="bg-green-500"></em>This a checkbox green
+                        </label>
+                    </div>
+                    <div class="mb">
+                        <label class="mda-checkbox">
+                            <input type="checkbox" checked="" /><em class="bg-lime-500"></em>This a checkbox lime
+                        </label>
+                    </div>
+                    <div class="mb">
+                        <label class="mda-checkbox">
+                            <input type="checkbox" checked="" /><em class="bg-yellow-500"></em>This a checkbox yellow
+                        </label>
+                    </div>
+                    <div class="mb">
+                        <label class="mda-checkbox">
+                            <input type="checkbox" checked="" /><em class="bg-amber-500"></em>This a checkbox amber
+                        </label>
+                    </div>
+                    <div class="mb">
+                        <label class="mda-checkbox">
+                            <input type="checkbox" checked="" /><em class="bg-orange-500"></em>This a checkbox orange
+                        </label>
+                    </div>
+                    <div class="mb">
+                        <label class="mda-checkbox">
+                            <input type="checkbox" checked="" /><em class="bg-brown-500"></em>This a checkbox brown
+                        </label>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Radios-->
+    <div class="card">
+        <div class="card-heading bg-primary">
+            <div class="card-title">Radios</div>
+        </div>
+        <div class="card-body">
+            <div class="row">
+                <div class="col-lg-4">
+                    <div class="mb">
+                        <label class="mda-radio">
+                            <input type="radio" name="oneradio" /><em class="bg-indigo-500"></em>This is a radio
+                        </label>
+                    </div>
+                    <div class="mb">
+                        <label class="mda-radio">
+                            <input type="radio" name="oneradio" checked="" /><em class="bg-purple-500"></em>This is a radio checked
+                        </label>
+                    </div>
+                    <div class="mb">
+                        <label class="mda-radio">
+                            <input type="radio" name="otherradio" disabled="" /><em class="bg-indigo-500"></em>This is a radio disabled
+                        </label>
+                    </div>
+                    <div class="mb">
+                        <label class="mda-radio">
+                            <input type="radio" name="otherradio" checked="" disabled="" /><em class="bg-indigo-500"></em>This is a radio checked and disabled
+                        </label>
+                    </div>
+                    <div class="mb">
+                        <label class="mda-radio">
+                            <input type="radio" name="emptyradio" checked="" /><em class="bg-blue-500 empty"></em>This is a radio empty
+                        </label>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="mb">
+                        <label class="mda-radio">
+                            <input type="radio" name="someradio-red" checked="" /><em class="bg-red-500"></em>This a radio red
+                        </label>
+                    </div>
+                    <div class="mb">
+                        <label class="mda-radio">
+                            <input type="radio" name="someradio-pink" checked="" /><em class="bg-pink-500"></em>This a radio pink
+                        </label>
+                    </div>
+                    <div class="mb">
+                        <label class="mda-radio">
+                            <input type="radio" name="someradio-purple" checked="" /><em class="bg-purple-500"></em>This a radio purple
+                        </label>
+                    </div>
+                    <div class="mb">
+                        <label class="mda-radio">
+                            <input type="radio" name="someradio-deep-purple" checked="" /><em class="bg-deep-purple-500"></em>This a radio purple
+                        </label>
+                    </div>
+                    <div class="mb">
+                        <label class="mda-radio">
+                            <input type="radio" name="someradio-indigo" checked="" /><em class="bg-indigo-500"></em>This a radio indigo
+                        </label>
+                    </div>
+                    <div class="mb">
+                        <label class="mda-radio">
+                            <input type="radio" name="someradio-blue" checked="" /><em class="bg-blue-500"></em>This a radio blue
+                        </label>
+                    </div>
+                    <div class="mb">
+                        <label class="mda-radio">
+                            <input type="radio" name="someradio-cyan" checked="" /><em class="bg-cyan-500"></em>This a radio cyan
+                        </label>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="mb">
+                        <label class="mda-radio">
+                            <input type="radio" name="someradio-teal" checked="" /><em class="bg-teal-500"></em>This a radio teal
+                        </label>
+                    </div>
+                    <div class="mb">
+                        <label class="mda-radio">
+                            <input type="radio" name="someradio-green" checked="" /><em class="bg-green-500"></em>This a radio green
+                        </label>
+                    </div>
+                    <div class="mb">
+                        <label class="mda-radio">
+                            <input type="radio" name="someradio-lime" checked="" /><em class="bg-lime-500"></em>This a radio lime
+                        </label>
+                    </div>
+                    <div class="mb">
+                        <label class="mda-radio">
+                            <input type="radio" name="someradio-yellow" checked="" /><em class="bg-yellow-500"></em>This a radio yellow
+                        </label>
+                    </div>
+                    <div class="mb">
+                        <label class="mda-radio">
+                            <input type="radio" name="someradio-amber" checked="" /><em class="bg-amber-500"></em>This a radio amber
+                        </label>
+                    </div>
+                    <div class="mb">
+                        <label class="mda-radio">
+                            <input type="radio" name="someradio-orange" checked="" /><em class="bg-orange-500"></em>This a radio orange
+                        </label>
+                    </div>
+                    <div class="mb">
+                        <label class="mda-radio">
+                            <input type="radio" name="someradio-brown" checked="" /><em class="bg-brown-500"></em>This a radio brown
+                        </label>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

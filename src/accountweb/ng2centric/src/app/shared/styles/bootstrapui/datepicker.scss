@@ -1,0 +1,151 @@
+/**
+ * Datepicker
+ */
+
+@import '../common/variables';
+@import '../common/mixins';
+
+@mixin dp-head-variant($color) {
+    table {
+        thead {
+            button {
+                background-color: $color;
+                color: #fff;
+            }
+            tr:last-child th {
+                background-color: darken($color, 10%);
+                color: #fff;
+            }
+        }
+    }
+}
+
+@mixin dp-table-variant($color) {
+    table {
+        button {
+            > span.text-info {
+                color: $color;
+            }
+            &.active, &:active, &:hover {
+                background-color: $color;
+                color: #fff;
+                > span,
+                > span.text-info {
+                    color: #fff;
+                }
+            }
+        }
+    }
+}
+
+// wrapper to show a scrollbar
+.ui-datepicker-responsive {
+    max-width: 100%;
+    overflow: auto;
+}
+
+.ui-datepicker {
+    background-color: transparent;
+    display: inline-block;
+    @include box-shadow($material-shadow-z1);
+
+    .card {
+        padding: 0;
+        margin: 0;
+        border: 0;
+    }
+
+    table {
+        width: 100%;
+        thead {
+            tr:last-child th {
+                line-height: 36px;
+            }
+            button {
+                width: 100%;
+                padding-top: 16px;
+                padding-bottom: 16px;
+            }
+        }
+        button {
+            border: 0;
+            border-radius: 0;
+            padding: 12px;
+            background-color: #fff;
+            @include box-shadow(0 0 0 #000 !important);
+
+            &.active {
+                // background-color: $brand-success;
+                > span {
+                    // color: #fff;
+                }
+            }
+
+            span {
+                position: relative;
+                &:after {
+                    content: '';
+                    display: block;
+                    position: absolute;
+                    left: 0; right: 0;
+                    bottom: -8px;
+                    margin: 0 auto;
+                    border-radius: 50%;
+                    height: 6px;
+                    width: 6px;
+                    background-color: transparent;
+                }
+                &.text-info {
+                    // color: $brand-success;
+                    border-bottom: 1px solid;
+                    font-weight: bold;
+                }
+            }
+            &.btn-default.btn-info {
+                background-color: $gray-lighter;
+                color: #333;
+            }
+        }
+
+        .full button span {
+            &:after {
+                background-color: $brand-info;
+            }
+        }
+        .partially button span {
+            &:after {
+                background-color: $brand-warning;
+            }
+        }
+    }
+}
+
+// Popup datepicker removes standard space from dropdowns
+.ui-datepicker .dropdown-menu {
+    margin: 0;
+    padding: 0 0 5px 0;
+    border: 0;
+}
+
+// Datepicker color Variants
+
+// Independt styles for the datepicker header
+.ui-datepicker {
+    &.dp-head-primary { @include dp-head-variant($brand-primary); }
+    &.dp-head-success { @include dp-head-variant($brand-success); }
+    &.dp-head-warning { @include dp-head-variant($brand-warning); }
+    &.dp-head-info { @include dp-head-variant($brand-info); }
+    &.dp-head-danger { @include dp-head-variant($brand-danger); }
+    &.dp-head-pink { @include dp-head-variant($mdc-pink-500); }
+    &.dp-head-purple { @include dp-head-variant($mdc-deep-purple-400); }
+}
+// Independt styles for the datepicker table
+.ui-datepicker {
+    &.dp-table-primary { @include dp-table-variant($brand-primary); }
+    &.dp-table-success { @include dp-table-variant($brand-success); }
+    &.dp-table-warning { @include dp-table-variant($brand-warning); }
+    &.dp-table-info { @include dp-table-variant($brand-info); }
+    &.dp-table-danger { @include dp-table-variant($brand-danger); }
+    &.dp-table-pink { @include dp-table-variant($mdc-pink-500); }
+    &.dp-table-purple { @include dp-table-variant($mdc-deep-purple-400); }
+}

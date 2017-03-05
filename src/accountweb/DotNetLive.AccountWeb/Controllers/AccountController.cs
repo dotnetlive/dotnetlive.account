@@ -1,16 +1,23 @@
-﻿using DotNetLive.AccountWeb.Models;
+﻿using DotNetLive.AccountWeb.ApiClients;
+using DotNetLive.AccountWeb.Models;
 using DotNetLive.AccountWeb.Models.AccountViewModels;
 using DotNetLive.AccountWeb.Services;
 using DotNetLive.Framework.Models;
+using DotNetLive.Framework.WebApiClient.Query;
+using DotNetLive.Framework.WebFramework;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http.Authentication;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.Extensions.Logging;
+using System;
 using System.Linq;
+using System.Net;
 using System.Security.Claims;
 using System.Threading.Tasks;
+using SignInStatus = Microsoft.AspNetCore.Identity.SignInResult;
 
 namespace DotNetLive.AccountWeb.Controllers
 {
@@ -23,6 +30,7 @@ namespace DotNetLive.AccountWeb.Controllers
         private readonly ISmsSender _smsSender;
         private readonly ILogger _logger;
         private IHostingEnvironment _hostingEnvironment;
+        private AccountApiClient _accountApiClient;
 
         public AccountController(
             UserManager<ApplicationUser> userManager,
@@ -30,7 +38,7 @@ namespace DotNetLive.AccountWeb.Controllers
             IEmailSender emailSender,
             ISmsSender smsSender,
             ILoggerFactory loggerFactory,
-            IHostingEnvironment hostingEnvironment)
+            IHostingEnvironment hostingEnvironment, AccountApiClient accountApiClient)
         {
             _userManager = userManager;
             _signInManager = signInManager;
@@ -38,6 +46,7 @@ namespace DotNetLive.AccountWeb.Controllers
             _smsSender = smsSender;
             _logger = loggerFactory.CreateLogger<AccountController>();
             _hostingEnvironment = hostingEnvironment;
+            _accountApiClient = accountApiClient;
         }
 
         //
@@ -46,6 +55,26 @@ namespace DotNetLive.AccountWeb.Controllers
         [AllowAnonymous]
         public IActionResult Login(string returnUrl = null)
         {
+            if (HttpContext.User.Identity.IsAuthenticated)
+            {
+                if (!Request.IsLocal() && !string.IsNullOrWhiteSpace(returnUrl))
+                {
+                    //var builder = new UriBuilder(UrlHelper.AddHost(returnUrl, Request.Url));
+                    //if (!builder.Host.EndsWith(ConfigurationManager.AppSettings["CookieDomain"], StringComparison.OrdinalIgnoreCase))
+                    //{
+                    //    var newUrl = string.Format("{0}://{1}{2}/account/loginBySession?sessionKey={3}&isRemeber={4}&returnUrl={5}",
+                    //        builder.Scheme, //http
+                    //        builder.Host, //host
+                    //        (builder.Port == 80 || builder.Port == 443) ? string.Empty : ":" + builder.Port.ToString(),  //port
+                    //        SessionKey, //sessionkey
+                    //        false, //IsRemember
+                    //     WebUtility.UrlEncode(returnUrl));//Return Url
+                    //    return RedirectToLocal(newUrl);
+                    //}
+                }
+                return RedirectToUrl(returnUrl);
+            }
+
             ViewData["ReturnUrl"] = returnUrl;
             return View();
         }
@@ -55,18 +84,44 @@ namespace DotNetLive.AccountWeb.Controllers
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Login(LoginViewModel model, string returnUrl = null)
+        public async Task<IActionResult> Login(LoginViewModel model, string returnUrl = null, bool forceLoginBySession = false)
         {
+            if (HttpContext.User.Identity.IsAuthenticated)
+            {
+                return RedirectToUrl(returnUrl);
+            }
+
             ViewData["ReturnUrl"] = returnUrl;
+            if (!ModelState.IsValid)
+            {
+                return View(model);
+            }
+
             if (ModelState.IsValid)
             {
                 // This doesn't count login failures towards account lockout
                 // To enable password failures to trigger account lockout, set lockoutOnFailure: true
-                var result = await _signInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, lockoutOnFailure: false);
+                //var result = await _signInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, lockoutOnFailure: false);
+                var result = SignInStatus.Failed;
+                var loginResult = _accountApiClient.Login(new LoginQuery() { Email = model.Email, Password = model.Password, DeviceType = 1 });
+                if (loginResult.Success)
+                {
+                    result = SignInStatus.Success;
+                    var loginUser = loginResult.ResponseResult.LoginUser;
+                    var applicationUser = new ApplicationUser(loginUser.Id, loginUser.UserName, loginUser.Email);
+                    applicationUser.AddClaim(new Claim(ApplicationUser.JwtClaimName, loginResult.ResponseResult.Token));
+                    await _signInManager.SignInAsync(applicationUser,
+                        new AuthenticationProperties()
+                        {
+                            AllowRefresh = true,
+                            IsPersistent = true
+                        });
+                }
+
                 if (result.Succeeded)
                 {
                     _logger.LogInformation(1, "User logged in.");
-                    return RedirectToLocal(returnUrl);
+                    return RedirectToUrl(returnUrl);
                 }
                 if (result.RequiresTwoFactor)
                 {
@@ -120,7 +175,7 @@ namespace DotNetLive.AccountWeb.Controllers
                     //    $"Please confirm your account by clicking this link: <a href='{callbackUrl}'>link</a>");
                     await _signInManager.SignInAsync(user, isPersistent: false);
                     _logger.LogInformation(3, "User created a new account with password.");
-                    return RedirectToLocal(returnUrl);
+                    return RedirectToUrl(returnUrl);
                 }
                 AddErrors(result);
             }
@@ -190,7 +245,7 @@ namespace DotNetLive.AccountWeb.Controllers
             if (result.Succeeded)
             {
                 _logger.LogInformation(5, "User logged in with {Name} provider.", info.LoginProvider);
-                return RedirectToLocal(returnUrl);
+                return RedirectToUrl(returnUrl);
             }
             if (result.RequiresTwoFactor)
             {
@@ -234,7 +289,7 @@ namespace DotNetLive.AccountWeb.Controllers
                     {
                         await _signInManager.SignInAsync(user, isPersistent: false);
                         _logger.LogInformation(6, "User created an account using {Name} provider.", info.LoginProvider);
-                        return RedirectToLocal(returnUrl);
+                        return RedirectToUrl(returnUrl);
                     }
                 }
                 AddErrors(result);
@@ -440,7 +495,7 @@ namespace DotNetLive.AccountWeb.Controllers
             var result = await _signInManager.TwoFactorSignInAsync(model.Provider, model.Code, model.RememberMe, model.RememberBrowser);
             if (result.Succeeded)
             {
-                return RedirectToLocal(model.ReturnUrl);
+                return RedirectToUrl(model.ReturnUrl);
             }
             if (result.IsLockedOut)
             {
@@ -469,16 +524,21 @@ namespace DotNetLive.AccountWeb.Controllers
             return _userManager.GetUserAsync(HttpContext.User);
         }
 
-        private IActionResult RedirectToLocal(string returnUrl)
+        private IActionResult RedirectToUrl(string returnUrl)
         {
-            if (Url.IsLocalUrl(returnUrl))
-            {
-                return Redirect(returnUrl);
-            }
-            else
+            // if (Url.IsLocalUrl(returnUrl))
+            // {
+            //     return Redirect(returnUrl);
+            // }
+            // else
+            // {
+            //     return RedirectToAction(nameof(HomeController.Index), "Home");
+            // }
+            if(string.IsNullOrWhiteSpace(returnUrl))
             {
                 return RedirectToAction(nameof(HomeController.Index), "Home");
             }
+            return Redirect(returnUrl);
         }
 
         #endregion
