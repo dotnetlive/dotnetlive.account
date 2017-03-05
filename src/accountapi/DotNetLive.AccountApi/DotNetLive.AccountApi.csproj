@@ -27,6 +27,9 @@
     <DotNetCliToolReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Tools" Version="1.0.0-msbuild3-final" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\..\..\dotnetlive.framework\src\DotNetLive.Framework.WebApi\DotNetLive.Framework.WebApi.csproj" />
+    <ProjectReference Include="..\..\..\..\dotnetlive.framework\src\DotNetLive.Framework.Web\DotNetLive.Framework.Web.csproj" />
+    <ProjectReference Include="..\..\..\..\dotnetlive.framework\src\DotNetLive.Framework\DotNetLive.Framework.csproj" />
     <ProjectReference Include="..\DotNetLive.Account.Services\DotNetLive.Account.Services.csproj" />
   </ItemGroup>
 
