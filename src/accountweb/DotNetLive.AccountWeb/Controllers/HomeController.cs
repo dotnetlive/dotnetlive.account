@@ -10,6 +10,7 @@ using Microsoft.Extensions.Options;
 using Microsoft.AspNetCore.Http;
 using System;
 using Newtonsoft.Json;
+using Microsoft.AspNetCore.Authorization;
 
 namespace DotNetLive.AccountWeb.Controllers
 {
@@ -24,6 +25,7 @@ namespace DotNetLive.AccountWeb.Controllers
             this._assSettings = appSettings.Value;
         }
 
+        [Authorize]
         public IActionResult Index()
         {
             //if (_hostingEnvironment.IsDevelopment())

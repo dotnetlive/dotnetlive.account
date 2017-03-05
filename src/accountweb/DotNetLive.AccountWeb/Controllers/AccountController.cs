@@ -1,10 +1,9 @@
 ﻿using DotNetLive.AccountWeb.ApiClients;
-using DotNetLive.AccountWeb.Models;
 using DotNetLive.AccountWeb.Models.AccountViewModels;
 using DotNetLive.AccountWeb.Services;
-using DotNetLive.Framework.Models;
+using DotNetLive.Framework.Web.Models;
+using DotNetLive.Framework.Web.WebFramework;
 using DotNetLive.Framework.WebApiClient.Query;
-using DotNetLive.Framework.WebFramework;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http.Authentication;
@@ -14,7 +13,6 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Linq;
-using System.Net;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using SignInStatus = Microsoft.AspNetCore.Identity.SignInResult;
@@ -40,7 +38,7 @@ namespace DotNetLive.AccountWeb.Controllers
             ILoggerFactory loggerFactory,
             IHostingEnvironment hostingEnvironment, AccountApiClient accountApiClient)
         {
-            _userManager = userManager;
+            //_userManager = userManager;
             _signInManager = signInManager;
             _emailSender = emailSender;
             _smsSender = smsSender;
@@ -164,20 +162,21 @@ namespace DotNetLive.AccountWeb.Controllers
             if (ModelState.IsValid)
             {
                 var user = new ApplicationUser(model.Email, model.Email);// { UserName = model.Email, Email = model.Email };
-                var result = await _userManager.CreateAsync(user, model.Password);
-                if (result.Succeeded)
-                {
-                    // For more information on how to enable account confirmation and password reset please visit http://go.microsoft.com/fwlink/?LinkID=532713
-                    // Send an email with this link
-                    //var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
-                    //var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: HttpContext.Request.Scheme);
-                    //await _emailSender.SendEmailAsync(model.Email, "Confirm your account",
-                    //    $"Please confirm your account by clicking this link: <a href='{callbackUrl}'>link</a>");
-                    await _signInManager.SignInAsync(user, isPersistent: false);
-                    _logger.LogInformation(3, "User created a new account with password.");
-                    return RedirectToUrl(returnUrl);
-                }
-                AddErrors(result);
+                throw new NotImplementedException();
+                //var result = await _userManager.CreateAsync(user, model.Password);
+                //if (result.Succeeded)
+                //{
+                //    // For more information on how to enable account confirmation and password reset please visit http://go.microsoft.com/fwlink/?LinkID=532713
+                //    // Send an email with this link
+                //    //var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
+                //    //var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: HttpContext.Request.Scheme);
+                //    //await _emailSender.SendEmailAsync(model.Email, "Confirm your account",
+                //    //    $"Please confirm your account by clicking this link: <a href='{callbackUrl}'>link</a>");
+                //    await _signInManager.SignInAsync(user, isPersistent: false);
+                //    _logger.LogInformation(3, "User created a new account with password.");
+                //    return RedirectToUrl(returnUrl);
+                //}
+                //AddErrors(result);
             }
 
             // If we got this far, something failed, redisplay form
@@ -281,18 +280,19 @@ namespace DotNetLive.AccountWeb.Controllers
                     return View("ExternalLoginFailure");
                 }
                 var user = new ApplicationUser(model.Email, model.Email);// { UserName = model.Email, Email = model.Email };
-                var result = await _userManager.CreateAsync(user);
-                if (result.Succeeded)
-                {
-                    result = await _userManager.AddLoginAsync(user, info);
-                    if (result.Succeeded)
-                    {
-                        await _signInManager.SignInAsync(user, isPersistent: false);
-                        _logger.LogInformation(6, "User created an account using {Name} provider.", info.LoginProvider);
-                        return RedirectToUrl(returnUrl);
-                    }
-                }
-                AddErrors(result);
+                //var result = await _userManager.CreateAsync(user);
+                //if (result.Succeeded)
+                //{
+                //    result = await _userManager.AddLoginAsync(user, info);
+                //    if (result.Succeeded)
+                //    {
+                //        await _signInManager.SignInAsync(user, isPersistent: false);
+                //        _logger.LogInformation(6, "User created an account using {Name} provider.", info.LoginProvider);
+                //        return RedirectToUrl(returnUrl);
+                //    }
+                //}
+                //AddErrors(result);
+                throw new NotImplementedException();
             }
 
             ViewData["ReturnUrl"] = returnUrl;
@@ -308,13 +308,14 @@ namespace DotNetLive.AccountWeb.Controllers
             {
                 return View("Error");
             }
-            var user = await _userManager.FindByIdAsync(userId);
-            if (user == null)
-            {
-                return View("Error");
-            }
-            var result = await _userManager.ConfirmEmailAsync(user, code);
-            return View(result.Succeeded ? "ConfirmEmail" : "Error");
+            //var user = await _userManager.FindByIdAsync(userId);
+            //if (user == null)
+            //{
+            //    return View("Error");
+            //}
+            //var result = await _userManager.ConfirmEmailAsync(user, code);
+            //return View(result.Succeeded ? "ConfirmEmail" : "Error");
+            throw new NotImplementedException();
         }
 
         //
@@ -335,12 +336,13 @@ namespace DotNetLive.AccountWeb.Controllers
         {
             if (ModelState.IsValid)
             {
-                var user = await _userManager.FindByNameAsync(model.Email);
-                if (user == null || !(await _userManager.IsEmailConfirmedAsync(user)))
-                {
-                    // Don't reveal that the user does not exist or is not confirmed
-                    return View("ForgotPasswordConfirmation");
-                }
+                //var user = await _userManager.FindByNameAsync(model.Email);
+                //if (user == null || !(await _userManager.IsEmailConfirmedAsync(user)))
+                //{
+                //    // Don't reveal that the user does not exist or is not confirmed
+                //    return View("ForgotPasswordConfirmation");
+                //}
+                throw new NotImplementedException();
 
                 // For more information on how to enable account confirmation and password reset please visit http://go.microsoft.com/fwlink/?LinkID=532713
                 // Send an email with this link
@@ -384,18 +386,19 @@ namespace DotNetLive.AccountWeb.Controllers
             {
                 return View(model);
             }
-            var user = await _userManager.FindByNameAsync(model.Email);
-            if (user == null)
-            {
-                // Don't reveal that the user does not exist
-                return RedirectToAction(nameof(AccountController.ResetPasswordConfirmation), "Account");
-            }
-            var result = await _userManager.ResetPasswordAsync(user, model.Code, model.Password);
-            if (result.Succeeded)
-            {
-                return RedirectToAction(nameof(AccountController.ResetPasswordConfirmation), "Account");
-            }
-            AddErrors(result);
+            //var user = await _userManager.FindByNameAsync(model.Email);
+            //if (user == null)
+            //{
+            //    // Don't reveal that the user does not exist
+            //    return RedirectToAction(nameof(AccountController.ResetPasswordConfirmation), "Account");
+            //}
+            //var result = await _userManager.ResetPasswordAsync(user, model.Code, model.Password);
+            //if (result.Succeeded)
+            //{
+            //    return RedirectToAction(nameof(AccountController.ResetPasswordConfirmation), "Account");
+            //}
+            //AddErrors(result);
+            throw new NotImplementedException();
             return View();
         }
 
@@ -419,9 +422,10 @@ namespace DotNetLive.AccountWeb.Controllers
             {
                 return View("Error");
             }
-            var userFactors = await _userManager.GetValidTwoFactorProvidersAsync(user);
-            var factorOptions = userFactors.Select(purpose => new SelectListItem { Text = purpose, Value = purpose }).ToList();
-            return View(new SendCodeViewModel { Providers = factorOptions, ReturnUrl = returnUrl, RememberMe = rememberMe });
+            //var userFactors = await _userManager.GetValidTwoFactorProvidersAsync(user);
+            //var factorOptions = userFactors.Select(purpose => new SelectListItem { Text = purpose, Value = purpose }).ToList();
+            //return View(new SendCodeViewModel { Providers = factorOptions, ReturnUrl = returnUrl, RememberMe = rememberMe });
+            throw new NotImplementedException();
         }
 
         //
@@ -443,21 +447,23 @@ namespace DotNetLive.AccountWeb.Controllers
             }
 
             // Generate the token and send it
-            var code = await _userManager.GenerateTwoFactorTokenAsync(user, model.SelectedProvider);
-            if (string.IsNullOrWhiteSpace(code))
-            {
-                return View("Error");
-            }
+            //var code = await _userManager.GenerateTwoFactorTokenAsync(user, model.SelectedProvider);
+            //if (string.IsNullOrWhiteSpace(code))
+            //{
+            //    return View("Error");
+            //}
+            throw new NotImplementedException();
 
-            var message = "Your security code is: " + code;
-            if (model.SelectedProvider == "Email")
-            {
-                await _emailSender.SendEmailAsync(await _userManager.GetEmailAsync(user), "Security Code", message);
-            }
-            else if (model.SelectedProvider == "Phone")
-            {
-                await _smsSender.SendSmsAsync(await _userManager.GetPhoneNumberAsync(user), message);
-            }
+            //var message = "Your security code is: " + code;
+            //if (model.SelectedProvider == "Email")
+            //{
+            //    await _emailSender.SendEmailAsync(await _userManager.GetEmailAsync(user), "Security Code", message);
+            //}
+            //else if (model.SelectedProvider == "Phone")
+            //{
+            //    await _smsSender.SendSmsAsync(await _userManager.GetPhoneNumberAsync(user), message);
+            //}
+            throw new NotImplementedException();
 
             return RedirectToAction(nameof(VerifyCode), new { Provider = model.SelectedProvider, ReturnUrl = model.ReturnUrl, RememberMe = model.RememberMe });
         }
@@ -521,7 +527,8 @@ namespace DotNetLive.AccountWeb.Controllers
 
         private Task<ApplicationUser> GetCurrentUserAsync()
         {
-            return _userManager.GetUserAsync(HttpContext.User);
+            throw new NotImplementedException();
+            //return _userManager.GetUserAsync(HttpContext.User);
         }
 
         private IActionResult RedirectToUrl(string returnUrl)
@@ -534,7 +541,7 @@ namespace DotNetLive.AccountWeb.Controllers
             // {
             //     return RedirectToAction(nameof(HomeController.Index), "Home");
             // }
-            if(string.IsNullOrWhiteSpace(returnUrl))
+            if (string.IsNullOrWhiteSpace(returnUrl))
             {
                 return RedirectToAction(nameof(HomeController.Index), "Home");
             }
