@@ -1,0 +1,45 @@
+<div class="container-full">
+    <div class="page-container bg-blue-grey-900">
+        <div class="container container-xs">
+            <img src="assets/img/logo.png" class="mv-lg block-center img-responsive thumb64" />
+            <form [formGroup]="loginForm" novalidate class="card b0 form-validate" (submit)="submitForm($event, loginForm)" novalidate="">
+                <div class="card-offset pb0">
+                    <div *ngIf="!loginForm.valid || loginForm.pristine" class="card-offset-item text-right">
+                        <a [routerLink]="'/signup'" class="btn-raised btn btn-info btn-circle btn-lg"><em class="ion-person-add"></em></a>
+                    </div>
+                    <div *ngIf="loginForm.valid" class="card-offset-item text-right">
+                        <button type="submit" class="btn btn-success btn-circle btn-lg"><em class="ion-checkmark-round"></em></button>
+                    </div>
+                </div>
+                <div class="card-heading">
+                    <div class="card-title text-center">Login</div>
+                </div>
+                <div class="card-body">
+                    <div class="mda-form-group float-label mda-input-group">
+                        <div class="mda-form-control">
+                            <input type="email" name="accountName" class="form-control" formControlName="email" [formControl]="loginForm.controls['email']" />
+                            <div class="mda-form-control-line"></div>
+                            <label>Email address</label>
+                        </div>
+                        <span class="text-danger" *ngIf="loginForm.controls['email'].hasError('required') && (loginForm.controls['email'].dirty || loginForm.controls['email'].touched)">This field is required</span>
+                        <span class="text-danger" *ngIf="loginForm.controls['email'].hasError('email') && (loginForm.controls['email'].dirty || loginForm.controls['email'].touched)">Please enter a valid email</span>
+                        <span class="mda-input-group-addon">
+                            <em class="ion-ios-email-outline icon-lg"></em>
+                        </span>
+                    </div>
+                    <div class="mda-form-group float-label mda-input-group">
+                        <div class="mda-form-control">
+                            <input type="password" name="accountPassword" class="form-control" formControlName="password" [formControl]="loginForm.controls['password']" />
+                            <div class="mda-form-control-line"></div>
+                            <label>Password</label>
+                        </div>
+                        <span class="text-danger" *ngIf="loginForm.controls['password'].hasError('required') && (loginForm.controls['password'].dirty || loginForm.controls['password'].touched)">Input required</span>
+                        <span class="mda-input-group-addon"><em class="ion-ios-locked-outline icon-lg"></em></span>
+                    </div>
+                </div>
+                <button type="submit" [disabled]="!loginForm.valid || loginForm.pristine" class="btn btn-primary btn-flat">Authenticate</button>
+            </form>
+            <div class="text-center text-sm"><a [routerLink]="'/recover'" class="text-inherit">Forgot password?</a></div>
+        </div>
+    </div>
+</div>

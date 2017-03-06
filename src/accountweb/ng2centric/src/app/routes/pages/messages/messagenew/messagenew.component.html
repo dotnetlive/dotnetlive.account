@@ -1,0 +1,25 @@
+<div bsModal #msgNewModal="bs-modal" [config]="{backdrop: false}" (onShow)="showBackdrop()" (onHide)="hideBackdrop()" class="modal fade">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-body">
+                <form action="">
+                    <div class="mda-form-group">
+                        <div class="mda-form-control">
+                            <input rows="3" aria-multiline="true" tabindex="0" aria-invalid="false" class="form-control" />
+                            <div class="mda-form-control-line"></div>
+                            <label>To:</label>
+                        </div>
+                    </div>
+                    <div class="mda-form-group">
+                        <div class="mda-form-control">
+                            <textarea rows="3" aria-multiline="true" tabindex="0" aria-invalid="false" class="form-control"></textarea>
+                            <div class="mda-form-control-line"></div>
+                            <label>Message</label>
+                        </div>
+                    </div>
+                    <button type="button" (click)="msgNewModal.hide()" class="btn btn-success">Send</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

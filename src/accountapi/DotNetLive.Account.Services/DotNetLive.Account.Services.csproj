@@ -5,6 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\..\..\dotnetlive.framework\src\DotNetLive.Framework.Data\DotNetLive.Framework.Data.csproj" />
     <ProjectReference Include="..\..\..\..\dotnetlive.framework\src\DotNetLive.Framework\DotNetLive.Framework.csproj" />
     <ProjectReference Include="..\DotNetLive.Account.Entities\DotNetLive.Account.Entities.csproj" />
   </ItemGroup>

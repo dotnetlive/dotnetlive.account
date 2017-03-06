@@ -1,0 +1,61 @@
+/**
+ * Site Preloader
+ */
+
+@import '../../shared/styles/common/variables';
+@import '../../shared/styles/common/mixins';
+
+.preloader {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    background-color:  $site-preloader-bg;
+    background: -webkit-linear-gradient(90deg, $site-preloader-bg 10%, darken($site-preloader-bg, 5%) 90%); /* Chrome 10+, Saf5.1+ */
+    background:    -moz-linear-gradient(90deg, $site-preloader-bg 10%, darken($site-preloader-bg, 5%) 90%); /* FF3.6+ */
+    background:     -ms-linear-gradient(90deg, $site-preloader-bg 10%, darken($site-preloader-bg, 5%) 90%); /* IE10 */
+    background:      -o-linear-gradient(90deg, $site-preloader-bg 10%, darken($site-preloader-bg, 5%) 90%); /* Opera 11.10+ */
+    background:         linear-gradient(90deg, $site-preloader-bg 10%, darken($site-preloader-bg, 5%) 90%); /* W3C */
+    z-index: 999999;
+    @include transition(opacity .65s);
+}
+
+.preloader-progress {
+    position: absolute;
+    top: 0; left: 0; bottom: 0; right: 0;
+    width: $site-preloader-wd;
+    height: $site-preloader-hg;
+    margin: auto;
+    overflow: auto;
+    background: url(../../../assets/img/preloader/preloader.empty.png);
+    background-size: $site-preloader-wd $site-preloader-hg;
+}
+
+.preloader-progress-bar {
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    min-width: 10px;
+    background: url(../../../assets/img/preloader/preloader.full.png);
+    background-size: $site-preloader-wd $site-preloader-hg;
+}
+
+.preloader-hidden {
+    display: none;
+}
+
+// ngAnimate behavior
+.preloader-hidden-add {
+    opacity: 1;
+    display: block;
+    .preloader-progress {
+        @include transition-transform(.4s ease);
+        @include scale(0);
+    }
+}
+.preloader-hidden-add-active {
+    opacity: 0;
+}

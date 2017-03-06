@@ -1,0 +1,94 @@
+<div class="container-fluid">
+    <!-- START row-->
+    <div class="row">
+        <div class="col-lg-4">
+            <div class="card">
+                <div class="card-heading">
+                    <div class="card-title">Area</div>
+                </div>
+                <div class="card-body">
+                    <div flot [dataset]="areaData" [options]="areaOptions" class="flot-chart flot-chart-lg"></div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-4">
+            <div class="card">
+                <div class="card-heading">
+                    <div class="card-title">Area Spline</div>
+                </div>
+                <div class="card-body">
+                    <div flot [dataset]="splineData" [options]="splineOptions" class="flot-chart flot-chart-lg"></div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-4">
+            <div class="card">
+                <div class="card-heading">
+                    <div class="card-title">Bar</div>
+                </div>
+                <div class="card-body">
+                    <div flot [dataset]="barData" [options]="barOptions" class="flot-chart flot-chart-lg"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- END row-->
+    <!-- START row-->
+    <div class="row">
+        <div class="col-lg-4">
+            <div class="card">
+                <div class="card-heading">
+                    <div class="card-title">Pie</div>
+                </div>
+                <div class="card-body">
+                    <div flot [dataset]="pieData" [options]="pieOptions" class="flot-chart flot-chart-lg"></div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-4">
+            <div class="card">
+                <div class="card-heading">
+                    <div class="card-title">Donut</div>
+                </div>
+                <div class="card-body">
+                    <div flot [dataset]="donutData" [options]="donutOptions" class="flot-chart flot-chart-lg"></div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-4">
+            <div class="card">
+                <div class="card-heading">
+                    <div class="card-title">Bar - Stacked</div>
+                </div>
+                <div class="card-body">
+                    <div flot [dataset]="barStackeData" [options]="barStackedOptions" class="flot-chart flot-chart-lg"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- END row-->
+    <!-- START row-->
+    <div class="row">
+        <div class="col-lg-6">
+            <div class="card">
+                <div class="card-heading">
+                    <div class="card-title">Real Time</div>
+                </div>
+                <div class="card-body">
+                    <div flot [dataset]="realTimeData" [options]="realTimeOptions" class="flot-chart flot-chart-lg"></div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-6">
+            <div class="card">
+                <div class="card-heading">
+                    <div class="card-title">Line</div>
+                </div>
+                <div class="card-body">
+                    <div flot [dataset]="lineData" [options]="lineOptions" class="flot-chart flot-chart-lg"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- END row-->
+</div>

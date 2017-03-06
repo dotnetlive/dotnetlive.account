@@ -1,0 +1,139 @@
+<div class="container-fluid">
+    <div class="card">
+        <div class="card-heading">
+            <div class="card-title">ng2Select</div>
+        </div>
+        <div class="card-body">
+            <label class="mt">Single Select</label>
+            <ng-select [allowClear]="true" [items]="items" [disabled]="disabled" (data)="refreshValue($event)" (selected)="selected($event)" (removed)="removed($event)" (typed)="typed($event)" placeholder="No city selected">
+            </ng-select>
+            <label class="mt">Multiple</label>
+            <ng-select (data)="value" [multiple]="true" [items]="items" [disabled]="disabled" (data)="refreshValue($event)" (selected)="selected($event)" (removed)="removed($event)" placeholder="No city selected"></ng-select>
+        </div>
+    </div>
+    <div class="card">
+        <div class="card-heading">
+            <div class="card-title">Calendar</div>
+        </div>
+        <div class="card-body">
+            <div class="row text-center">
+                <div class="col-md-4">
+                    <div class="ui-datepicker-responsive">
+                        <datepicker [(ngModel)]="dt" class="ui-datepicker dp-head-primary dp-table-primary"></datepicker>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="ui-datepicker-responsive">
+                        <datepicker [(ngModel)]="dt" class="ui-datepicker dp-head-info dp-table-info"></datepicker>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="ui-datepicker-responsive">
+                        <datepicker [(ngModel)]="dt" class="ui-datepicker dp-head-pink dp-table-pink"></datepicker>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="card-footer">
+            <strong>Selected: {{dt}}</strong>
+        </div>
+    </div>
+    <div class="card">
+        <div class="card-heading">
+            <div class="card-title">Time Picker</div>
+        </div>
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-6">
+                    <timepicker [(ngModel)]="mytime" (change)="changed()" [hourStep]="hstep" [minuteStep]="mstep" [showMeridian]="ismeridian" [readonlyInput]="!isEnabled"></timepicker>
+                    <pre class="alert alert-info">Time is: {{mytime}}</pre>
+                </div>
+                <div class="col-md-6">
+                    <div class="row">
+                        <div class="col-xs-6">
+                            Hours step is:
+                            <select class="form-control" [(ngModel)]="hstep">
+                                <option *ngFor="let opt of options.hstep" [value]="opt">{{opt}}</option>
+                            </select>
+                        </div>
+                        <div class="col-xs-6">
+                            Minutes step is:
+                            <select class="form-control" [(ngModel)]="mstep">
+                                <option *ngFor="let opt of options.mstep" [value]="opt">{{opt}}</option>
+                            </select>
+                        </div>
+                    </div>
+                    <hr/>
+                    <button type="button" class="btn btn-info" (click)="toggleMode()">12H / 24H</button>
+                    <button type="button" class="btn btn-info" (click)="isEnabled=!isEnabled">Enable / Disable input</button>
+                    <button type="button" class="btn btn-primary" (click)="update()">Set to 14:00</button>
+                    <button type="button" class="btn btn-danger" (click)="clear()">Clear</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="card">
+        <div class="card-heading">
+            <div class="card-title">Color Picker</div>
+        </div>
+        <div class="card-body">
+            <div class="row">
+                <div class="col-sm-6">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">Input</div>
+                        <div class="panel-body">
+                            <label for="" [style.color]="colorDemo1">Show me color</label>
+                            <input class="form-control" [(colorPicker)]="colorDemo1" [value]="colorDemo1" />
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">Html element:</div>
+                        <div class="panel-body">
+                            <div class="h1 clickable mt-lg" [(colorPicker)]="colorDemo2" [cpPosition]="'bottom'" [style.color]="colorDemo2" [cpPositionOffset]="'50%'" [cpPositionRelativeToArrow]="true">Change me!</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-6">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">Cancel button</div>
+                        <div class="panel-body">
+                            <input class="form-control" [(colorPicker)]="colorDemo3" [value]="colorDemo3" [cpCancelButton]="true" [cpHeight]="'310px'" />
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">Output format</div>
+                        <div class="panel-body">
+                            <input class="form-control" [(colorPicker)]="colorDemo4" [value]="colorDemo4" [cpOutputFormat]="'rgba'" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="card">
+        <div class="card-heading">Note editors (textarea)</div>
+        <div class="card-body">
+            <div class="card">
+                <div class="card-body">
+                    <div class="note-area">
+                        <textarea rows="10" class="form-control">In elementum magna sed sapien gravida scelerisque.</textarea>
+                    </div>
+                </div>
+            </div>
+            <p>With margin</p>
+            <div class="card">
+                <div class="card-body">
+                    <div class="note-area note-area-margin">
+                        <textarea rows="10" class="form-control">Curabitur tellus mauris, fringilla sed tempus eget, convallis id orci.</textarea>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

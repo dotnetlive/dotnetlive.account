@@ -1,9 +1,7 @@
 ﻿using AutoMapper;
 using DotNetLive.Account.Entities;
 using DotNetLive.Account.Services;
-using DotNetLive.AccountApi.Models.AccountModels;
 using DotNetLive.AccountApi.Models.UserModels;
-using DotNetLive.Framework.WebFramework.Filters;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;

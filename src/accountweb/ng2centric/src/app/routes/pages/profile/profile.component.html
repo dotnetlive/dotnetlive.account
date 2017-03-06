@@ -1,0 +1,217 @@
+<div class="container-overlap bg-blue-500">
+    <div class="media m0 pv">
+        <div class="media-left">
+            <a href="#"><img src="assets/img/user/03.jpg" alt="User" class="media-object img-circle thumb64" /></a>
+        </div>
+        <div class="media-body media-middle">
+            <h4 class="media-heading">Christine Matthews</h4><span class="text-muted">Sed eget lacus quis diam molestie mollis.</span>
+        </div>
+    </div>
+</div>
+<div class="container-fluid">
+    <div class="row">
+        <!-- Left column-->
+        <div class="col-md-7 col-lg-8">
+            <form name="user.profileForm" class="card">
+                <h5 class="card-heading pb0">
+                  <div dropdown class="pull-right dropdown">
+                    <button type="button" dropdownToggle class="btn btn-default btn-flat btn-flat-icon"><em class="ion-android-more-vertical"></em></button>
+                    <ul role="menu" dropdownMenu class="dropdown-menu md-dropdown-menu dropdown-menu-right">
+                      <li><a href="">Action 1</a></li>
+                      <li><a href="">Action 2</a></li>
+                    </ul>
+                  </div>
+                  About
+                </h5>
+                <div class="card-body">
+                    <p>{{user.data.about}}</p>
+                </div>
+                <div class="card-divider"></div>
+                <div class="card-offset">
+                    <div class="card-offset-item text-right">
+                        <button type="button" *ngIf="!profileFormVisible" (click)="profileFormVisible=!profileFormVisible" class="btn-raised btn btn-warning btn-circle btn-lg"><em class="ion-edit"></em></button>
+                        <button type="submit" *ngIf="profileFormVisible" (click)="profileFormVisible=!profileFormVisible" class="btn-raised btn btn-success btn-circle btn-lg"><em class="ion-checkmark-round"></em></button>
+                    </div>
+                </div>
+                <h5 class="card-heading pb0">Contact Information</h5>
+                <div class="card-body">
+                    <table class="table table-striped">
+                        <tbody>
+                            <tr>
+                                <td><em class="ion-document-text icon-fw mr"></em>Area</td>
+                                <td>{{user.data.area}}</td>
+                            </tr>
+                            <tr>
+                                <td><em class="ion-egg icon-fw mr"></em>Birthday</td>
+                                <td><span>{{user.data.birthday}}</span></td>
+                            </tr>
+                            <tr>
+                                <td><em class="ion-ios-body icon-fw mr"></em>Member since</td>
+                                <td><span>{{user.data.membersince}}</span></td>
+                            </tr>
+                            <tr>
+                                <td><em class="ion-man icon-fw mr"></em>Gender</td>
+                                <td>
+                                    <span>{{genders[user.data.gender].text}}</span>
+                                    <!-- <select name="gender" class="form-control">
+                                        <option *ngFor="let gender of genders" value="gender.value">{{gender.text}}</option>
+                                    </select> -->
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><em class="ion-android-home icon-fw mr"></em>Address</td>
+                                <td><span>{{user.data.address}}</span></td>
+                            </tr>
+                            <tr>
+                                <td><em class="ion-email icon-fw mr"></em>Email</td>
+                                <td><span><a href="">{{user.data.email}}</a></span></td>
+                            </tr>
+                            <tr>
+                                <td><em class="ion-ios-telephone icon-fw mr"></em>Contact phone</td>
+                                <td><span>{{user.data.phone}}</span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="card-divider"></div>
+                <h5 class="card-heading pb0">Recent articles</h5>
+                <div class="card-body">
+                    <ul class="mda-list">
+                        <li class="mda-list-item pl0 bb">
+                            <div class="mda-list-item-text">
+                                <h3><a href="#">Release 3.0 is out</a></h3>
+                                <p>Proin metus justo, commodo in ultrices...</p><small class="text-muted">2 days ago</small>
+                            </div>
+                            <div class="pull-right">
+                                <div class="pt-lg"><em tooltip="Active" class="icon-2x ion-checkmark-circled text-success"></em></div>
+                            </div>
+                        </li>
+                        <li class="mda-list-item pl0 bb">
+                            <div class="mda-list-item-text">
+                                <h3><a href="#">Improving compatibility</a></h3>
+                                <p>Proin metus justo, commodo in ultrices...</p><small class="text-muted">3 days ago</small>
+                            </div>
+                            <div class="pull-right">
+                                <div class="pt-lg"><em tooltip="Active" class="icon-2x ion-checkmark-circled text-success"></em></div>
+                            </div>
+                        </li>
+                        <li class="mda-list-item pl0">
+                            <div class="mda-list-item-text">
+                                <h3><a href="#">Small decisions count</a></h3>
+                                <p>Proin metus justo, commodo in ultrices...</p><small class="text-muted">3 days ago</small>
+                            </div>
+                            <div class="pull-right">
+                                <div class="pt-lg"><em tooltip="Pending" class="icon-2x ion-minus-circled text-warning"></em></div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </form>
+        </div>
+        <!-- Right column-->
+        <div class="col-md-5 col-lg-4">
+            <div class="card">
+                <h5 class="card-heading">
+          <!-- START dropdown-->
+          <div dropdown class="pull-right dropdown">
+            <button type="button" dropdownToggle class="btn btn-default btn-flat btn-flat-icon"><em class="ion-android-more-vertical"></em></button>
+            <ul role="menu" dropdownMenu class="dropdown-menu md-dropdown-menu dropdown-menu-right">
+              <li><a href="">Action 1</a></li>
+              <li><a href="">Action 2</a></li>
+            </ul>
+          </div>
+          <!-- END dropdown-->Contacts
+        </h5>
+                <div class="mda-list">
+                    <div class="mda-list-item"><img src="assets/img/user/01.jpg" alt="List user" class="mda-list-item-img" />
+                        <div class="mda-list-item-text mda-2-line">
+                            <h3><a href="#">Eric Graves</a></h3>
+                            <div class="text-muted text-ellipsis">Ut ac nisi id mauris</div>
+                        </div>
+                    </div>
+                    <div class="mda-list-item"><img src="assets/img/user/02.jpg" alt="List user" class="mda-list-item-img" />
+                        <div class="mda-list-item-text mda-2-line">
+                            <h3><a href="#">Jessie Cox</a></h3>
+                            <div class="text-muted text-ellipsis">Sed lacus nisl luctus</div>
+                        </div>
+                    </div>
+                    <div class="mda-list-item"><img src="assets/img/user/03.jpg" alt="List user" class="mda-list-item-img" />
+                        <div class="mda-list-item-text mda-2-line">
+                            <h3><a href="#">Marie Hall</a></h3>
+                            <div class="text-muted text-ellipsis">Donec congue sagittis mi</div>
+                        </div>
+                    </div>
+                    <div class="mda-list-item"><img src="assets/img/user/04.jpg" alt="List user" class="mda-list-item-img" />
+                        <div class="mda-list-item-text mda-2-line">
+                            <h3><a href="#">Guy Carpenter</a></h3>
+                            <div class="text-muted text-ellipsis">Donec convallis arcu sit</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-body pv0 text-right"><a href="" class="btn btn-flat btn-info">View all</a></div>
+                <div class="card-divider"></div>
+                <h5 class="card-heading">Activity</h5>
+                <div class="card-body pb0">
+                    <p class="pull-left mr"><em class="ion-record text-info"></em></p>
+                    <div class="oh">
+                        <p><strong class="mr-sm">Added</strong><span class="mr-sm">a new issue</span><a href="">#5478</a></p>
+                        <div class="clearfix">
+                            <div class="pull-left text-muted"><em class="ion-android-time mr-sm"></em><span>an hour ago</span></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-body pb0">
+                    <p class="pull-left mr"><em class="ion-record text-danger"></em></p>
+                    <div class="oh">
+                        <p><strong class="mr-sm">Commented</strong><span class="mr-sm"> on the project</span><a href="">Material</a></p>
+                        <p class="bl pl"><i>That's awesome!</i></p>
+                        <div class="clearfix">
+                            <div class="pull-left text-muted"><em class="ion-android-time mr-sm"></em><span>2 hours ago</span></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-body pb0">
+                    <p class="pull-left mr"><em class="ion-record text-success"></em></p>
+                    <div class="oh">
+                        <p><strong class="mr-sm">Completed</strong><span> all tasks asigned this week</span></p>
+                        <div class="clearfix">
+                            <div class="pull-left text-muted"><em class="ion-android-time mr-sm"></em><span>3 hours ago</span></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-body pb0">
+                    <p class="pull-left mr"><em class="ion-record text-info"></em></p>
+                    <div class="oh">
+                        <p><strong class="mr-sm">Published</strong><span class="mr-sm"> new photos on the album</span><a href="">WorldTrip</a></p>
+                        <p>
+                            <a href=""><img src="assets/img/pic4.jpg" alt="Pic" class="mr-sm thumb48" /></a>
+                            <a href=""><img src="assets/img/pic5.jpg" alt="Pic" class="mr-sm thumb48" /></a>
+                            <a href=""><img src="assets/img/pic6.jpg" alt="Pic" class="mr-sm thumb48" /></a>
+                        </p>
+                        <div class="clearfix">
+                            <div class="pull-left text-muted"><em class="ion-android-time mr-sm"></em><span>4 hours ago</span></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="clearfix">
+                        <p class="pull-left mr"><em class="ion-record text-primary"></em></p>
+                        <div class="oh">
+                            <p><strong class="mr-sm">Following</strong><span class="mr-sm">Jane Kuhn</span></p>
+                            <p><span class="image-list">
+                                <a href=""><img src="assets/img/user/03.jpg" alt="User" class="img-circle thumb32"/></a>
+                                <a href=""><img src="assets/img/user/04.jpg" alt="User" class="img-circle thumb32"/></a>
+                                <a href=""><img src="assets/img/user/05.jpg" alt="User" class="img-circle thumb32"/></a>
+                                <a href=""><img src="assets/img/user/06.jpg" alt="User" class="img-circle thumb32"/></a>
+                                <a href=""><img src="assets/img/user/07.jpg" alt="User" class="img-circle thumb32"/></a>
+                                <strong><a href="" class="ml-sm link-unstyled">+200</a></strong></span></p>
+                            <div class="clearfix">
+                                <div class="pull-left text-muted"><em class="ion-android-time mr-sm"></em><span>yesterday</span></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

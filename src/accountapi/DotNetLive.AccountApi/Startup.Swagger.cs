@@ -25,7 +25,7 @@ namespace DotNetLive.AccountApi
                 {
                     Type = "oauth2",
                     Flow = "implicit",
-                    AuthorizationUrl = "http://petstore.swagger.io/oauth/dialog",
+                    AuthorizationUrl = "/api/account/login",
                     Scopes = new Dictionary<string, string>
                     {
                         { "readAccess", "Access read operations" },
@@ -48,14 +48,14 @@ namespace DotNetLive.AccountApi
                 c.SwaggerEndpoint("/swagger/v2/swagger.json", "DNL Accont API V2");
 
                 c.InjectStylesheet("/swagger.css");
-                c.EnabledValidator();
+                //c.EnabledValidator();
                 c.BooleanValues(new object[] { 0, 1 });
                 //c.DocExpansion("full");
                 //c.InjectOnCompleteJavaScript("/swagger-ui/on-complete.js");
                 //c.InjectOnFailureJavaScript("/swagger-ui/on-failure.js");
-                c.SupportedSubmitMethods(new[] { "get", "post", "put", "patch" });
-                c.ShowRequestHeaders();
-                c.ShowJsonEditor();
+                //c.SupportedSubmitMethods(new[] { "get", "post", "put", "patch" });
+                //c.ShowRequestHeaders();
+                //c.ShowJsonEditor();
             });
         }
     }

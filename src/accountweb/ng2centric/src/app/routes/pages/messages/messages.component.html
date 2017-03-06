@@ -1,0 +1,379 @@
+<div class="container container-md">
+    <p class="ph">Today</p>
+    <div class="card">
+        <table class="table table-hover table-fixed va-middle">
+            <tbody>
+                <tr (click)="messageView.msgViewModal.show()">
+                    <td class="wd-xxs">
+                        <div class="initial32 bg-indigo-500">E</div>
+                    </td>
+                    <td class="text-ellipsis wd-sm">Erin Alvarez</td>
+                    <td class="text-ellipsis">Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Cras nunc velit, bibendum vel imperdiet eget, posuere nec diam. </td>
+                    <td class="wd-xxs">
+                        <!-- START dropdown-->
+                        <div dropdown class="pull-right dropdown">
+                            <button type="button" dropdownToggle (click)="$event.stopPropagation()" class="btn btn-default btn-flat btn-flat-icon"><em class="ion-android-more-vertical"></em></button>
+                            <ul role="menu" dropdownMenu class="dropdown-menu md-dropdown-menu dropdown-menu-right">
+                                <li><a><em class="ion-reply icon-fw"></em>Reply</a></li>
+                                <li><a><em class="ion-forward icon-fw"></em>Forward</a></li>
+                                <li><a><em class="ion-trash-a icon-fw"></em>Spam</a></li>
+                            </ul>
+                        </div>
+                        <!-- END dropdown-->
+                    </td>
+                </tr>
+                <tr (click)="messageView.msgViewModal.show()">
+                    <td><img src="assets/img/user/04.jpg" alt="user" class="img-circle thumb32" /></td>
+                    <td class="text-ellipsis">Nathan Richardson</td>
+                    <td class="text-ellipsis">Praesent leo quam, faucibus at facilisis id, rhoncus sit amet metus. Sed pretium malesuada leo sit amet convallis. Phasellus dolor velit, dictum a pulvinar eu, convallis a ante. </td>
+                    <td>
+                        <!-- START dropdown-->
+                        <div dropdown class="pull-right dropdown">
+                            <button type="button" dropdownToggle (click)="$event.stopPropagation()" class="btn btn-default btn-flat btn-flat-icon"><em class="ion-android-more-vertical"></em></button>
+                            <ul role="menu" dropdownMenu class="dropdown-menu md-dropdown-menu dropdown-menu-right">
+                                <li><a><em class="ion-reply icon-fw"></em>Reply</a></li>
+                                <li><a><em class="ion-forward icon-fw"></em>Forward</a></li>
+                                <li><a><em class="ion-trash-a icon-fw"></em>Spam</a></li>
+                            </ul>
+                        </div>
+                        <!-- END dropdown-->
+                    </td>
+                </tr>
+                <tr (click)="messageView.msgViewModal.show()">
+                    <td>
+                        <div class="initial32 bg-green-500">K</div>
+                    </td>
+                    <td class="text-ellipsis">Kelly Hernandez</td>
+                    <td class="text-ellipsis">Integer sit amet vulputate mauris. Praesent nulla est, molestie at auctor vulputate, semper eu sapien. Fusce dolor lacus, interdum eu tincidunt sed, aliquet vel turpis. </td>
+                    <td>
+                        <!-- START dropdown-->
+                        <div dropdown class="pull-right dropdown">
+                            <button type="button" dropdownToggle (click)="$event.stopPropagation()" class="btn btn-default btn-flat btn-flat-icon"><em class="ion-android-more-vertical"></em></button>
+                            <ul role="menu" dropdownMenu class="dropdown-menu md-dropdown-menu dropdown-menu-right">
+                                <li><a><em class="ion-reply icon-fw"></em>Reply</a></li>
+                                <li><a><em class="ion-forward icon-fw"></em>Forward</a></li>
+                                <li><a><em class="ion-trash-a icon-fw"></em>Spam</a></li>
+                            </ul>
+                        </div>
+                        <!-- END dropdown-->
+                    </td>
+                </tr>
+                <tr (click)="messageView.msgViewModal.show()">
+                    <td><img src="assets/img/user/06.jpg" alt="user" class="img-circle thumb32" /></td>
+                    <td class="text-ellipsis">Nathan Richardson</td>
+                    <td class="text-ellipsis">Praesent leo quam, faucibus at facilisis id, rhoncus sit amet metus. Sed pretium malesuada leo sit amet convallis. Phasellus dolor velit, dictum a pulvinar eu, convallis a ante. </td>
+                    <td>
+                        <!-- START dropdown-->
+                        <div dropdown class="pull-right dropdown">
+                            <button type="button" dropdownToggle (click)="$event.stopPropagation()" class="btn btn-default btn-flat btn-flat-icon"><em class="ion-android-more-vertical"></em></button>
+                            <ul role="menu" dropdownMenu class="dropdown-menu md-dropdown-menu dropdown-menu-right">
+                                <li><a><em class="ion-reply icon-fw"></em>Reply</a></li>
+                                <li><a><em class="ion-forward icon-fw"></em>Forward</a></li>
+                                <li><a><em class="ion-trash-a icon-fw"></em>Spam</a></li>
+                            </ul>
+                        </div>
+                        <!-- END dropdown-->
+                    </td>
+                </tr>
+                <tr (click)="messageView.msgViewModal.show()">
+                    <td><img src="assets/img/user/05.jpg" alt="user" class="img-circle thumb32" /></td>
+                    <td class="text-ellipsis">Oscar Stanley</td>
+                    <td class="text-ellipsis">Praesent leo quam, faucibus at facilisis id, rhoncus sit amet metus. Sed pretium malesuada leo sit amet convallis. Phasellus dolor velit, dictum a pulvinar eu, convallis a ante. </td>
+                    <td>
+                        <!-- START dropdown-->
+                        <div dropdown class="pull-right dropdown">
+                            <button type="button" dropdownToggle (click)="$event.stopPropagation()" class="btn btn-default btn-flat btn-flat-icon"><em class="ion-android-more-vertical"></em></button>
+                            <ul role="menu" dropdownMenu class="dropdown-menu md-dropdown-menu dropdown-menu-right">
+                                <li><a><em class="ion-reply icon-fw"></em>Reply</a></li>
+                                <li><a><em class="ion-forward icon-fw"></em>Forward</a></li>
+                                <li><a><em class="ion-trash-a icon-fw"></em>Spam</a></li>
+                            </ul>
+                        </div>
+                        <!-- END dropdown-->
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <p class="ph">Yesterday</p>
+    <div class="card">
+        <table class="table table-hover table-fixed va-middle">
+            <tbody>
+                <tr (click)="messageView.msgViewModal.show()">
+                    <td class="wd-xxs">
+                        <div class="initial32 bg-blue-500">T</div>
+                    </td>
+                    <td class="text-ellipsis wd-sm">Timmothy Terry</td>
+                    <td class="text-ellipsis">Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Mauris hendrerit nibh eu nisi congue dapibus. </td>
+                    <td class="wd-xxs">
+                        <!-- START dropdown-->
+                        <div dropdown class="pull-right dropdown">
+                            <button type="button" dropdownToggle (click)="$event.stopPropagation()" class="btn btn-default btn-flat btn-flat-icon"><em class="ion-android-more-vertical"></em></button>
+                            <ul role="menu" dropdownMenu class="dropdown-menu md-dropdown-menu dropdown-menu-right">
+                                <li><a><em class="ion-reply icon-fw"></em>Reply</a></li>
+                                <li><a><em class="ion-forward icon-fw"></em>Forward</a></li>
+                                <li><a><em class="ion-trash-a icon-fw"></em>Spam</a></li>
+                            </ul>
+                        </div>
+                        <!-- END dropdown-->
+                    </td>
+                </tr>
+                <tr (click)="messageView.msgViewModal.show()">
+                    <td><img src="assets/img/user/01.jpg" alt="user" class="img-circle thumb32" /></td>
+                    <td class="text-ellipsis">Nathan Richardson</td>
+                    <td class="text-ellipsis">Praesent leo quam, faucibus at facilisis id, rhoncus sit amet metus. Sed pretium malesuada leo sit amet convallis. Phasellus dolor velit, dictum a pulvinar eu, convallis a ante. </td>
+                    <td>
+                        <!-- START dropdown-->
+                        <div dropdown class="pull-right dropdown">
+                            <button type="button" dropdownToggle (click)="$event.stopPropagation()" class="btn btn-default btn-flat btn-flat-icon"><em class="ion-android-more-vertical"></em></button>
+                            <ul role="menu" dropdownMenu class="dropdown-menu md-dropdown-menu dropdown-menu-right">
+                                <li><a><em class="ion-reply icon-fw"></em>Reply</a></li>
+                                <li><a><em class="ion-forward icon-fw"></em>Forward</a></li>
+                                <li><a><em class="ion-trash-a icon-fw"></em>Spam</a></li>
+                            </ul>
+                        </div>
+                        <!-- END dropdown-->
+                    </td>
+                </tr>
+                <tr (click)="messageView.msgViewModal.show()">
+                    <td>
+                        <div class="initial32 bg-green-500">N</div>
+                    </td>
+                    <td class="text-ellipsis">Nina Brown</td>
+                    <td class="text-ellipsis">Etiam eu ipsum dui, et tincidunt orci. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. </td>
+                    <td>
+                        <!-- START dropdown-->
+                        <div dropdown class="pull-right dropdown">
+                            <button type="button" dropdownToggle (click)="$event.stopPropagation()" class="btn btn-default btn-flat btn-flat-icon"><em class="ion-android-more-vertical"></em></button>
+                            <ul role="menu" dropdownMenu class="dropdown-menu md-dropdown-menu dropdown-menu-right">
+                                <li><a><em class="ion-reply icon-fw"></em>Reply</a></li>
+                                <li><a><em class="ion-forward icon-fw"></em>Forward</a></li>
+                                <li><a><em class="ion-trash-a icon-fw"></em>Spam</a></li>
+                            </ul>
+                        </div>
+                        <!-- END dropdown-->
+                    </td>
+                </tr>
+                <tr (click)="messageView.msgViewModal.show()">
+                    <td><img src="assets/img/user/06.jpg" alt="user" class="img-circle thumb32" /></td>
+                    <td class="text-ellipsis">Nathan Richardson</td>
+                    <td class="text-ellipsis">Praesent leo quam, faucibus at facilisis id, rhoncus sit amet metus. Sed pretium malesuada leo sit amet convallis. Phasellus dolor velit, dictum a pulvinar eu, convallis a ante. </td>
+                    <td>
+                        <!-- START dropdown-->
+                        <div dropdown class="pull-right dropdown">
+                            <button type="button" dropdownToggle (click)="$event.stopPropagation()" class="btn btn-default btn-flat btn-flat-icon"><em class="ion-android-more-vertical"></em></button>
+                            <ul role="menu" dropdownMenu class="dropdown-menu md-dropdown-menu dropdown-menu-right">
+                                <li><a><em class="ion-reply icon-fw"></em>Reply</a></li>
+                                <li><a><em class="ion-forward icon-fw"></em>Forward</a></li>
+                                <li><a><em class="ion-trash-a icon-fw"></em>Spam</a></li>
+                            </ul>
+                        </div>
+                        <!-- END dropdown-->
+                    </td>
+                </tr>
+                <tr (click)="messageView.msgViewModal.show()">
+                    <td><img src="assets/img/user/03.jpg" alt="user" class="img-circle thumb32" /></td>
+                    <td class="text-ellipsis">Myrtle James</td>
+                    <td class="text-ellipsis">Praesent leo quam, faucibus at facilisis id, rhoncus sit amet metus. Sed pretium malesuada leo sit amet convallis. Phasellus dolor velit, dictum a pulvinar eu, convallis a ante. </td>
+                    <td>
+                        <!-- START dropdown-->
+                        <div dropdown class="pull-right dropdown">
+                            <button type="button" dropdownToggle (click)="$event.stopPropagation()" class="btn btn-default btn-flat btn-flat-icon"><em class="ion-android-more-vertical"></em></button>
+                            <ul role="menu" dropdownMenu class="dropdown-menu md-dropdown-menu dropdown-menu-right">
+                                <li><a><em class="ion-reply icon-fw"></em>Reply</a></li>
+                                <li><a><em class="ion-forward icon-fw"></em>Forward</a></li>
+                                <li><a><em class="ion-trash-a icon-fw"></em>Spam</a></li>
+                            </ul>
+                        </div>
+                        <!-- END dropdown-->
+                    </td>
+                </tr>
+                <tr (click)="messageView.msgViewModal.show()">
+                    <td>
+                        <div class="initial32 bg-amber-500">T</div>
+                    </td>
+                    <td class="text-ellipsis">Ted Vasquez</td>
+                    <td class="text-ellipsis">Praesent vel nisi nibh.Integer imperdiet, turpis nec viverra egestas, magna sapien convallis velit, nec vestibulum turpis dui vel dui. </td>
+                    <td>
+                        <!-- START dropdown-->
+                        <div dropdown class="pull-right dropdown">
+                            <button type="button" dropdownToggle (click)="$event.stopPropagation()" class="btn btn-default btn-flat btn-flat-icon"><em class="ion-android-more-vertical"></em></button>
+                            <ul role="menu" dropdownMenu class="dropdown-menu md-dropdown-menu dropdown-menu-right">
+                                <li><a><em class="ion-reply icon-fw"></em>Reply</a></li>
+                                <li><a><em class="ion-forward icon-fw"></em>Forward</a></li>
+                                <li><a><em class="ion-trash-a icon-fw"></em>Spam</a></li>
+                            </ul>
+                        </div>
+                        <!-- END dropdown-->
+                    </td>
+                </tr>
+                <tr (click)="messageView.msgViewModal.show()">
+                    <td>
+                        <div class="initial32 bg-pink-500">L</div>
+                    </td>
+                    <td class="text-ellipsis">Lillian Snyder</td>
+                    <td class="text-ellipsis">Praesent vel nisi nibh.Integer imperdiet, turpis nec viverra egestas, magna sapien convallis velit, nec vestibulum turpis dui vel dui. </td>
+                    <td>
+                        <!-- START dropdown-->
+                        <div dropdown class="pull-right dropdown">
+                            <button type="button" dropdownToggle (click)="$event.stopPropagation()" class="btn btn-default btn-flat btn-flat-icon"><em class="ion-android-more-vertical"></em></button>
+                            <ul role="menu" dropdownMenu class="dropdown-menu md-dropdown-menu dropdown-menu-right">
+                                <li><a><em class="ion-reply icon-fw"></em>Reply</a></li>
+                                <li><a><em class="ion-forward icon-fw"></em>Forward</a></li>
+                                <li><a><em class="ion-trash-a icon-fw"></em>Spam</a></li>
+                            </ul>
+                        </div>
+                        <!-- END dropdown-->
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <p class="ph">2 days ago</p>
+    <div class="card">
+        <table class="table table-hover table-fixed va-middle">
+            <tbody>
+                <tr (click)="messageView.msgViewModal.show()">
+                    <td class="wd-xxs">
+                        <div class="initial32 bg-blue-500">T</div>
+                    </td>
+                    <td class="text-ellipsis wd-sm">Timmothy Terry</td>
+                    <td class="text-ellipsis">Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Mauris hendrerit nibh eu nisi congue dapibus. </td>
+                    <td class="wd-xxs">
+                        <!-- START dropdown-->
+                        <div dropdown class="pull-right dropdown">
+                            <button type="button" dropdownToggle (click)="$event.stopPropagation()" class="btn btn-default btn-flat btn-flat-icon"><em class="ion-android-more-vertical"></em></button>
+                            <ul role="menu" dropdownMenu class="dropdown-menu md-dropdown-menu dropdown-menu-right">
+                                <li><a><em class="ion-reply icon-fw"></em>Reply</a></li>
+                                <li><a><em class="ion-forward icon-fw"></em>Forward</a></li>
+                                <li><a><em class="ion-trash-a icon-fw"></em>Spam</a></li>
+                            </ul>
+                        </div>
+                        <!-- END dropdown-->
+                    </td>
+                </tr>
+                <tr (click)="messageView.msgViewModal.show()">
+                    <td><img src="assets/img/user/01.jpg" alt="user" class="img-circle thumb32" /></td>
+                    <td class="text-ellipsis">Nathan Richardson</td>
+                    <td class="text-ellipsis">Praesent leo quam, faucibus at facilisis id, rhoncus sit amet metus. Sed pretium malesuada leo sit amet convallis. Phasellus dolor velit, dictum a pulvinar eu, convallis a ante. </td>
+                    <td>
+                        <!-- START dropdown-->
+                        <div dropdown class="pull-right dropdown">
+                            <button type="button" dropdownToggle (click)="$event.stopPropagation()" class="btn btn-default btn-flat btn-flat-icon"><em class="ion-android-more-vertical"></em></button>
+                            <ul role="menu" dropdownMenu class="dropdown-menu md-dropdown-menu dropdown-menu-right">
+                                <li><a><em class="ion-reply icon-fw"></em>Reply</a></li>
+                                <li><a><em class="ion-forward icon-fw"></em>Forward</a></li>
+                                <li><a><em class="ion-trash-a icon-fw"></em>Spam</a></li>
+                            </ul>
+                        </div>
+                        <!-- END dropdown-->
+                    </td>
+                </tr>
+                <tr (click)="messageView.msgViewModal.show()">
+                    <td>
+                        <div class="initial32 bg-green-500">N</div>
+                    </td>
+                    <td class="text-ellipsis">Nina Brown</td>
+                    <td class="text-ellipsis">Etiam eu ipsum dui, et tincidunt orci. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. </td>
+                    <td>
+                        <!-- START dropdown-->
+                        <div dropdown class="pull-right dropdown">
+                            <button type="button" dropdownToggle (click)="$event.stopPropagation()" class="btn btn-default btn-flat btn-flat-icon"><em class="ion-android-more-vertical"></em></button>
+                            <ul role="menu" dropdownMenu class="dropdown-menu md-dropdown-menu dropdown-menu-right">
+                                <li><a><em class="ion-reply icon-fw"></em>Reply</a></li>
+                                <li><a><em class="ion-forward icon-fw"></em>Forward</a></li>
+                                <li><a><em class="ion-trash-a icon-fw"></em>Spam</a></li>
+                            </ul>
+                        </div>
+                        <!-- END dropdown-->
+                    </td>
+                </tr>
+                <tr (click)="messageView.msgViewModal.show()">
+                    <td><img src="assets/img/user/06.jpg" alt="user" class="img-circle thumb32" /></td>
+                    <td class="text-ellipsis">Nathan Richardson</td>
+                    <td class="text-ellipsis">Praesent leo quam, faucibus at facilisis id, rhoncus sit amet metus. Sed pretium malesuada leo sit amet convallis. Phasellus dolor velit, dictum a pulvinar eu, convallis a ante. </td>
+                    <td>
+                        <!-- START dropdown-->
+                        <div dropdown class="pull-right dropdown">
+                            <button type="button" dropdownToggle (click)="$event.stopPropagation()" class="btn btn-default btn-flat btn-flat-icon"><em class="ion-android-more-vertical"></em></button>
+                            <ul role="menu" dropdownMenu class="dropdown-menu md-dropdown-menu dropdown-menu-right">
+                                <li><a><em class="ion-reply icon-fw"></em>Reply</a></li>
+                                <li><a><em class="ion-forward icon-fw"></em>Forward</a></li>
+                                <li><a><em class="ion-trash-a icon-fw"></em>Spam</a></li>
+                            </ul>
+                        </div>
+                        <!-- END dropdown-->
+                    </td>
+                </tr>
+                <tr (click)="messageView.msgViewModal.show()">
+                    <td><img src="assets/img/user/03.jpg" alt="user" class="img-circle thumb32" /></td>
+                    <td class="text-ellipsis">Myrtle James</td>
+                    <td class="text-ellipsis">Praesent leo quam, faucibus at facilisis id, rhoncus sit amet metus. Sed pretium malesuada leo sit amet convallis. Phasellus dolor velit, dictum a pulvinar eu, convallis a ante. </td>
+                    <td>
+                        <!-- START dropdown-->
+                        <div dropdown class="pull-right dropdown">
+                            <button type="button" dropdownToggle (click)="$event.stopPropagation()" class="btn btn-default btn-flat btn-flat-icon"><em class="ion-android-more-vertical"></em></button>
+                            <ul role="menu" dropdownMenu class="dropdown-menu md-dropdown-menu dropdown-menu-right">
+                                <li><a><em class="ion-reply icon-fw"></em>Reply</a></li>
+                                <li><a><em class="ion-forward icon-fw"></em>Forward</a></li>
+                                <li><a><em class="ion-trash-a icon-fw"></em>Spam</a></li>
+                            </ul>
+                        </div>
+                        <!-- END dropdown-->
+                    </td>
+                </tr>
+                <tr (click)="messageView.msgViewModal.show()">
+                    <td>
+                        <div class="initial32 bg-amber-500">T</div>
+                    </td>
+                    <td class="text-ellipsis">Ted Vasquez</td>
+                    <td class="text-ellipsis">Praesent vel nisi nibh.Integer imperdiet, turpis nec viverra egestas, magna sapien convallis velit, nec vestibulum turpis dui vel dui. </td>
+                    <td>
+                        <!-- START dropdown-->
+                        <div dropdown class="pull-right dropdown">
+                            <button type="button" dropdownToggle (click)="$event.stopPropagation()" class="btn btn-default btn-flat btn-flat-icon"><em class="ion-android-more-vertical"></em></button>
+                            <ul role="menu" dropdownMenu class="dropdown-menu md-dropdown-menu dropdown-menu-right">
+                                <li><a><em class="ion-reply icon-fw"></em>Reply</a></li>
+                                <li><a><em class="ion-forward icon-fw"></em>Forward</a></li>
+                                <li><a><em class="ion-trash-a icon-fw"></em>Spam</a></li>
+                            </ul>
+                        </div>
+                        <!-- END dropdown-->
+                    </td>
+                </tr>
+                <tr (click)="messageView.msgViewModal.show()">
+                    <td>
+                        <div class="initial32 bg-pink-500">L</div>
+                    </td>
+                    <td class="text-ellipsis">Lillian Snyder</td>
+                    <td class="text-ellipsis">Praesent vel nisi nibh.Integer imperdiet, turpis nec viverra egestas, magna sapien convallis velit, nec vestibulum turpis dui vel dui. </td>
+                    <td>
+                        <!-- START dropdown-->
+                        <div dropdown class="pull-right dropdown">
+                            <button type="button" dropdownToggle (click)="$event.stopPropagation()" class="btn btn-default btn-flat btn-flat-icon"><em class="ion-android-more-vertical"></em></button>
+                            <ul role="menu" dropdownMenu class="dropdown-menu md-dropdown-menu dropdown-menu-right">
+                                <li><a><em class="ion-reply icon-fw"></em>Reply</a></li>
+                                <li><a><em class="ion-forward icon-fw"></em>Forward</a></li>
+                                <li><a><em class="ion-trash-a icon-fw"></em>Spam</a></li>
+                            </ul>
+                        </div>
+                        <!-- END dropdown-->
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="floatbutton" (click)="messageNew.msgNewModal.show()">
+        <ul class="mfb-component--br mfb-zoomin">
+            <li class="mfb-component__wrap">
+                <a id="compose" class="mfb-component__button--main">
+                    <i class="mfb-component__main-icon--resting ion-edit"></i>
+                    <i class="mfb-component__main-icon--active ion-edit"></i>
+                </a>
+                <ul class="mfb-component__list"></ul>
+            </li>
+        </ul>
+    </div>
+</div>
+<app-messagenew #messageNew></app-messagenew>
+<app-messageview #messageView></app-messageview>

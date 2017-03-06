@@ -1,0 +1,16 @@
+<div class="layout-container" [ngClass]="layout()">
+    <!-- top navbar-->
+    <app-header></app-header>
+    <!-- sidebar-->
+    <app-sidebar></app-sidebar>
+    <div (click)="closeSidebar()" class="sidebar-layout-obfuscator"></div>
+    <!-- Main section-->
+    <main class="main-container">
+        <!-- Page content-->
+        <section>
+            <router-outlet></router-outlet>
+        </section>
+        <!-- Page footer-->
+        <footer><span>2017 - Centric app.</span></footer>
+    </main>
+</div>

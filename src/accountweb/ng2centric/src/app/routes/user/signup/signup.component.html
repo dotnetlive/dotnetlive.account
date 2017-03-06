@@ -1,0 +1,52 @@
+<div class="container-full">
+    <div class="page-container bg-blue-grey-900">
+        <div class="container container-xs">
+            <img src="assets/img/logo.png" class="mv-lg block-center img-responsive thumb64" />
+            <form [formGroup]="regForm" novalidate class="card b0 form-validate" (submit)="submitForm($event, regForm)" novalidate="">
+                <div class="card-offset pb0">
+                    <div *ngIf="regForm.valid" class="card-offset-item text-right">
+                        <button type="submit" class="btn btn-success btn-circle btn-lg"><em class="ion-checkmark-round"></em></button>
+                    </div>
+                </div>
+                <div class="card-heading">
+                    <div class="card-title text-center">Create account</div>
+                </div>
+                <div class="card-body">
+                    <div class="mda-form-group float-label mda-input-group">
+                        <div class="mda-form-control">
+                            <input type="email" name="accountName" formControlName="email" [formControl]="regForm.controls['email']" class="form-control" />
+                            <div class="mda-form-control-line"></div>
+                            <label>Email address</label>
+                        </div>
+                        <span class="text-danger" *ngIf="regForm.controls['email'].hasError('required') && (regForm.controls['email'].dirty || regForm.controls['email'].touched)">This field is required</span>
+                        <span class="text-danger" *ngIf="regForm.controls['email'].hasError('email') && (regForm.controls['email'].dirty || regForm.controls['email'].touched)">Please enter a valid email</span>
+                        <span class="mda-input-group-addon"><em class="ion-ios-email-outline icon-lg"></em></span>
+                    </div>
+                    <div class="mda-form-group float-label mda-input-group">
+                        <div class="mda-form-control">
+                            <input type="password" name="accountPassword" formControlName="password" [formControl]="regForm.controls['password']" class="form-control" />
+                            <div class="mda-form-control-line"></div>
+                            <label>Password</label>
+                        </div>
+                        <span class="text-danger" *ngIf="regForm.controls['password'].hasError('required') && (regForm.controls['password'].dirty || regForm.controls['password'].touched)">Input required</span>
+                        <span class="mda-input-group-addon"><em class="ion-ios-locked-outline icon-lg"></em></span>
+                    </div>
+                    <div class="mda-form-group float-label mda-input-group">
+                        <div class="mda-form-control">
+                            <input type="password" name="accountPassword2" formControlName="confirmPassword" [formControl]="regForm.controls['confirmPassword']" class="form-control" />
+                            <div class="mda-form-control-line"></div>
+                            <label>Confirm password</label>
+                        </div>
+                        <span class="text-danger" *ngIf="regForm.controls['confirmPassword'].errors?.equalTo">Input does Not match</span>
+                        <span class="mda-input-group-addon"><em class="ion-ios-locked-outline icon-lg"></em></span>
+                    </div>
+                </div>
+                <button type="submit" [disabled]="!regForm.valid || regForm.pristine" class="btn btn-primary btn-flat">Create</button>
+                <div class="card-body bg-gray-lighter text-center text-sm">
+                    <span class="spr">By registering I accept the</span>
+                    <a href class="spr">Terms of Service</a><span class="spr">and</span><a href class="spr">Privacy</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

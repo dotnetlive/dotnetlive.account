@@ -1,0 +1,31 @@
+<div class="container-full">
+    <div class="page-container bg-blue-grey-900">
+        <div class="container container-xs">
+            <div class="text-center mv-lg"><img src="assets/img/user/01.jpg" class="img-circle mb block-center img-responsive thumb64" />
+                <p>Brian Walker</p>
+            </div>
+            <form [formGroup]="lockForm" class="card form-validate" (submit)="submitForm($event, lockForm)" novalidate>
+                <div class="card-heading">
+                    <p class="text-center">Type your password to unlock terminal</p>
+                </div>
+                <div class="card-offset pb0">
+                    <div *ngIf="lockForm.valid" class="card-offset-item text-right">
+                        <button type="submit" class="btn btn-success btn-circle btn-lg"><em class="ion-checkmark-round"></em></button>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="mda-form-group float-label mda-input-group">
+                        <div class="mda-form-control">
+                            <input type="password" name="accountPassword" formControlName="password" [formControl]="lockForm.controls['password']" required class="form-control" />
+                            <div class="mda-form-control-line"></div>
+                            <label>Password</label>
+                        </div>
+                        <span class="text-danger" *ngIf="lockForm.controls['password'].hasError('required') && (lockForm.controls['password'].dirty || lockForm.controls['password'].touched)">Input required</span>
+                        <a [routerLink]="'/login'" class="mda-form-msg right">Not you?</a>
+                        <span class="mda-input-group-addon"><em class="ion-ios-locked-outline icon-lg"></em></span>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

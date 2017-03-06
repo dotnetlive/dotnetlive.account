@@ -7,6 +7,10 @@ using System.Reflection;
 using DotNetLive.Framework;
 using DotNetLive.AccountWeb.Configurations;
 using Microsoft.Extensions.Options;
+using Microsoft.AspNetCore.Http;
+using System;
+using Newtonsoft.Json;
+using Microsoft.AspNetCore.Authorization;
 
 namespace DotNetLive.AccountWeb.Controllers
 {
@@ -21,16 +25,18 @@ namespace DotNetLive.AccountWeb.Controllers
             this._assSettings = appSettings.Value;
         }
 
+        [Authorize]
         public IActionResult Index()
         {
-            if (_hostingEnvironment.IsDevelopment())
-            {
-                return View();
-            }
-            else
-            {
-                return Redirect(_assSettings.MainSite);
-            }
+            //if (_hostingEnvironment.IsDevelopment())
+            //{
+            //    return View();
+            //}
+            //else
+            //{
+            //    return Redirect(_assSettings.MainSite);
+            //}
+            return View();
         }
 
         public IActionResult About()
@@ -65,6 +71,58 @@ namespace DotNetLive.AccountWeb.Controllers
                 sbContent.AppendLine($"<strong>{key}</strong>:{dicParms[key]}<br/>");
             }
             return Content(sbContent.ToString());
+        }
+
+        const string SessionKeyName = "_Name";
+        const string SessionKeyYearsMember = "_YearsMember";
+        const string SessionKeyDate = "_Date";
+
+        public IActionResult SessionTest()
+        {
+            // Requires using Microsoft.AspNetCore.Http;
+            HttpContext.Session.SetString(SessionKeyName, "Rick");
+            HttpContext.Session.SetInt32(SessionKeyYearsMember, 3);
+            return RedirectToAction("SessionNameYears");
+        }
+        public IActionResult SessionNameYears()
+        {
+            var name = HttpContext.Session.GetString(SessionKeyName);
+            var yearsMember = HttpContext.Session.GetInt32(SessionKeyYearsMember);
+
+            return Content($"Name: \"{name}\",  Membership years: \"{yearsMember}\"");
+        }
+
+        public IActionResult SetDate()
+        {
+            // Requires you add the Set extension method mentioned in the article.
+            HttpContext.Session.Set<DateTime>(SessionKeyDate, DateTime.Now);
+            return RedirectToAction("GetDate");
+        }
+
+        public IActionResult GetDate()
+        {
+            // Requires you add the Get extension method mentioned in the article.
+            var date = HttpContext.Session.Get<DateTime>(SessionKeyDate);
+            var sessionTime = date.TimeOfDay.ToString();
+            var currentTime = DateTime.Now.TimeOfDay.ToString();
+
+            return Content($"Current time: {currentTime} - "
+                         + $"session time: {sessionTime}");
+        }
+    }
+
+    public static class SessionExtensions
+    {
+        public static void Set<T>(this ISession session, string key, T value)
+        {
+            session.SetString(key, JsonConvert.SerializeObject(value));
+        }
+
+        public static T Get<T>(this ISession session, string key)
+        {
+            var value = session.GetString(key);
+            return value == null ? default(T) :
+                                  JsonConvert.DeserializeObject<T>(value);
         }
     }
 }

@@ -1,0 +1,97 @@
+<div class="container container-md">
+    <div class="text-right mb-lg">
+        <button (click)="timelineModeAlt = !timelineModeAlt" class="btn btn-default">Switch timeline</button>
+    </div>
+    <!-- START timeline-->
+    <!-- ul.timeline-alt-->
+    <ul [class]="timelineModeAlt ? 'timeline-alt' : 'timeline'">
+        <li data-datetime="Now" class="timeline-separator"></li>
+        <!-- START timeline item-->
+        <li>
+            <div class="timeline-badge bg-info"></div>
+            <div class="timeline-panel">
+                <div class="card">
+                    <div class="card-body">
+                        <p><strong>Client Meeting</strong></p><small>Pellentesque ut diam velit, eget porttitor risus. Nullam posuere euismod volutpat.</small>
+                        <div class="text-right"><a href="">Av 123 St - Floor 2</a></div>
+                    </div>
+                </div>
+            </div>
+        </li>
+        <!-- END timeline item-->
+        <!-- START timeline item-->
+        <li class="timeline-inverted">
+            <div class="timeline-badge bg-pink-400"></div>
+            <div class="timeline-panel">
+                <div class="card">
+                    <div class="card-body"><em class="mr ion-ios-telephone icon-lg"></em>Call with Michael</div>
+                </div>
+            </div>
+        </li>
+        <!-- END timeline item-->
+        <!-- START timeline separator-->
+        <li data-datetime="Yesterday" class="timeline-separator"></li>
+        <!-- END timeline separator-->
+        <!-- START timeline item-->
+        <li>
+            <div class="timeline-badge bg-purple-500"></div>
+            <div class="timeline-panel">
+                <div class="card">
+                    <div class="card-body">
+                        <p><strong>Conference</strong></p>
+                        <p>Join development group</p><small><a href="skype:echo123?call"><em class="ion-ios-telephone mr-sm icon-lg"></em> Call the Skype Echo</a></small>
+                    </div>
+                </div>
+            </div>
+        </li>
+        <!-- END timeline item-->
+        <!-- START timeline item-->
+        <li class="timeline-inverted">
+            <div class="timeline-badge bg-green-500"></div>
+            <div class="timeline-panel">
+                <div class="card right">
+                    <div class="card-body">
+                        <p><strong>Appointment</strong></p>
+                        <p>Sed posuere consectetur est at lobortis. Aenean eu leo quam. Pellentesque ornare sem lacinia quam.</p>
+                    </div>
+                </div>
+            </div>
+        </li>
+        <!-- END timeline item-->
+        <!-- START timeline item-->
+        <li>
+            <div class="timeline-badge bg-info"></div>
+            <div class="timeline-panel">
+                <div class="card bg-blue-500">
+                    <div class="card-body">
+                        <p><strong>Fly</strong></p>
+                        <p>Sed posuere consectetur est at lobortis. Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis vestibulum.</p>
+                    </div>
+                </div>
+            </div>
+        </li>
+        <!-- END timeline item-->
+        <!-- START timeline separator-->
+        <li data-datetime="2 days ago" class="timeline-separator"></li>
+        <!-- END timeline separator-->
+        <!-- START timeline item-->
+        <li class="timeline-inverted">
+            <div class="timeline-badge bg-warning"></div>
+            <div class="timeline-panel">
+                <div class="card">
+                    <div class="card-body">
+                        <p><strong>Relax</strong></p>
+                        <p>Listen some music</p>
+                    </div>
+                </div>
+            </div>
+        </li>
+        <!-- END timeline item-->
+        <!-- START timeline item-->
+        <li class="timeline-end">
+            <a href="" class="timeline-badge bg-blue-grey-200"></a>
+        </li>
+        <!-- END timeline item-->
+    </ul>
+    <!-- END timeline-->
+</div>

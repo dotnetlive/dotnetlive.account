@@ -59,13 +59,11 @@ namespace DotNetLive.AccountApi
                 if (!operation.Responses.ContainsKey("403"))
                     operation.Responses.Add("403", new Response { Description = "Forbidden" });
 
-                operation.Security = new List<IDictionary<string, IEnumerable<string>>>();
-                operation.Security.Add(new Dictionary<string, IEnumerable<string>>
-                {
-                    { "oauth2", requiredScopes }
-                });
-                //}
-
+                //operation.Security = new List<IDictionary<string, IEnumerable<string>>>();
+                //operation.Security.Add(new Dictionary<string, IEnumerable<string>>
+                //{
+                //    { "oauth2", requiredScopes }
+                //});
             }
         }
 

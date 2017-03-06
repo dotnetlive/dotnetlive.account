@@ -1,12 +1,12 @@
-﻿using DotNetLive.AccountApi.AuthorizationPolicy;
+﻿using DotNetLive.Account.Services;
+using DotNetLive.AccountApi.AuthorizationPolicy;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Security.Claims;
 using System.Security.Principal;
 using System.Text;
 using System.Threading.Tasks;
@@ -19,7 +19,7 @@ namespace DotNetLive.AccountApi
         // Keep this safe on the server!
         private static readonly string secretKey = "mysupersecret_secretkey!123";
 
-        private void ConfigureAuth(IServiceCollection services)
+        private void ConfigureAuthorization(IServiceCollection services)
         {
             services.AddAuthorization(options =>
             {
@@ -53,32 +53,24 @@ namespace DotNetLive.AccountApi
             services.AddSingleton<IAuthorizationHandler, BadgeEntryHandler>();
         }
 
-        private void ConfigureAuth(IApplicationBuilder app)
+        private void ConfigureAuthentication(IApplicationBuilder app, IServiceProvider serviceProvider)
         {
-            var signingKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(secretKey));
-
-            app.UseSimpleTokenProvider(new TokenProviderOptions
-            {
-                Path = "/api/token",
-                Audience = "ExampleAudience",
-                Issuer = "ExampleIssuer",
-                SigningCredentials = new SigningCredentials(signingKey, SecurityAlgorithms.HmacSha256),
-                IdentityResolver = GetIdentity
-            });
+            var tokenSettings = serviceProvider.GetService<IOptions<TokenSettings>>().Value;
 
             var tokenValidationParameters = new TokenValidationParameters
             {
                 // The signing key must match!
                 ValidateIssuerSigningKey = true,
-                IssuerSigningKey = signingKey,
+
+                IssuerSigningKey = tokenSettings.GetSecurityKey(),
 
                 // Validate the JWT Issuer (iss) claim
                 ValidateIssuer = true,
-                ValidIssuer = "ExampleIssuer",
+                ValidIssuer = tokenSettings.Issuer,
 
                 // Validate the JWT Audience (aud) claim
                 ValidateAudience = true,
-                ValidAudience = "ExampleAudience",
+                ValidAudience = tokenSettings.Audience,
 
                 // Validate the token expiry
                 ValidateLifetime = true,
@@ -87,35 +79,23 @@ namespace DotNetLive.AccountApi
                 ClockSkew = TimeSpan.Zero
             };
 
-            app.UseJwtBearerAuthentication(new JwtBearerOptions
+            var options = new JwtBearerOptions
             {
                 AutomaticAuthenticate = true,
                 AutomaticChallenge = true,
                 TokenValidationParameters = tokenValidationParameters
-            });
+            };
 
-            //app.UseCookieAuthentication(new CookieAuthenticationOptions
-            //{
-            //    AutomaticAuthenticate = true,
-            //    AutomaticChallenge = true,
-            //    AuthenticationScheme = "Cookie",
-            //    CookieName = "access_token",
-            //    TicketDataFormat = new CustomJwtDataFormat(
-            //        SecurityAlgorithms.HmacSha256,
-            //        tokenValidationParameters)
-            //});
-        }
-
-        private Task<ClaimsIdentity> GetIdentity(string username, string password)
-        {
-            // Don't do this in production, obviously!
-            if (username == "TEST" && password == "TEST123")
-            {
-                return Task.FromResult(new ClaimsIdentity(new GenericIdentity(username, "Token"), new Claim[] { }));
-            }
-
-            // Credentials are invalid, or account doesn't exist
-            return Task.FromResult<ClaimsIdentity>(null);
+            //这里默认是:System.IdentityModel.Tokens.Jwt.JwtSecurityTokenHandler, System.IdentityModel.Tokens.Jwt, Version=5.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35
+            options.SecurityTokenValidators.Clear();
+            var tokenValidater = new DnlJwtSecurityValidater("DotNetLive Jwt Auth", (jwtId, userSysId) =>
+                {
+                    var userService = serviceProvider.GetService<UserQueryService>();
+                    var user = userService.GetUserById(userSysId);
+                    return user != null;
+                });
+            options.SecurityTokenValidators.Add(tokenValidater);
+            app.UseJwtBearerAuthentication(options);
         }
     }
 }

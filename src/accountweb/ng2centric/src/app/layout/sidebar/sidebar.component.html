@@ -1,0 +1,101 @@
+<div class="sidebar-container">
+    <div *ngIf="settings.app.sidebar.showheader" class="sidebar-header">
+        <div (click)="closeSidebar()" class="pull-right pt-lg text-muted visible-xs-visible-sm hidden">
+            <em class="ion-close-round"></em>
+        </div>
+        <a class="sidebar-header-logo">
+            <img src="assets/img/logo.svg" svgreplace/>
+            <span class="sidebar-header-logo-text">Centric</span>
+        </a>
+    </div>
+    <div class="sidebar-content">
+        <div *ngIf="settings.app.sidebar.showtoolbar" class="sidebar-toolbar text-center">
+            <a>
+                <img src="assets/img/user/01.jpg" alt="Profile" class="img-circle thumb64" />
+            </a>
+            <div class="mt">{{ 'WELCOME' | translate }}, Willie Webb</div>
+        </div>
+        <nav class="sidebar-nav" (click)=handleSidebar($event)>
+            <!-- 1st level items-->
+            <ul>
+                <li *ngFor="let item of menu" [routerLinkActive]="['active']">
+                    <!-- support for direct links-->
+                    <a [href]="item.href" *ngIf="item.href" class="ripple">
+                        <span *ngIf="item.subitems?.length" class="pull-right nav-caret">
+                            <em class="ion-ios-arrow-right"></em>
+                        </span>
+                        <span class="pull-right nav-label">
+                            <span [innerHTML]="item.label?.count" [ngClass]="item.label?.classname"></span>
+                        </span>
+                        <span class="nav-icon" *ngIf="item.iconclass || item.imgpath">
+                            <em *ngIf="item.iconclass" [ngClass]="item.iconclass"></em>
+                            <img *ngIf="item.imgpath" svgreplace [src]="item.imgpath"/>
+                        </span>
+                        <span [innerHTML]="item.name"></span>
+                    </a>
+                    <!-- support for route states links-->
+                    <a [routerLink]="item.link" *ngIf="!item.href && !item.subitems?.length" class="ripple">
+                        <span *ngIf="item.subitems?.length" class="pull-right nav-caret">
+                            <em class="ion-ios-arrow-right"></em>
+                        </span>
+                        <span class="pull-right nav-label">
+                            <span [innerHTML]="item.label?.count" [ngClass]="item.label?.classname"></span>
+                        </span>
+                        <span class="nav-icon" *ngIf="item.iconclass || item.imgpath">
+                            <em *ngIf="item.iconclass" [ngClass]="item.iconclass"></em>
+                            <img *ngIf="item.imgpath" svgreplace [src]="item.imgpath"/>
+                        </span>
+                        <span [innerHTML]="item.name"></span>
+                    </a>
+                    <!-- parent menu items have empty links-->
+                    <a *ngIf="!item.href && item.subitems?.length" class="ripple">
+                        <span *ngIf="item.subitems?.length" class="pull-right nav-caret">
+                            <em class="ion-ios-arrow-right"></em>
+                        </span>
+                        <span class="pull-right nav-label">
+                            <span [innerHTML]="item.label?.count" [ngClass]="item.label?.classname"></span>
+                        </span>
+                        <span class="nav-icon" *ngIf="item.iconclass || item.imgpath">
+                            <em *ngIf="item.iconclass" [ngClass]="item.iconclass"></em>
+                            <img *ngIf="item.imgpath" svgreplace [src]="item.imgpath"/>
+                        </span>
+                        <span [innerHTML]="item.name"></span>
+                    </a>
+                    <!-- 2nd level items-->
+                    <ul *ngIf="item.subitems?.length" class="sidebar-subnav">
+                        <li *ngFor="let sitem of item.subitems" [routerLinkActive]="['active']">
+                            <a [routerLink]="sitem.link" class="ripple">
+                                <span *ngIf="sitem.subitems?.length" class="pull-right nav-caret">
+                                    <em class="ion-ios-arrow-right"></em>
+                                </span>
+                                <span class="pull-right nav-label">
+                                    <span [innerHTML]="sitem.label?.count" *ngClass="sitem.label?.classname"></span>
+                                </span>
+                                <span class="nav-icon" *ngIf="sitem.iconclass || sitem.imgpath">
+                                    <em *ngIf="sitem.iconclass" [ngClass]="sitem.iconclass"></em>
+                                    <img *ngIf="sitem.imgpath" svgreplace [src]="sitem.imgpath"/>
+                                </span>
+                                <span [innerHTML]="sitem.name"></span>
+                            </a>
+                            <!-- 3rd level items-->
+                            <ul *ngIf="sitem.subitems?.length" class="sidebar-subnav">
+                                <li *ngFor="let ssitem of sitem.subitems" ui-sref-active="active">
+                                    <a [routerLink]="ssitem.sref">
+                                        <span *ngIf="ssitem.subitems?.length" class="pull-right nav-caret">
+                                            <em class="ion-ios-arrow-right"></em>
+                                        </span>
+                                        <span class="pull-right nav-label">
+                                            <span [innerHTML]="ssitem.label?.count" [ngClass]="ssitem.label?.classname"></span>
+                                        </span>
+                                        <em [ngClass]="ssitem.iconclass" *ngIf="ssitem.iconclass"></em>
+                                        <span [innerHTML]="ssitem.name"></span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </nav>
+    </div>
+</div>

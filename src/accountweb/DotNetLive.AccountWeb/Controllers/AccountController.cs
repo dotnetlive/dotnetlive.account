@@ -1,16 +1,21 @@
-﻿using DotNetLive.AccountWeb.Models;
+﻿using DotNetLive.AccountWeb.ApiClients;
 using DotNetLive.AccountWeb.Models.AccountViewModels;
 using DotNetLive.AccountWeb.Services;
-using DotNetLive.Framework.Models;
+using DotNetLive.Framework.Web.Models;
+using DotNetLive.Framework.Web.WebFramework;
+using DotNetLive.Framework.WebApiClient.Query;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http.Authentication;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.Extensions.Logging;
+using System;
 using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
+using SignInStatus = Microsoft.AspNetCore.Identity.SignInResult;
 
 namespace DotNetLive.AccountWeb.Controllers
 {
@@ -23,6 +28,7 @@ namespace DotNetLive.AccountWeb.Controllers
         private readonly ISmsSender _smsSender;
         private readonly ILogger _logger;
         private IHostingEnvironment _hostingEnvironment;
+        private AccountApiClient _accountApiClient;
 
         public AccountController(
             UserManager<ApplicationUser> userManager,
@@ -30,14 +36,15 @@ namespace DotNetLive.AccountWeb.Controllers
             IEmailSender emailSender,
             ISmsSender smsSender,
             ILoggerFactory loggerFactory,
-            IHostingEnvironment hostingEnvironment)
+            IHostingEnvironment hostingEnvironment, AccountApiClient accountApiClient)
         {
-            _userManager = userManager;
+            //_userManager = userManager;
             _signInManager = signInManager;
             _emailSender = emailSender;
             _smsSender = smsSender;
             _logger = loggerFactory.CreateLogger<AccountController>();
             _hostingEnvironment = hostingEnvironment;
+            _accountApiClient = accountApiClient;
         }
 
         //
@@ -46,6 +53,26 @@ namespace DotNetLive.AccountWeb.Controllers
         [AllowAnonymous]
         public IActionResult Login(string returnUrl = null)
         {
+            if (HttpContext.User.Identity.IsAuthenticated)
+            {
+                if (!Request.IsLocal() && !string.IsNullOrWhiteSpace(returnUrl))
+                {
+                    //var builder = new UriBuilder(UrlHelper.AddHost(returnUrl, Request.Url));
+                    //if (!builder.Host.EndsWith(ConfigurationManager.AppSettings["CookieDomain"], StringComparison.OrdinalIgnoreCase))
+                    //{
+                    //    var newUrl = string.Format("{0}://{1}{2}/account/loginBySession?sessionKey={3}&isRemeber={4}&returnUrl={5}",
+                    //        builder.Scheme, //http
+                    //        builder.Host, //host
+                    //        (builder.Port == 80 || builder.Port == 443) ? string.Empty : ":" + builder.Port.ToString(),  //port
+                    //        SessionKey, //sessionkey
+                    //        false, //IsRemember
+                    //     WebUtility.UrlEncode(returnUrl));//Return Url
+                    //    return RedirectToLocal(newUrl);
+                    //}
+                }
+                return RedirectToUrl(returnUrl);
+            }
+
             ViewData["ReturnUrl"] = returnUrl;
             return View();
         }
@@ -55,18 +82,44 @@ namespace DotNetLive.AccountWeb.Controllers
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Login(LoginViewModel model, string returnUrl = null)
+        public async Task<IActionResult> Login(LoginViewModel model, string returnUrl = null, bool forceLoginBySession = false)
         {
+            if (HttpContext.User.Identity.IsAuthenticated)
+            {
+                return RedirectToUrl(returnUrl);
+            }
+
             ViewData["ReturnUrl"] = returnUrl;
+            if (!ModelState.IsValid)
+            {
+                return View(model);
+            }
+
             if (ModelState.IsValid)
             {
                 // This doesn't count login failures towards account lockout
                 // To enable password failures to trigger account lockout, set lockoutOnFailure: true
-                var result = await _signInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, lockoutOnFailure: false);
+                //var result = await _signInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, lockoutOnFailure: false);
+                var result = SignInStatus.Failed;
+                var loginResult = _accountApiClient.Login(new LoginQuery() { Email = model.Email, Password = model.Password, DeviceType = 1 });
+                if (loginResult.Success)
+                {
+                    result = SignInStatus.Success;
+                    var loginUser = loginResult.ResponseResult.LoginUser;
+                    var applicationUser = new ApplicationUser(loginUser.Id, loginUser.UserName, loginUser.Email);
+                    applicationUser.AddClaim(new Claim(ApplicationUser.JwtClaimName, loginResult.ResponseResult.Token));
+                    await _signInManager.SignInAsync(applicationUser,
+                        new AuthenticationProperties()
+                        {
+                            AllowRefresh = true,
+                            IsPersistent = true
+                        });
+                }
+
                 if (result.Succeeded)
                 {
                     _logger.LogInformation(1, "User logged in.");
-                    return RedirectToLocal(returnUrl);
+                    return RedirectToUrl(returnUrl);
                 }
                 if (result.RequiresTwoFactor)
                 {
@@ -109,20 +162,21 @@ namespace DotNetLive.AccountWeb.Controllers
             if (ModelState.IsValid)
             {
                 var user = new ApplicationUser(model.Email, model.Email);// { UserName = model.Email, Email = model.Email };
-                var result = await _userManager.CreateAsync(user, model.Password);
-                if (result.Succeeded)
-                {
-                    // For more information on how to enable account confirmation and password reset please visit http://go.microsoft.com/fwlink/?LinkID=532713
-                    // Send an email with this link
-                    //var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
-                    //var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: HttpContext.Request.Scheme);
-                    //await _emailSender.SendEmailAsync(model.Email, "Confirm your account",
-                    //    $"Please confirm your account by clicking this link: <a href='{callbackUrl}'>link</a>");
-                    await _signInManager.SignInAsync(user, isPersistent: false);
-                    _logger.LogInformation(3, "User created a new account with password.");
-                    return RedirectToLocal(returnUrl);
-                }
-                AddErrors(result);
+                throw new NotImplementedException();
+                //var result = await _userManager.CreateAsync(user, model.Password);
+                //if (result.Succeeded)
+                //{
+                //    // For more information on how to enable account confirmation and password reset please visit http://go.microsoft.com/fwlink/?LinkID=532713
+                //    // Send an email with this link
+                //    //var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
+                //    //var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: HttpContext.Request.Scheme);
+                //    //await _emailSender.SendEmailAsync(model.Email, "Confirm your account",
+                //    //    $"Please confirm your account by clicking this link: <a href='{callbackUrl}'>link</a>");
+                //    await _signInManager.SignInAsync(user, isPersistent: false);
+                //    _logger.LogInformation(3, "User created a new account with password.");
+                //    return RedirectToUrl(returnUrl);
+                //}
+                //AddErrors(result);
             }
 
             // If we got this far, something failed, redisplay form
@@ -190,7 +244,7 @@ namespace DotNetLive.AccountWeb.Controllers
             if (result.Succeeded)
             {
                 _logger.LogInformation(5, "User logged in with {Name} provider.", info.LoginProvider);
-                return RedirectToLocal(returnUrl);
+                return RedirectToUrl(returnUrl);
             }
             if (result.RequiresTwoFactor)
             {
@@ -226,18 +280,19 @@ namespace DotNetLive.AccountWeb.Controllers
                     return View("ExternalLoginFailure");
                 }
                 var user = new ApplicationUser(model.Email, model.Email);// { UserName = model.Email, Email = model.Email };
-                var result = await _userManager.CreateAsync(user);
-                if (result.Succeeded)
-                {
-                    result = await _userManager.AddLoginAsync(user, info);
-                    if (result.Succeeded)
-                    {
-                        await _signInManager.SignInAsync(user, isPersistent: false);
-                        _logger.LogInformation(6, "User created an account using {Name} provider.", info.LoginProvider);
-                        return RedirectToLocal(returnUrl);
-                    }
-                }
-                AddErrors(result);
+                //var result = await _userManager.CreateAsync(user);
+                //if (result.Succeeded)
+                //{
+                //    result = await _userManager.AddLoginAsync(user, info);
+                //    if (result.Succeeded)
+                //    {
+                //        await _signInManager.SignInAsync(user, isPersistent: false);
+                //        _logger.LogInformation(6, "User created an account using {Name} provider.", info.LoginProvider);
+                //        return RedirectToUrl(returnUrl);
+                //    }
+                //}
+                //AddErrors(result);
+                throw new NotImplementedException();
             }
 
             ViewData["ReturnUrl"] = returnUrl;
@@ -253,13 +308,14 @@ namespace DotNetLive.AccountWeb.Controllers
             {
                 return View("Error");
             }
-            var user = await _userManager.FindByIdAsync(userId);
-            if (user == null)
-            {
-                return View("Error");
-            }
-            var result = await _userManager.ConfirmEmailAsync(user, code);
-            return View(result.Succeeded ? "ConfirmEmail" : "Error");
+            //var user = await _userManager.FindByIdAsync(userId);
+            //if (user == null)
+            //{
+            //    return View("Error");
+            //}
+            //var result = await _userManager.ConfirmEmailAsync(user, code);
+            //return View(result.Succeeded ? "ConfirmEmail" : "Error");
+            throw new NotImplementedException();
         }
 
         //
@@ -280,12 +336,13 @@ namespace DotNetLive.AccountWeb.Controllers
         {
             if (ModelState.IsValid)
             {
-                var user = await _userManager.FindByNameAsync(model.Email);
-                if (user == null || !(await _userManager.IsEmailConfirmedAsync(user)))
-                {
-                    // Don't reveal that the user does not exist or is not confirmed
-                    return View("ForgotPasswordConfirmation");
-                }
+                //var user = await _userManager.FindByNameAsync(model.Email);
+                //if (user == null || !(await _userManager.IsEmailConfirmedAsync(user)))
+                //{
+                //    // Don't reveal that the user does not exist or is not confirmed
+                //    return View("ForgotPasswordConfirmation");
+                //}
+                throw new NotImplementedException();
 
                 // For more information on how to enable account confirmation and password reset please visit http://go.microsoft.com/fwlink/?LinkID=532713
                 // Send an email with this link
@@ -329,18 +386,19 @@ namespace DotNetLive.AccountWeb.Controllers
             {
                 return View(model);
             }
-            var user = await _userManager.FindByNameAsync(model.Email);
-            if (user == null)
-            {
-                // Don't reveal that the user does not exist
-                return RedirectToAction(nameof(AccountController.ResetPasswordConfirmation), "Account");
-            }
-            var result = await _userManager.ResetPasswordAsync(user, model.Code, model.Password);
-            if (result.Succeeded)
-            {
-                return RedirectToAction(nameof(AccountController.ResetPasswordConfirmation), "Account");
-            }
-            AddErrors(result);
+            //var user = await _userManager.FindByNameAsync(model.Email);
+            //if (user == null)
+            //{
+            //    // Don't reveal that the user does not exist
+            //    return RedirectToAction(nameof(AccountController.ResetPasswordConfirmation), "Account");
+            //}
+            //var result = await _userManager.ResetPasswordAsync(user, model.Code, model.Password);
+            //if (result.Succeeded)
+            //{
+            //    return RedirectToAction(nameof(AccountController.ResetPasswordConfirmation), "Account");
+            //}
+            //AddErrors(result);
+            throw new NotImplementedException();
             return View();
         }
 
@@ -364,9 +422,10 @@ namespace DotNetLive.AccountWeb.Controllers
             {
                 return View("Error");
             }
-            var userFactors = await _userManager.GetValidTwoFactorProvidersAsync(user);
-            var factorOptions = userFactors.Select(purpose => new SelectListItem { Text = purpose, Value = purpose }).ToList();
-            return View(new SendCodeViewModel { Providers = factorOptions, ReturnUrl = returnUrl, RememberMe = rememberMe });
+            //var userFactors = await _userManager.GetValidTwoFactorProvidersAsync(user);
+            //var factorOptions = userFactors.Select(purpose => new SelectListItem { Text = purpose, Value = purpose }).ToList();
+            //return View(new SendCodeViewModel { Providers = factorOptions, ReturnUrl = returnUrl, RememberMe = rememberMe });
+            throw new NotImplementedException();
         }
 
         //
@@ -388,21 +447,23 @@ namespace DotNetLive.AccountWeb.Controllers
             }
 
             // Generate the token and send it
-            var code = await _userManager.GenerateTwoFactorTokenAsync(user, model.SelectedProvider);
-            if (string.IsNullOrWhiteSpace(code))
-            {
-                return View("Error");
-            }
+            //var code = await _userManager.GenerateTwoFactorTokenAsync(user, model.SelectedProvider);
+            //if (string.IsNullOrWhiteSpace(code))
+            //{
+            //    return View("Error");
+            //}
+            throw new NotImplementedException();
 
-            var message = "Your security code is: " + code;
-            if (model.SelectedProvider == "Email")
-            {
-                await _emailSender.SendEmailAsync(await _userManager.GetEmailAsync(user), "Security Code", message);
-            }
-            else if (model.SelectedProvider == "Phone")
-            {
-                await _smsSender.SendSmsAsync(await _userManager.GetPhoneNumberAsync(user), message);
-            }
+            //var message = "Your security code is: " + code;
+            //if (model.SelectedProvider == "Email")
+            //{
+            //    await _emailSender.SendEmailAsync(await _userManager.GetEmailAsync(user), "Security Code", message);
+            //}
+            //else if (model.SelectedProvider == "Phone")
+            //{
+            //    await _smsSender.SendSmsAsync(await _userManager.GetPhoneNumberAsync(user), message);
+            //}
+            throw new NotImplementedException();
 
             return RedirectToAction(nameof(VerifyCode), new { Provider = model.SelectedProvider, ReturnUrl = model.ReturnUrl, RememberMe = model.RememberMe });
         }
@@ -440,7 +501,7 @@ namespace DotNetLive.AccountWeb.Controllers
             var result = await _signInManager.TwoFactorSignInAsync(model.Provider, model.Code, model.RememberMe, model.RememberBrowser);
             if (result.Succeeded)
             {
-                return RedirectToLocal(model.ReturnUrl);
+                return RedirectToUrl(model.ReturnUrl);
             }
             if (result.IsLockedOut)
             {
@@ -466,19 +527,25 @@ namespace DotNetLive.AccountWeb.Controllers
 
         private Task<ApplicationUser> GetCurrentUserAsync()
         {
-            return _userManager.GetUserAsync(HttpContext.User);
+            throw new NotImplementedException();
+            //return _userManager.GetUserAsync(HttpContext.User);
         }
 
-        private IActionResult RedirectToLocal(string returnUrl)
+        private IActionResult RedirectToUrl(string returnUrl)
         {
-            if (Url.IsLocalUrl(returnUrl))
-            {
-                return Redirect(returnUrl);
-            }
-            else
+            // if (Url.IsLocalUrl(returnUrl))
+            // {
+            //     return Redirect(returnUrl);
+            // }
+            // else
+            // {
+            //     return RedirectToAction(nameof(HomeController.Index), "Home");
+            // }
+            if (string.IsNullOrWhiteSpace(returnUrl))
             {
                 return RedirectToAction(nameof(HomeController.Index), "Home");
             }
+            return Redirect(returnUrl);
         }
 
         #endregion

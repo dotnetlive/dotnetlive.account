@@ -1,0 +1,43 @@
+<div class="container-full">
+    <div class="page-container bg-blue-grey-900">
+        <div class="container container-xs">
+            <div class="text-center mv-lg">
+                <img src="assets/img/user/01.jpg" class="img-circle mb block-center img-responsive thumb64" />
+                <p>Brian Walker</p>
+            </div>
+            <div *ngIf="mailSent" class="card bg-success">
+                <div class="card-heading"><em class="ion-checkmark-round pull-right icon-lg"></em>
+                    <h4 class="mt0">Mail Sent!</h4>
+                </div>
+                <div class="card-body">
+                    <p>Please check your inbox and follow instructions to reset your password.</p>
+                </div>
+                <div class="card-footer text-right">
+                    <a [routerLink]="'/login'" class="btn btn-success btn-flat text-white">Login<em class="ion-ios-arrow-thin-right icon-fw"></em></a>
+                </div>
+            </div>
+            <form [formGroup]="recForm" class="card form-validate" *ngIf="!mailSent" (submit)="submitForm($event, recForm)" novalidate>
+                <div class="card-heading">
+                    <p class="text-center text-inherit">Fill with your mail to receive instructions on how to reset your password.</p>
+                </div>
+                <div class="card-offset pb0">
+                    <div *ngIf="recForm.valid" class="card-offset-item text-right">
+                        <button type="submit" class="btn btn-success btn-circle btn-lg"><em class="ion-checkmark-round"></em></button>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="mda-form-group float-label mda-input-group">
+                        <div class="mda-form-control">
+                            <input type="email" name="accountName" formControlName="email" [formControl]="recForm.controls['email']" class="form-control" />
+                            <div class="mda-form-control-line"></div>
+                            <label>Email address</label>
+                        </div>
+                        <span class="text-danger" *ngIf="recForm.controls['email'].hasError('required') && (recForm.controls['email'].dirty || recForm.controls['email'].touched)">This field is required</span>
+                        <span class="text-danger" *ngIf="recForm.controls['email'].hasError('email') && (recForm.controls['email'].dirty || recForm.controls['email'].touched)">Please enter a valid email</span>
+                        <span class="mda-input-group-addon"><em class="ion-ios-email-outline icon-lg"></em></span>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
