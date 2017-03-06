@@ -61,7 +61,7 @@ namespace DotNetLive.AccountApi.Controllers
         /// <returns></returns>
         //header:[[token:string[64]]]
         [HttpGet, Route("login"), AllowAnonymous]
-        public async Task<LoginResult> Login([FromQuery]string email, [FromQuery]string passwordHash, [FromHeader]string token, [FromQuery] bool withBearerPrefix)
+        public async Task<LoginResult> Login([FromQuery]string email, [FromQuery]string passwordHash, [FromHeader]string token)
         {
             var userInfo = UserQueryService.GetUserByEmail(email);
             if (userInfo == null)
@@ -74,7 +74,7 @@ namespace DotNetLive.AccountApi.Controllers
                 throw new ApiException("Authentication Fail, Please confirm your username and password", 500);
             }
 
-            return await GenerateToken(userInfo, withBearerPrefix);
+            return await GenerateToken(userInfo, true);
         }
 
         private async Task<LoginResult> GenerateToken(SysUser user, bool withBearerPrefix = true)
