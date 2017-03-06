@@ -7,7 +7,7 @@
         <div class="sidebar-content">
             <div class="sidebar-toolbar text-center">
                 <a href=""><img src="./../assets/images/user/01.jpg" alt="Profile" class="img-circle thumb64"></a>
-                <div class="mt">Welcome, Willie Webb</div>
+                <div class="mt">Welcome, {{userName}}</div>
             </div>
             <nav class="sidebar-nav">
                 <ul>
@@ -41,11 +41,12 @@
     export default {
         data() {
             return {
-                showMenus: ''
+                showMenus: '',
+                userName: ''
             }
         },
         created() {
-
+            this.userName = this.$store.state.user.userName;
         },
         methods: {
             menusNav() {

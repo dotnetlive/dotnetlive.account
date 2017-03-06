@@ -1,33 +1,42 @@
 import axios from 'axios'
-var baseAjax = {
-    baseApi: "http://api.account.dotnet.live/",
-    get: function (url, data) {
+export default class Http {
+    constructor() {
+        this.baseApi = "http://api.account.dotnet.live/";
+        // this.token = token;
+    };
+    get(url, data) {
         data = data || {};
         let urlParams = '';
+        // if (sessionStorage.getItem("token")) {
+        //     urlParams = "Authorization=" + sessionStorage.getItem("token");
+        // }
         for (let key in data) {
             urlParams = urlParams + `&${key}=${data[key]}`;
         }
-        if (urlParams)
+        if (urlParams) {
             url = url.indexOf('?') < 0 ? url + '?' + urlParams : url + '&' + urlParams;
-        var options = {
+        }
+        return this.request({
             url: this.baseApi + url,
             method: 'get',
-        };
-        this.request(options);
-    },
-    post: function (url, data) {
+            headers: { 'Authorization': sessionStorage.getItem("token") || '' }
+        });
+    }
+    post(url, data) {
         var formData = new FormData();
         for (var item in data) {
             formData.append(item, data[item]);
         }
-        var options = {
+        if (sessionStorage.getItem("token")) {
+            formData.append('Authorization', sessionStorage.getItem("token"));
+        }
+        return this.request({
             url: this.baseApi + url,
             data: formData,
             method: 'post',
-        };
-        return this.request(options);
-    },
-    request: function (options) {
+        });
+    }
+    request(options) {
         var promise = new Promise((resolve, reject) => {
             axios(options)
                 .then(function (result) {
@@ -48,4 +57,3 @@ var baseAjax = {
         return promise;
     }
 }
-module.exports = baseAjax;
