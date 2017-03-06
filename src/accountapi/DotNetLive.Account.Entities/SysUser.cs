@@ -1,5 +1,4 @@
-﻿using DotNetLive.Framework.Dapper.Extensions;
-using DotNetLive.Framework.Entities;
+﻿using DotNetLive.Framework.Entities;
 using System;
 using System.ComponentModel.DataAnnotations.Schema;
 

@@ -6,6 +6,7 @@ using DotNetLive.Framework.WebApiClient.Query;
 using DotNetLive.Framework.WebApiClient;
 using Newtonsoft.Json;
 using Microsoft.Extensions.Options;
+using DotNetLive.Framework.Web.Models;
 
 namespace DotNetLive.AccountWeb.ApiClients
 {
@@ -23,6 +24,11 @@ namespace DotNetLive.AccountWeb.ApiClients
             loginQuery.AddParameter("withBearerPrefix", "true");
             var rsp = ApiClient.NExecute<LoginResult>(ApiHostSettings.AccountApi, "account/login", loginQuery);
             return rsp;
+        }
+
+        internal Task CreateAsync(ApplicationUser user, string password)
+        {
+            throw new NotImplementedException();
         }
     }
 

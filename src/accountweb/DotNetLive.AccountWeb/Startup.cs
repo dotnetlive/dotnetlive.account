@@ -62,13 +62,13 @@ namespace DotNetLive.AccountWeb
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
         {
-            loggerFactory = NpgsqlLogManager.LoggerFactory;
-            //loggerFactory.AddConsole(Configuration.GetSection("Logging"));
-            //loggerFactory.AddDebug();
-            loggerFactory.AddNLog();
+            //loggerFactory = NpgsqlLogManager.LoggerFactory;
+            ////loggerFactory.AddConsole(Configuration.GetSection("Logging"));
+            ////loggerFactory.AddDebug();
+            //loggerFactory.AddNLog();
 
-            //add NLog.Web
-            app.AddNLogWeb();
+            ////add NLog.Web
+            //app.AddNLogWeb();
             ////foreach (DatabaseTarget target in LogManager.Configuration.AllTargets.Where(t => t is DatabaseTarget))
             ////{
             ////    target.ConnectionString = Configuration.GetConnectionString("NLogDb");
@@ -76,7 +76,7 @@ namespace DotNetLive.AccountWeb
 
             ////LogManager.ReconfigExistingLoggers();
 
-            LogManager.Configuration.Variables["connectionString"] = Configuration.GetConnectionString("NLogDb");
+            //LogManager.Configuration.Variables["connectionString"] = Configuration.GetConnectionString("NLogDb");
 
             app.UseSession();
 
@@ -97,7 +97,6 @@ namespace DotNetLive.AccountWeb
             app.UseCookieAuthentication();
 
             // Add external authentication middleware below. To configure them please see http://go.microsoft.com/fwlink/?LinkID=532715
-
             app.UseMvc(routes =>
             {
                 routes.MapRoute(
@@ -109,7 +108,7 @@ namespace DotNetLive.AccountWeb
 
     public class LogFilter : ActionFilterAttribute
     {
-        private readonly ILogger _logger;
+        private readonly Microsoft.Extensions.Logging.ILogger _logger;
 
         public LogFilter(ILoggerFactory loggerFactory)
         {

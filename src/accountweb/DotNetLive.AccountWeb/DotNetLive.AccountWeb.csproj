@@ -36,7 +36,9 @@
     <PackageReference Include="Microsoft.AspNetCore.Mvc.ViewFeatures" Version="1.1.1" />
     <PackageReference Include="Microsoft.AspNetCore.Session" Version="1.1.0" />
     <PackageReference Include="Microsoft.AspNetCore.StaticFiles" Version="1.1.0" />
+    <PackageReference Include="Microsoft.Extensions.Configuration" Version="1.1.0" />
     <PackageReference Include="Microsoft.Extensions.Configuration.UserSecrets" Version="1.1.0" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="1.1.0" />
     <PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="1.1.0" />
     <PackageReference Include="Microsoft.Extensions.Options.ConfigurationExtensions" Version="1.1.0" />
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="1.1.0-msbuild3-final" PrivateAssets="All" />
@@ -56,7 +58,9 @@
     <Folder Include="UserIdentity\" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\..\..\dotnetlive.framework\src\DotNetLive.Framework.Mvc\DotNetLive.Framework.Mvc.csproj" />
     <ProjectReference Include="..\..\..\..\dotnetlive.framework\src\DotNetLive.Framework.WebApiClient\DotNetLive.Framework.WebApiClient.csproj" />
+    <ProjectReference Include="..\..\..\..\dotnetlive.framework\src\DotNetLive.Framework.Web\DotNetLive.Framework.Web.csproj" />
     <ProjectReference Include="..\..\..\..\dotnetlive.framework\src\DotNetLive.Framework\DotNetLive.Framework.csproj" />
   </ItemGroup>
 </Project>
