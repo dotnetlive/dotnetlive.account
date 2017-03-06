@@ -47,6 +47,8 @@ namespace DotNetLive.AccountApi
 
             app.UseStaticFiles();
 
+            app.UseCors(builder=>builder.AllowAnyHeader().AllowAnyMethod().AllowAnyOrigin());
+
             ConfigSwagger(app);
 
             ConfigureAuthentication(app, serviceProvider);
