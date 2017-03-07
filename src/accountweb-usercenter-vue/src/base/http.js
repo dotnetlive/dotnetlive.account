@@ -7,9 +7,6 @@ export default class Http {
     get(url, data) {
         data = data || {};
         let urlParams = '';
-        // if (sessionStorage.getItem("token")) {
-        //     urlParams = "Authorization=" + sessionStorage.getItem("token");
-        // }
         for (let key in data) {
             urlParams = urlParams + `&${key}=${data[key]}`;
         }
@@ -34,6 +31,37 @@ export default class Http {
             url: this.baseApi + url,
             data: formData,
             method: 'post',
+            headers: { 'Authorization': sessionStorage.getItem("token") || '' }
+        });
+    }
+    put(url, data) {
+        var formData = new FormData();
+        for (var item in data) {
+            formData.append(item, data[item]);
+        }
+        if (sessionStorage.getItem("token")) {
+            formData.append('Authorization', sessionStorage.getItem("token"));
+        }
+        return this.request({
+            url: this.baseApi + url,
+            data: formData,
+            method: 'put',
+            headers: { 'Authorization': sessionStorage.getItem("token") || '' }
+        });
+    }
+    delete(url, data) {
+        var formData = new FormData();
+        for (var item in data) {
+            formData.append(item, data[item]);
+        }
+        if (sessionStorage.getItem("token")) {
+            formData.append('Authorization', sessionStorage.getItem("token"));
+        }
+        return this.request({
+            url: this.baseApi + url,
+            data: formData,
+            method: 'delete',
+            headers: { 'Authorization': sessionStorage.getItem("token") || '' }
         });
     }
     request(options) {

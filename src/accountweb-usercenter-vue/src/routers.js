@@ -16,6 +16,10 @@ module.exports = {
         {
           path: 'profile',
           component: resolve => require(['./components/Profile.vue'], resolve)
+        },
+        {
+          path: 'userInfo',
+          component: resolve => require(['./components/UserInfo.vue'], resolve)
         }
       ]
     }

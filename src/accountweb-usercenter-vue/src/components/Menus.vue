@@ -31,6 +31,15 @@
                             <span>个人中心</span>
                         </router-link>
                     </li>
+                    <li>
+                        <router-link :to="{ path: '/home/userInfo'}" class="ripple">
+                            <span class="pull-right nav-label"></span>
+                            <span class="nav-icon">
+                                <img src="" data-svg-replace="./../assets/images/icons/radio-waves.svg" alt="MenuItem" class="hidden">
+                            </span>
+                            <span>用户列表</span>
+                        </router-link>
+                    </li>
                 </ul>
             </nav>
         </div>
