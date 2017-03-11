@@ -5,6 +5,8 @@ import VueRouter from 'vue-router'
 import App from './App'
 import routers from './routers'
 import store from './store'
+
+// import 'bootstrap'
 import './assets/less/index.less'
 import './assets/less/style.less'
 /* eslint-disable no-new */
