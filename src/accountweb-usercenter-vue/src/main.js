@@ -16,6 +16,21 @@ Vue.prototype.$http = new Http();
 
 Vue.use(VueRouter)
 const router = new VueRouter(routers)
+router.beforeEach((to, from, next) => {
+  if (to.path != "/") {
+    if (_.isNull(sessionStorage.getItem("token"))) {
+      next({
+        path: '/'
+      })
+    } else {
+      next();
+    }
+  } else {
+    next();
+  }
+})
+
+
 new Vue({
   el: '#app',
   router,
