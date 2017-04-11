@@ -1,5 +1,18 @@
-# 用户中心
+# y
 
-用户登录后点击用户账户，进入用户中心
+> Baison.M6.ModelVeiwFront
 
-这里包括 用户基本信息，用户修改账户信息 修改用户密码
+## Build Setup
+
+``` bash
+# install dependencies
+npm install
+
+# serve with hot reload at localhost:8080
+npm run dev
+
+# build for production with minification
+npm run build
+```
+
+For detailed explanation on how things work, checkout the [guide](http://vuejs-templates.github.io/webpack/) and [docs for vue-loader](http://vuejs.github.io/vue-loader).

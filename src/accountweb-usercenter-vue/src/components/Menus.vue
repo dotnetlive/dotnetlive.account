@@ -1,55 +1,61 @@
 <template>
-    <nav class="navbar-default navbar-static-side" role="navigation" @click="menusNav()">
-        <div class="sidebar-collapse">
-            <ul class="nav metismenu" id="side-menu">
-                <li class="nav-header">
-                    <div class="dropdown profile-element" v-bind:class="showMenus">
-                        <span>
-                            <img alt="image" class="img-circle" src="./../assets/images/profile_small.jpg" />
-                             </span>
-                        <a data-toggle="dropdown" class="dropdown-toggle">
-                            <span class="clear"> 
-                                <span class="block m-t-xs"> 
-                                <strong class="font-bold">David Williams</strong>
-                             </span>
-                            <span class="text-muted text-xs block" @click="showMenusNav($event)">Art Director <b class="caret"></b></span>
-                            </span>
-                        </a>
-                        <ul class="dropdown-menu animated fadeInRight m-t-xs">
-                            <li>
-                                <router-link :to="{ path: '/home/profile'}">Profile</router-link>
-                            </li>
-                            <li class="divider"></li>
-                            <li>
-                                <router-link :to="{ path: '/'}">Logout</router-link>
-                            </li>
-                        </ul>
-                    </div>
-                    <div class="logo-element">
-                        IN+
-                    </div>
-                </li>
-                <li class="active">
-                    <router-link :to="{ path: '/home/index'}"><i class="fa fa-th-large"></i> <span class="nav-label">首页</span><span class="fa arrow"></span></router-link>
-                </li>
-                <li>
-                    <router-link :to="{ path: '/home/profile'}"><i class="fa fa-diamond"></i> <span class="nav-label">个人中心</span></router-link>
-                </li>
-            </ul>
-
+    <aside class="sidebar-container">
+        <div class="sidebar-header">
+            <div class="pull-right pt-lg text-muted hidden"><em class="ion-close-round"></em></div>
+            <a href="#" class="sidebar-header-logo"><img src="./../assets/images/logo.png" data-svg-replace="./../assets/images/logo.svg" alt="Logo"><span class="sidebar-header-logo-text">Centric</span></a>
         </div>
-    </nav>
+        <div class="sidebar-content">
+            <div class="sidebar-toolbar text-center">
+                <a href=""><img src="./../assets/images/user/01.jpg" alt="Profile" class="img-circle thumb64"></a>
+                <div class="mt">Welcome, {{userName}}</div>
+            </div>
+            <nav class="sidebar-nav">
+                <ul>
+                    <li>
+                        <router-link :to="{ path: '/home/index'}" class="ripple">
+                            <span class="pull-right nav-label">
+                                <span class="badge bg-success">2</span>
+                            </span>
+                            <span class="nav-icon">
+                                <img src="" data-svg-replace="./../assets/images/icons/aperture.svg" alt="MenuItem" class="hidden">
+                            </span>
+                            <span>首页</span>
+                        </router-link>
+                    </li>
+                    <li>
+                        <router-link :to="{ path: '/home/profile'}" class="ripple">
+                            <span class="pull-right nav-label"></span>
+                            <span class="nav-icon">
+                                <img src="" data-svg-replace="./../assets/images/icons/radio-waves.svg" alt="MenuItem" class="hidden">
+                            </span>
+                            <span>个人中心</span>
+                        </router-link>
+                    </li>
+                    <li>
+                        <router-link :to="{ path: '/home/userInfo'}" class="ripple">
+                            <span class="pull-right nav-label"></span>
+                            <span class="nav-icon">
+                                <img src="" data-svg-replace="./../assets/images/icons/radio-waves.svg" alt="MenuItem" class="hidden">
+                            </span>
+                            <span>用户列表</span>
+                        </router-link>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </aside>
 </template>
 
 <script>
     export default {
         data() {
             return {
-                showMenus: ''
+                showMenus: '',
+                userName: ''
             }
         },
         created() {
-
+            this.userName = this.$store.state.user.userName;
         },
         methods: {
             menusNav() {
